@@ -35,7 +35,7 @@
 				setInterval("djs()",1000);
 				function djs()
 				{
-					var ms=Date.UTC(2016,9,8,00,00,00);
+					var ms=Date.UTC(2017,0,28,00,00,00);
 					var time=new Date(ms);
 					var onesd=1000;
 					var onemt=60*onesd;
@@ -54,7 +54,7 @@
 						sum=sum-m*onemt;
 						var s=Math.floor(sum/onesd);
 						var str=d+"天"+h+"小时"+m+"分钟"+s+"秒";
-						djstxt.innerHTML="<h3>国庆长假倒计时：<font color=red>"+str+"</font></h3>";	
+						djstxt.innerHTML="<h3>春节长假倒计时：<font color=red>"+str+"</font></h3>";	
 					}
 					xh();
 					
@@ -197,7 +197,7 @@
 		<br><br>
 		<a href="mailto:zfb@163.com">点击此处给zfb发送电子邮件</a>
 		<br>
-		<form method="POST" action="/user">
+		<form method="POST" action="user.html">
 			<h4 style="color:green">
 				<p>最喜欢的偶像：</p>
 				<select name="love">
