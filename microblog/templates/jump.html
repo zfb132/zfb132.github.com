@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <title>阻尼运动</title>
+    <style type="text/css">
+        body 
+        {
+            margin: 0;
+        }
+
+        #canvas 
+        {
+            display: block;
+            margin: 0 auto;
+            border: thin solid #dfdfdf;
+        }
+    </style>
+</head>
+<body>
+<div style="position:absolute;top:10px;left:10px;right:10px;bottom: 10px;width:200px;height:40px;padding-left: 5px;padding-right: 5px;padding-top: 5px;padding-bottom: 5px">
+	<form id=fA style="width:100px">
+		<h4 style="color:blue">
+			<p>方块颜色：</p>
+			<select name="color" multiple>
+				<option value="red">红</option>
+				<option value="orange">橙</option>
+				<option value="yellow" >黄</option>
+				<option value="green" selected>绿</option>
+				<option value="blue">蓝</option>
+				<option value="purple">紫</option>
+			</select>
+		</h4>
+		<input type="button" name="b" value="提交" onclick="Invalidate()" />
+	</form>
+</div>
+	<canvas id="canvas" width="1366" height="638"></canvas>
+	<script type="text/javascript" async="" defer="" src="//liudian.piwikpro.com/piwik.js"></script>
+	<script type="text/javascript">
+	    var canvas = document.getElementById("canvas");
+	    canvas.width = window.innerWidth;
+	    canvas.height = window.innerHeight;
+	    canvas.addEventListener('mousemove', onMouseMove, false);
+	    canvas.addEventListener('mouseup', onMouseUp, false);
+	    canvas.addEventListener('mouseout', onMouseUp, false);
+	    canvas.addEventListener('mousedown', onMouseDown, false);
+	    canvas.addEventListener('touchstart', onMouseDown, false);
+	    canvas.addEventListener('touchmove', onMouseMove, false);
+	    canvas.addEventListener('touchend', onMouseUp, false);
+	    canvas.addEventListener('touchcancel', onMouseUp, false);
+	    function onMouseMove(event) 
+	    {
+	        event.preventDefault();
+	        if (event.changedTouches) 
+	        {
+	            var touch = event.changedTouches[0];
+	            mouse.x = touch.clientX - canvas.width / 2;
+	            mouse.y = touch.clientY - canvas.height / 2;
+	        } 
+	        else 
+	        {
+	            mouse.x = event.offsetX - canvas.width / 2;
+	            mouse.y = event.offsetY - canvas.height / 2;
+	        }
+
+	    }
+	    function onMouseDown(event) 
+	    {
+	        event.preventDefault();
+	        dragging = true;
+	        onMouseMove(event);
+
+	    }
+	    function onMouseUp(event) 
+	    {
+	        event.preventDefault();
+	        dragging = false;
+	    }
+	    var ctx = canvas.getContext("2d");
+	    ctx.translate(canvas.width / 2, canvas.height / 2);
+	    ctx.fillStyle = "green";
+
+	    function Invalidate()
+		{
+			var form=document.getElementById("fA");
+			//alert(form.color.value);
+			ctx.fillStyle=form.color.value;
+		}
+
+	    var last = Date.now();
+	    var dragging = false;
+	    var mouse = {x: 0, y: 0};
+	    var d = {x: -100, y: -50};
+	    var v = {x: 0, y: 0};
+	    var k = 100;
+	    var damp = 5;
+
+
+	    function update(dt) 
+	    {
+	        if (dragging) 
+	        {
+	            d.x = mouse.x;
+	            d.y = mouse.y;
+	            v.x = 0;
+	            v.y = 0;
+	        } 
+	        else 
+	        {
+	            var acc = {x: 0, y: 0};
+	            acc.x = -k * d.x - damp * v.x;
+	            acc.y = -k * d.y - damp * v.y;
+	            v.x += acc.x * dt;
+	            v.y += acc.y * dt;
+	            d.x += v.x * dt;
+	            d.y += v.y * dt;
+
+	        }
+
+	    }
+
+
+	    function render() 
+	    {
+	        ctx.clearRect(-canvas.width / 2, -canvas.height / 2, canvas.width, canvas.height);
+	        var now = Date.now();
+	        update((now - last) / 1000);
+	        last = now;
+	        ctx.fillRect(d.x - 50, d.y - 50, 100, 100);
+	    }
+	    function animate() 
+	    {
+	        requestAnimationFrame(animate);
+	        //setTimeout(animate, 1000/60);
+	        render();
+	    }
+	    animate();
+	</script>
+<!-- Piwik -->
+<script type="text/javascript">
+    var _paq = _paq || [];
+    _paq.push(['trackPageView']);
+    _paq.push(['enableLinkTracking']);
+    (
+    	function () 
+    	{
+	        var u = "//liudian.piwikpro.com/";
+	        _paq.push(['setTrackerUrl', u + 'piwik.php']);
+	        _paq.push(['setSiteId', 1]);
+	        var d = document, g = d.createElement('script'), s = d.getElementsByTagName('script')[0];
+	        g.type = 'text/javascript';
+	        g.async = true;
+	        g.defer = true;
+	        g.src = u + 'piwik.js';
+	        s.parentNode.insertBefore(g, s);
+    	}
+    )();
+</script>
+<noscript>&lt;p&gt;&lt;img src="//liudian.piwikpro.com/piwik.php?idsite=1" style="border:0;" alt=""/&gt;&lt;/p&gt;</noscript>
+<!-- End Piwik Code -->
+</body>
+</html>

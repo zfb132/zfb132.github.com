@@ -1,0 +1,29 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<div>
+		<h3>头部信息栏的标题</h3>
+		{{ get_flashed_messages()[0] }}
+		<pre style="color:purple;font-size:15px;">{{pre}}</pre>
+	</div>
+
+	<div style="color:red">
+		<p>主页地址是&nbsp;&nbsp;/user</p><br>
+		<p>登录地址是&nbsp;&nbsp;/login</p><br>
+		<p>网址传参地址是&nbsp;&nbsp;/user/1234(1234是传的数字)</p><br>
+		<p>网址传参地址是&nbsp;&nbsp;/query_user，需要输入query_user?id=123456</p><br>
+		<p>反向路由地址是&nbsp;&nbsp;/query_url</p><br>
+		<p>基类地址是&nbsp;&nbsp;/base</p><br>
+		<p>继承类地址是&nbsp;&nbsp;/extend</p><br>
+		</div>
+	{% block content %}
+	{% endblock %}
+	<div>
+		<h3>底部信息状态栏</h3>
+	</div>
+</body>
+</html>
