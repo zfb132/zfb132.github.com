@@ -1,0 +1,103 @@
+﻿<!doctype html>
+<html>
+	<head>
+	{% if title %}
+		<title>这是标题{{title}}</title>
+	{% else %}
+		<title>这是标题默认</title>
+	{% endif %}
+	<script type="text/javascript">
+		<!--
+		{
+			function show()
+			{
+				//可以使用getElementById()获取id为该的值元素（只有一个），访问值时.value
+				//此处可以使用getElementsByName()获取name为该的所有元素的数组，以下两句表示显示第一个属性值为user的元素的值
+				var user_now=document.getElementsByName("user");
+				//alert(user_now[0].value);
+				var single=document.getElementsByName("r");
+				//alert(single);
+				var checkbox=document.getElementsByName("c");
+				alert(user_now[0].value+'\n'+single[0].value+'\n'+checkbox[0].value+'\n'+checkbox[1].value+'\n'+checkbox[2].value)
+			}
+		}
+		-->
+	</script>
+	</head>
+	<body>
+		{% if user %}
+		<h1>hello,{{user.nickname}}</h1>
+		{% else %}
+		<h1>hello,wrong user</h1>
+		{% endif %}
+		{% if content %}
+		<h2>{{content}}</h2>
+		{% else %}
+		<h1>wrong number</h1>
+		{% endif %}
+		{% if loop %}
+		{% for i in loop %}
+		循环数字：{{i}}&nbsp;&nbsp;
+		{% endfor %}
+		{% endif %}
+		<div style="color:red">
+			<p>主页地址是&nbsp;&nbsp;/user</p><br>
+			<p>登录地址是&nbsp;&nbsp;/login</p><br>
+			<p>网址传参地址是&nbsp;&nbsp;/user/1234(1234是传的数字)</p><br>
+			<p>网址传参地址是&nbsp;&nbsp;/query_user，需要输入query_user?id=123456</p><br>
+			<p>反向路由地址是&nbsp;&nbsp;/query_url</p><br>
+			<p>基类地址是&nbsp;&nbsp;/base</p><br>
+			<p>继承类地址是&nbsp;&nbsp;/extend</p><br>
+		</div>
+		<!--form可以有属性name，在js中名字=document.form1.user.value
+		-->
+		<form method="POST" action="/user">
+			<h4 style="color:green">
+				<p>最喜欢的偶像：</p>
+				<select name="st1">
+					<option value="zxy">张学友
+					<option value="ldh">刘德华
+					<option value="zfb" selected>张富彬
+					<option value="zjl">周杰伦
+				</select>
+			</h4>
+			<h4 style="color:blue">
+				<p>喜欢的食物：</p>
+				<select name="st2" multiple>
+					<option value="lj">辣椒
+					<option value="df" selected>豆腐
+					<option value="td" selected>土豆
+					<option value="mt">面条
+				</select>
+			</h4>
+			<h4>请选择您的性别
+			<p>
+				<input type="radio" name="r" value="option1" checked>男&nbsp;&nbsp;
+				<input type="radio" name="r" value="option2">女
+			</p>
+			<p>
+				<input type="checkbox" name="c" value="option1">语文
+				<input type="checkbox" name="c" value="option2">数学
+				<input type="checkbox" name="c" value="option3">英语
+			</p>
+			<p>
+				<input type="button" name="b" value="显示" onClick="show()">
+			</p>
+			</h4>
+			<h4>请输入用户名&nbsp;
+				<input type="text" name="user" id="user" value="" alt="shuru">
+			</h4><br>
+			<h4>请输入密码&nbsp;&nbsp;
+				<input type="password" name="psw">
+			</h4>
+			<h3>{{ get_flashed_messages()[0] }}(该函数返回的flash数组)</h3>
+			<p style="font-size:15pt;color:yellow">
+				<input type="checkbox">记住密码
+			</p>
+
+			<input type="submit" name="s1" value="提交">
+			&nbsp;&nbsp;&nbsp;
+			<input type="reset" name="s2" value="重输">
+		</form>
+	</body>
+</html>
