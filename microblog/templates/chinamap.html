@@ -1,0 +1,17 @@
+<html lang="zh-cn">
+	<head><meta charset="utf-8">
+    中国地图测试版
+    </head>
+	<body>
+		<script src="necessary_jquery.min.js"></script>
+		<script src="raphael-min.js"></script>
+		<script src="chinamap.js"></script>
+		<style type="text/css">
+    	#chinaMap {margin-left:50px;  width:700px; max-width:700px; background-color:#FFF; }
+    	</style>
+		<div id="chinaMap"></div>
+		<script type="text/javascript">
+		$("#chinaMap").Map({width:700,height:600,opacity:true,datas:{},'tipContent':'1'});
+		</script>
+	</body>
+</html>
