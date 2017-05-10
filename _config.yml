@@ -66,11 +66,11 @@ sidebar-avatar: /img/me2.jpg     # img前面加`/`绝对引用。
 # Friends
 friends: [
 	{
-        title: "brucezhaor",
-        href: "http://brucezhaor.github.io/"
+        title: "果壳任意门",
+        href: "http://gate.guokr.com/"
 	},{
-        title: "Hux-模板来源",
-        href: "https://github.com/Huxpro/huxpro.github.io"
+        title: "LeetCode",
+        href: "https://leetcode.com/"
 	},{
         title: "谢益辉",
         href: "http://yihui.name"
@@ -84,11 +84,11 @@ friends: [
         title: "邱怡轩",
         href: "http://yixuan.cos.name/cn/"
 	},{
-        title: "JRQ 西南交大",
-        href: "http://ruiqiangjiao.github.io/"
+        title: "Hux-模板来源",
+        href: "https://github.com/Huxpro/huxpro.github.io"
 	},{
-        title: "MenBin 东财应统",
-        href: "http://binmen.github.io/blog"
+        title: "brucezhaor",
+        href: "http://brucezhaor.github.io/"
 	}
 ]
 
