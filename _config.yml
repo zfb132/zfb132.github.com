@@ -1,0 +1,8 @@
+title: zfb132.github.com
+description: 这是我的个人博客
+google_analytics: 
+show_downloads: true
+theme: jekyll-theme-cayman
+
+gems:
+  - jekyll-mentions
