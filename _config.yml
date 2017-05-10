@@ -1,7 +1,7 @@
 # visit https://github.com/mojombo/jekyll/wiki/Configuration for more settings
-title: BZR
-SEOTitle: BruceZhao's Blog
-author: Bruce Zhao
+title: ZFB
+SEOTitle: FbZhang Blog
+author: Fb Zhang
 timezone: Asia/Shanghai
 paginate: 10 # pagination based on number of posts
 paginate_path: "page:num"
@@ -9,19 +9,19 @@ highlighter: rouge
 markdown: kramdown
 kramdown:
   input: GFM                       # use Github Flavored Markdown !important
-  
+
 gems:
   - jekyll-paginate
   - jekyll-sitemap
   - jekyll-feed
 
 # 国内用多说
-# disqus: brucezhaor
+ disqus: zfb132
 
 #Google Analytics https://developers.google.com/analytics/devguides/collection/analyticsjs/
 #去_layout/default.html的头文件中去设置.
-#google_analytics_id: UA-72808482-1
-#google_analytics_domain: auto
+google_analytics_id: UA-97824262-2
+google_analytics_domain: auto
 
 # 自定义永久链接
 permalink: /blog/:year/:month/:day/:title/
@@ -40,13 +40,13 @@ BASE_PATH:
 
 # SNS settings
 
-weibo_username:     brucezhaor
-facebook_username:     BruceZhaoR
-github_username:    BruceZhaoR
-google_username:  101167914127123982138/posts
+weibo_username:     zfb
+facebook_username:
+github_username:    zfb132
+google_username:  zfb132
 RSS: feed.xml
-email: brucezhaor2016@gmail.com
-linkedin: brucezhaor
+email: zfb132@gmail.com
+linkedin:
 
 anchorjs: true                          # 修改在default.html->footer
 
@@ -56,7 +56,7 @@ anchorjs: true                          # 修改在default.html->footer
 duoshuo_username: brucezhaor
 # Share component is depend on Comment so we can NOT use share only.
 duoshuo_share: true                     # set to false if you want to use Comment without Sharing
-url: "http://brucezhaor.github.io" 
+url: "http://zfb132.github.io"
 
 # page Sidebar settings
 sidebar-about-description: "A future technique geek."
@@ -66,9 +66,9 @@ sidebar-avatar: /img/me2.jpg     # img前面加`/`绝对引用。
 
 # Friends
 friends: [
-	{   
-        title: "R学习社区",
-        href: "http://bzrlc.github.io/about/"
+	{
+        title: "brucezhaor",
+        href: "http://brucezhaor.github.io/"
 	},{
         title: "Hux-模板来源",
         href: "https://github.com/Huxpro/huxpro.github.io"
