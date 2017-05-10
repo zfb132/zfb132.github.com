@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # visit https://github.com/mojombo/jekyll/wiki/Configuration for more settings
 title: BZR
 SEOTitle: BruceZhao's Blog
@@ -6,30 +5,6 @@ author: Bruce Zhao
 timezone: Asia/Shanghai
 paginate: 10 # pagination based on number of posts
 paginate_path: "page:num"
-=======
-# Site settings
-title: 点滴
-SEOTitle: 博客 | 点滴
-header-img: img/home-bg.jpg
-email: zfb132@gmail.com
-description: ""
-keyword: ""
-url: "http://www.whuzfb.cn"             
-baseurl: ""       
-
-
-# SNS settings
-RSS: false
-weibo_username:     zfb
-zhihu_username:     zfb-chenxi
-github_username:    zfb132
-facebook_username:  zfb
-
-
-
-# Build settings
-# from 2016, 'pygments' is unsupported on GitHub Pages. Use 'rouge' for highlighting instead.
->>>>>>> 7c0973b8e8d5a0e51f46fe07d2e9d48fa534e5e5
 highlighter: rouge
 markdown: kramdown
 kramdown:
@@ -73,14 +48,7 @@ RSS: feed.xml
 email: brucezhaor2016@gmail.com
 linkedin: brucezhaor
 
-<<<<<<< HEAD
 anchorjs: true                          # 修改在default.html->footer
-=======
-# Sidebar settings
-sidebar: true                           # whether or not using Sidebar.
-sidebar-about-description: "爱写代码的孩子运气不会太差"
-sidebar-avatar: /img/avatar-hux.jpg      # use absolute URL, seeing it's used in both `/` and `/about/`
->>>>>>> 7c0973b8e8d5a0e51f46fe07d2e9d48fa534e5e5
 
 
 # 评论系统
@@ -98,7 +66,6 @@ sidebar-avatar: /img/me2.jpg     # img前面加`/`绝对引用。
 
 # Friends
 friends: [
-<<<<<<< HEAD
 	{   
         title: "R学习社区",
         href: "http://bzrlc.github.io/about/"
@@ -111,17 +78,6 @@ friends: [
 	},{
         title: "落园",
         href: "http://www.loyhome.cn/"
-=======
-    {
-        title: "我的博客",
-        href: "http://huangxuan.me"
-    },{
-        title: "Foo",
-        href: "#"
-    },{
-        title: "Bar",
-        href: "#"
->>>>>>> 7c0973b8e8d5a0e51f46fe07d2e9d48fa534e5e5
     },{
         title: "刘思喆",
         href: "http://www.bjt.name/"
