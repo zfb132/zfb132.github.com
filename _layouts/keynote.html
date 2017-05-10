@@ -2,14 +2,10 @@
 layout: default
 ---
 
-<!-- Image to hack wechat -->
-<!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
-<!-- <img src="{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}" width="0" height="0"> -->
 
 <!-- Post Header -->
 <style type="text/css">
     header.intro-header{
-        /*background-image: url('{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}')*/
         height: 500px;
         overflow: hidden;
     }
@@ -18,6 +14,14 @@ layout: default
         height: 100%;
         border: 0;
     }
+    /* Override Nav Style */
+    {% if page.navcolor == "invert" %}
+        .navbar-custom .nav li a,
+        .navbar-custom .nav li a:hover,
+        .navbar-custom .navbar-brand,
+        .navbar-custom .navbar-brand:hover {color:#777;}
+        .navbar-default .navbar-toggle .icon-bar {background-color:#777;}
+    {% endif %}
 </style>
 <header class="intro-header" >
     <iframe src="{{page.iframe}}"/>
@@ -25,19 +29,13 @@ layout: default
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                     <div class="post-heading">
-                        <div class="tags">
-                            {% for tag in page.tags %}
-                            <a class="tag" href="{{ site.baseurl }}/tags/#{{ tag }}" title="{{ tag }}">{{ tag }}</a>
-                            {% endfor %}
-                        </div>
+                    
                         <h1>{{ page.title }}</h1>
-                        {% comment %}
-                            always create a h2 for keeping the margin , Hux
-                        {% endcomment %}
+
                         {% comment %} if page.subtitle {% endcomment %}
                         <h2 class="subheading">{{ page.subtitle }}</h2>
                         {% comment %} endif {% endcomment %}
-                        <span class="meta">Posted by {% if page.author %}{{ page.author }}{% else %}{{ site.title }}{% endif %} on {{ page.date | date: "%B %-d, %Y" }}</span>
+                        <span class="meta">Posted by {% if page.author %}{{ page.author }}{% else %}{{ site.author }}{% endif %} on {{ page.date | date: "%B %-d, %Y" }}</span>
                     </div>
                 </div>
             </div>
@@ -57,17 +55,84 @@ layout: default
 
 				{{ content }}
 
+				<p class="text-right">
+				<a href="/">{{ page.author }}</a>
+				<span class="time">
+				/
+				<time>{{ page.date | date:"%Y-%m-%d" }}</time>
+				<style>span.test {color: #0085A5;font-weight: bold;}</style>
+				</span>/&nbsp;<span data-hk-page="current" class="test"> - </span>&nbsp;views
+				<br>
+				<span>
+					<strong><em>Published under<a href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/">(CC) BY-NC-SA 3.0 CN</a>.
+					</em></strong>
+				</span>
+				
+					
+				
+				</p>
+	
+					<hr>
+					{% unless page.categories == empty %}
+					<ul class="tag_box list-unstyled list-inline">
+					<li><i class="fa fa-folder-open"></i></li>
+					{% assign categories_list = page.categories %}
+					{% if categories_list.first[0] == null %}
+						{% for category in categories_list %} 
+							<li><a href="{{ site.BASE_PATH }}/{{ site.categories_path }}#{{ category }}-ref">
+								{{ category | join: "/" }} <span>({{ site.categories[category].size }})</span>
+								{% unless forloop.last %},{% endunless %}
+							</a></li>
+						{% endfor %}
+					{% else %}
+						{% for category in categories_list %} 
+							<li><a href="{{ site.BASE_PATH }}/{{ site.categories_path }}#{{ category[0] }}-ref">
+								{{ category[0] | join: "/" }} <span>/{{ category[1].size }})</span>
+							</a></li>
+						{% endfor %}
+					{% endif %}
+					</ul>
+					{% endunless %}  
+			
+					{% unless page.tags == empty %}
+					<ul class="list-inline">
+					<li><i class="fa fa-tags"></i></li>
+					{% assign tags_list = page.tags %}
+					{% if tags_list.first[0] == null %}
+						{% for tag in tags_list %} 
+							<li>
+								<a href="{{ site.BASE_PATH }}/{{ site.tags_path }}#{{ tag }}-ref">
+								{{ tag }} <span>({{ site.tags[tag].size }})</span>
+								{% unless forloop.last %},{% endunless %}
+								</a>
+							</li>
+						{% endfor %}
+					{% else %}
+						{% for tag in tags_list %} 
+							<li>
+								<a href="{{ site.BASE_PATH }}/{{ site.tags_path }}#{{ tag[0] }}-ref">
+									{{ tag[0] }} <span>({{ tag[1].size }})</span>
+									{% unless forloop.last %},{% endunless %}
+								</a>
+							</li>
+						
+						{% endfor %}
+					{% endif %}
+					{% assign tags_list = nil %}
+					</ul>
+					{% endunless %}  
+			
                 <hr>
 
-                {% if site.duoshuo_share && site.duoshuo_username %}
+			{% if site.duoshuo_share && site.duoshuo_username %}
                 <!-- 多说 Share start -->
-                </style>
-                <div class="ds-share"
+				<div class="ds-share"
                     style="text-align: right"
-                    data-thread-key="{{page.id}}" data-title="{{page.title}}"
-                    data-images="{{ site.url }}{{site.baseurl}}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}"
-                    data-content="{{ content | strip_html | truncate:80 }} | Hux Blog，@Hux黄玄 的个人博客"
-                    data-url="{{site.url}}{{site.baseurl}}{{page.url}}">
+                    data-thread-key="{{page.id}}"
+                    data-title="{{page.title}}"
+                    data-url="{{site.url}}{{site.BASE_PATH}}{{page.url}}"
+                    data-images="{{site.url}}{{site.BASE_PATH}}{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}"
+                    data-content="{{ page.description }} | {{ site.SEOTitle }} " >
                     <div class="ds-share-inline">
                       <ul  class="ds-share-icons-16">
                         <li data-toggle="ds-share-icons-more"><a class="ds-more" href="#">分享到：</a></li>
@@ -80,20 +145,23 @@ layout: default
                     </div>
                 <hr>
                 </div>
-                <!-- 多少 Share end-->
+                <!-- 多说 Share end-->
                 {% endif %}
 
 
                 <ul class="pager">
-                    {% if page.previous.url %}
+                    {% if page.previous %}
                     <li class="previous">
-                        <a href="{{ page.previous.url | prepend: site.baseurl | replace: '//', '/' }}" data-toggle="tooltip" data-placement="top" title="{{page.previous.title}}">&larr; Previous Post</a>
-                    </li>
-                    {% endif %}
-                    {% if page.next.url %}
-                    <li class="next">
-                        <a href="{{ page.next.url | prepend: site.baseurl | replace: '//', '/' }}" data-toggle="tooltip" data-placement="top" title="{{page.next.title}}">Next Post &rarr;</a>
-                    </li>
+                      <a href="{{ site.BASE_PATH }}{{ page.previous.url }}" data-toggle="tooltip" data-placement="top" title="{{ page.previous.title }}">&larr; Previous<br>
+                      <span>{{page.previous.title}}</span></a></li>
+                    {% else %}
+                    <li class="previous disabled"><a>&larr; Previous</a></li>
+                   {% endif %}
+                   {% if page.next %}
+                    <li class="next"><a href="{{ site.BASE_PATH }}{{ page.next.url }}" data-toggle="tooltip" data-placement="top" title="{{ page.next.title }}">Next &rarr;<br>
+                    <span>{{page.next.title}}</span></a></li>
+                    {% else %}
+                    <li class="next disabled"><a>Next &rarr;</a>
                     {% endif %}
                 </ul>
 
@@ -104,50 +172,34 @@ layout: default
                     <div class="ds-thread"
                         data-thread-key="{{page.id}}"
                         data-title="{{page.title}}"
-                        data-url="{{site.url}}{{site.baseurl}}{{page.url}}" >
+                        data-url="{{site.url}}{{site.BASE_PATH}}{{page.url}}" >
                     </div>
+					<!-- 多说热评文章 end -->
+					<div class="ds-top-threads" data-range="monthly" data-num-items="5"></div>
                 </div>
                 <!-- 多说评论框 end -->
                 {% endif %}
-
-                {% if site.disqus_username %}
+				
+                {% if site.disqus %}
                 <!-- disqus 评论框 start -->
                 <div class="comment">
-                    <div id="disqus_thread" class="disqus-thread">
-
-                    </div>
+                    <div id="disqus_thread" class="disqus-thread"></div>
                 </div>
                 <!-- disqus 评论框 end -->
                 {% endif %}
-
             </div>
-
-            <!-- Sidebar Container -->
-            <div class="sidebar-container
+    </div>
+		<!-- Sidebar Container -->
+            <div class="
                 col-lg-8 col-lg-offset-2
-                col-md-10 col-md-offset-1 ">
+                col-md-10 col-md-offset-1
+                sidebar-container">
 
-                <!-- Featured Tags -->
-                {% if site.featured-tags %}
-                <section>
-                    <hr class="hidden-sm hidden-xs">
-                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
-                    <div class="tags">
-                        {% for tag in site.tags %}
-                            {% if tag[1].size > {{site.featured-condition-size}} %}
-                                <a href="{{ site.baseurl }}/tags/#{{ tag[0] }}" title="{{ tag[0] }}" rel="{{ tag[1].size }}">
-                                    {{ tag[0] }}
-                                </a>
-                            {% endif %}
-                        {% endfor %}
-                    </div>
-                </section>
-                {% endif %}
 
                 <!-- Friends Blog -->
                 {% if site.friends %}
                 <hr>
-                <h5>FRIENDS</h5>
+                <h5>友情链接</h5>
                 <ul class="list-inline">
                     {% for friend in site.friends %}
                         <li><a href="{{friend.href}}">{{friend.title}}</a></li>
@@ -185,9 +237,8 @@ layout: default
 {% if site.duoshuo_username %}
 <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 <script type="text/javascript">
-    // dynamic User by Hux
-    var _user = '{{site.duoshuo_username}}';
 
+    var _user = '{{site.duoshuo_username}}';
     // duoshuo comment query.
     var duoshuoQuery = {short_name: _user };
     (function() {
@@ -202,15 +253,13 @@ layout: default
 <!-- 多说公共JS代码 end -->
 {% endif %}
 
-
 {% if site.disqus_username %}
 <!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
 <script type="text/javascript">
     /* * * CONFIGURATION VARIABLES * * */
-    var disqus_shortname = "{{site.disqus_username}}";
+    var disqus_shortname = "{{site.disqus}}";
     var disqus_identifier = "{{page.id}}";
-    var disqus_url = "{{site.url}}{{page.url}}";
-
+    var disqus_url = "{{site.BASE_PATH}}{{page.url}}";
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
         dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
@@ -219,7 +268,6 @@ layout: default
 </script>
 <!-- disqus 公共JS代码 end -->
 {% endif %}
-
 
 {% if site.anchorjs %}
 <!-- async load function -->
@@ -235,24 +283,22 @@ layout: default
 </script>
 <!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
 <script>
-    async("http://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
-        anchors.options = {
-          visible: 'always',
-          placement: 'right',
-          icon: '#'
-        };
-        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    async("//cdnjs.cloudflare.com/ajax/libs/anchor-js/3.2.2/anchor.min.js",function(){
+        anchors.options.placement = 'left';
+        anchors.add('h2,h3');
+		anchors.remove('.subheading');
     })
 </script>
-<style>
-    /* place left on bigger screen */
-    @media all and (min-width: 800px) {
-        .anchorjs-link{
-            position: absolute;
-            left: -0.75em;
-            font-size: 1.1em;
-            margin-top : -0.1em;
-        }
-    }
-</style>
+{% endif %}
+
+{% if page.mathjax %}
+<!-- mathjax -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 {% endif %}

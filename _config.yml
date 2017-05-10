@@ -1,100 +1,97 @@
-# Site settings
-title: 点滴
-SEOTitle: 博客 | 点滴
-header-img: img/home-bg.jpg
-email: zfb132@gmail.com
-description: ""
-keyword: ""
-url: "http://www.whuzfb.cn"              # your host, for absolute URL
-baseurl: "/"         # for example, '/blog' if your blog hosted on 'host/blog'
+# visit https://github.com/mojombo/jekyll/wiki/Configuration for more settings
+title: BZR
+SEOTitle: BruceZhao's Blog
+author: Bruce Zhao
+timezone: Asia/Shanghai
+paginate: 10 # pagination based on number of posts
+paginate_path: "page:num"
+highlighter: rouge
+markdown: kramdown
+kramdown:
+  input: GFM                       # use Github Flavored Markdown !important
+  
+gems:
+  - jekyll-paginate
+  - jekyll-sitemap
+  - jekyll-feed
 
+# 国内用多说
+# disqus: brucezhaor
+
+#Google Analytics https://developers.google.com/analytics/devguides/collection/analyticsjs/
+#去_layout/default.html的头文件中去设置.
+#google_analytics_id: UA-72808482-1
+#google_analytics_domain: auto
+
+# 自定义永久链接
+permalink: /blog/:year/:month/:day/:title/
+
+#默认底图
+header-img: /img/default-bg.jpg
+
+RSS: feed.xml
+categories_path: categories
+tags_path: tags
+archive_path: archives
+about_path: about
+
+BASE_PATH:
 
 
 # SNS settings
-RSS: false
-weibo_username:     zfb
-zhihu_username:     拂晓-晨曦
-github_username:    zfb132
-#twitter_username:  huxpro
-facebook_username:  zfb
+
+weibo_username:     brucezhaor
+facebook_username:     BruceZhaoR
+github_username:    BruceZhaoR
+google_username:  101167914127123982138/posts
+RSS: feed.xml
+email: brucezhaor2016@gmail.com
+linkedin: brucezhaor
+
+anchorjs: true                          # 修改在default.html->footer
 
 
-
-# Build settings
-# from 2016, 'pygments' is unsupported on GitHub Pages. Use 'rouge' for highlighting instead.
-highlighter: rouge
-permalink: pretty
-paginate: 10
-exclude: ["less","node_modules","Gruntfile.js","package.json","README.md"]
-anchorjs: true                          # if you want to customize anchor. check out line:181 of `post.html`
-
-
-
-# Gems
-# from PR#40, to support local preview for Jekyll 3.0
-gems: [jekyll-paginate]
-
-
-
-# Markdown settings
-# replace redcarpet to kramdown,
-# although redcarpet can auto highlight code, the lack of header-id make the catalog impossible, so I switch to kramdown
-# document: http://jekyllrb.com/docs/configuration/#kramdown
-markdown: kramdown
-kramdown:
-  input: GFM                            # use Github Flavored Markdown !important
-
-
-
-# Disqus settings
-#disqus_username: _your_disqus_short_name_
-
+# 评论系统
 # Duoshuo settings
-duoshuo_username: huxblog
+duoshuo_username: brucezhaor
 # Share component is depend on Comment so we can NOT use share only.
 duoshuo_share: true                     # set to false if you want to use Comment without Sharing
+url: "http://brucezhaor.github.io" 
 
-
-
-
-# Analytics settings
-# Baidu Analytics
-ba_track_id: 4cc1f2d8f3067386cc5cdb626a202900
-# Google Analytics
-ga_track_id: 'UA-49627206-1'            # Format: UA-xxxxxx-xx
-ga_domain: huangxuan.me
-
-
-
-# Sidebar settings
-sidebar: true                           # whether or not using Sidebar.
-sidebar-about-description: "写写代码，做做设计，看看产品。世界那么大，多玩玩看看。"
-sidebar-avatar: /img/avatar-hux.jpg      # use absolute URL, seeing it's used in both `/` and `/about/`
-
-
-
-# Featured Tags
-featured-tags: true                     # whether or not using Feature-Tags
-featured-condition-size: 1              # A tag will be featured if the size of it is more than this condition value
+# page Sidebar settings
+sidebar-about-description: "A future technique geek."
+sidebar-avatar: /img/me2.jpg     # img前面加`/`绝对引用。
 
 
 
 # Friends
 friends: [
-    {
-        title: "Hux Blog",
-        href: "http://huangxuan.me"
+	{   
+        title: "R学习社区",
+        href: "http://bzrlc.github.io/about/"
+	},{
+        title: "Hux-模板来源",
+        href: "https://github.com/Huxpro/huxpro.github.io"
+	},{
+        title: "谢益辉",
+        href: "http://yihui.name"
+	},{
+        title: "落园",
+        href: "http://www.loyhome.cn/"
     },{
-        title: "Foo",
-        href: "#"
+        title: "刘思喆",
+        href: "http://www.bjt.name/"
     },{
-        title: "Bar",
-        href: "#"
-    },{
-        title: "Example Friends",
-        href: "#"
-    },{
-        title: "It helps SEO",
-        href: "#"
-    }
+        title: "邱怡轩",
+        href: "http://yixuan.cos.name/cn/"
+	},{
+        title: "JRQ 西南交大",
+        href: "http://ruiqiangjiao.github.io/"
+	},{
+        title: "MenBin 东财应统",
+        href: "http://binmen.github.io/blog"
+	}
 ]
+
+
+
