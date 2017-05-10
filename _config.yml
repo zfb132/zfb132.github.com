@@ -72,17 +72,17 @@ friends: [
         title: "LeetCode",
         href: "https://leetcode.com/"
 	},{
-        title: "谢益辉",
-        href: "http://yihui.name"
+        title: "Archive",
+        href: "https://archive.org/"
 	},{
-        title: "落园",
-        href: "http://www.loyhome.cn/"
+        title: "MSDN",
+        href: "https://msdn.microsoft.com/zh-cn/library/ms310241/"
     	},{
-        title: "刘思喆",
-        href: "http://www.bjt.name/"
+        title: "IconFont",
+        href: "http://www.iconfont.cn/"
     },{
-        title: "邱怡轩",
-        href: "http://yixuan.cos.name/cn/"
+        title: "微信公众平台",
+        href: "https://mp.weixin.qq.com/wiki"
 	},{
         title: "Hux-模板来源",
         href: "https://github.com/Huxpro/huxpro.github.io"
