@@ -43,7 +43,7 @@ BASE_PATH:
 weibo_username:     zfb
 facebook_username:
 github_username:    zfb132
-google_username:  zfb132
+google_username:    zfb132
 RSS: feed.xml
 email: zfb132@gmail.com
 linkedin:
@@ -78,7 +78,7 @@ friends: [
 	},{
         title: "落园",
         href: "http://www.loyhome.cn/"
-    },{
+    	},{
         title: "刘思喆",
         href: "http://www.bjt.name/"
     },{
