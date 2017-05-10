@@ -1,4 +1,3 @@
-# visit https://github.com/mojombo/jekyll/wiki/Configuration for more settings
 title: ZFB
 SEOTitle: FbZhang Blog
 author: Fb Zhang
@@ -15,8 +14,8 @@ gems:
   - jekyll-sitemap
   - jekyll-feed
 
-# 国内用多说
- disqus: zfb132
+# 国内用多
+disqus: zfb132
 
 #Google Analytics https://developers.google.com/analytics/devguides/collection/analyticsjs/
 #去_layout/default.html的头文件中去设置.
