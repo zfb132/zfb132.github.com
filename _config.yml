@@ -52,10 +52,10 @@ anchorjs: true                          # 修改在default.html->footer
 
 # 评论系统
 # Duoshuo settings
-duoshuo_username: brucezhaor
+#duoshuo_username: brucezhaor
 # Share component is depend on Comment so we can NOT use share only.
-duoshuo_share: true                     # set to false if you want to use Comment without Sharing
-url: "http://zfb132.github.io"
+#duoshuo_share: true                     # set to false if you want to use Comment without Sharing
+#url: "http://zfb132.github.io"
 
 # page Sidebar settings
 sidebar-about-description: "A future technique geek."
@@ -68,28 +68,28 @@ friends: [
 	{
         title: "果壳任意门",
         href: "http://gate.guokr.com/"
-	},{
+        },{
         title: "LeetCode",
         href: "https://leetcode.com/"
-	},{
+        },{
         title: "Archive",
         href: "https://archive.org/"
-	},{
+        },{
         title: "MSDN",
         href: "https://msdn.microsoft.com/zh-cn/library/ms310241/"
-    	},{
+        },{
         title: "IconFont",
         href: "http://www.iconfont.cn/"
     },{
         title: "微信公众平台",
         href: "https://mp.weixin.qq.com/wiki"
-	},{
+        },{
         title: "Hux-模板来源",
         href: "https://github.com/Huxpro/huxpro.github.io"
-	},{
+        },{
         title: "brucezhaor",
         href: "http://brucezhaor.github.io/"
-	}
+        }
 ]
 
 
