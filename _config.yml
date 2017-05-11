@@ -1,6 +1,6 @@
 title: ZFB
-SEOTitle: FbZhang Blog
-author: Fb Zhang
+SEOTitle: ZFB 博客
+author: 晨曦
 timezone: Asia/Shanghai
 paginate: 10 # pagination based on number of posts
 paginate_path: "page:num"
@@ -62,7 +62,7 @@ cy_conf: prod_9f689acf279f6cafa48eff93be14cdf6
 #url: "http://zfb132.github.io"
 
 # page Sidebar settings
-sidebar-about-description: "A future technique geek."
+sidebar-about-description: "在代码的道路上渐行渐远"
 sidebar-avatar: /img/me2.jpg     # img前面加`/`绝对引用。
 
 
@@ -92,7 +92,7 @@ friends: [
         href: "https://github.com/Huxpro/huxpro.github.io"
         },{
         title: "brucezhaor",
-        href: "http://brucezhaor.github.io/"
+        href: "https://github.com/BruceZhaoR"
         }
 ]
 
