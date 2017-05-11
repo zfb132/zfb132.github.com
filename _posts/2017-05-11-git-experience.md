@@ -24,7 +24,7 @@ description:  "本文主要介绍一些简单的命令：包括clone, add, commi
   如果你经常在网上下载一些源码之类的话，这段命令你就再熟悉不过了。这是克隆仓库的命令，其格式为`git clone [url]`。比如,要克隆 GitHub用户`zfb132`的代码仓库`zfb132.github.com`，可以用下面的命令：  
 `git clone git@github.com:zfb132/zfb132.github.com.git`  
   这会在当前目录下创建一个名为`zfb132.github.com`的目录，其中包含一个`.git`的目录，用于保存下载下来的所有版本记录，然后从中取出最新版本的文件拷贝。如果进入这个新建的`zfb132.github.com`目录，你会看到项目中的所有文件已经在里边了。如果希望在克隆的时候，自己定义要新建的项目目录名称，可以在上面的命令末尾指定新的名字：  
-`git clone git://github.com/schacon/grit.git mygrit`  
+`git clone git://github.com/zfb132/zfb132.github.com.git myName`  
   
 ## init  
   要对现有的某个项目开始用Git管理，只需到此项目所在的目录，执行命令：  
