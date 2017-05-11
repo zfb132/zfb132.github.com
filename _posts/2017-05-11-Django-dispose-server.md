@@ -55,13 +55,13 @@ description:  "这是花费了一个月的时间摸索整理出来的一份总�
 ## django项目如何创建呢？  
 
 ### 首先需要在ubuntu上面安装python-pip    
-        `sudo apt-get install python3-pip`      
-### 升级pip      
-        `(sudo) pip3 install –upgrade pip`    
-### 安装django    
-        `sudo pip3 install Django==1.8.0`    
-### 创建工程项目microblog    
-        `django-admin.py startproject microblog`      
+        `sudo apt-get install python3-pip`
+### 升级pip      
+        `(sudo) pip3 install –upgrade pip`   
+### 安装django    
+        `sudo pip3 install Django==1.8.0`  
+### 创建工程项目microblog  
+        `django-admin.py startproject microblog`      
 此时的情况：         
 ```
 	│── microblog      
@@ -77,8 +77,8 @@ description:  "这是花费了一个月的时间摸索整理出来的一份总�
 ``` 
     
 ### 创建app项目blog（此命令在manage.py同级的目录处执行）      
-        `python3 manage.py startapp blog`    
-### 首先在settings.py中添加自己的app名称：      
+        `python3 manage.py startapp blog`  
+### 首先在settings.py中添加自己的app名称：      
 ```python
 	INSTALLED_APPS = (
 	'django.contrib.admin',
@@ -184,12 +184,13 @@ STATICFILES_DIRS = (
 
 ）
 
-### 更改一下models.py文件并：  
-	`python3 manage.py makemigrations`  
-	`python3 manage.py migrate`  
+### 更改一下models.py文件并： 
+  `python3 manage.py makemigrations`  
+  `python3 manage.py migrate`  
 
-### 此时运行：  
-	`python3 manage.py runserver 8000`    
+### 此时运行： 
+   `python3 manage.py runserver 8000`    
+   
 (默认在8000端口运行)    
 
 ***
@@ -197,15 +198,15 @@ STATICFILES_DIRS = (
 ***
 
 ## 安装pip3：  
-        `sudo apt install python3-pip`
+    `sudo apt install python3-pip`  
 
 ## 安装django  
 
 ## 在服务器上下载uwsgi：  
-        `sudo python3 -m pip install uwsgi`  
+    `sudo python3 -m pip install uwsgi`  
 
 ## 安装nginx：  
-        `sudo apt-get install nginx`  
+    `sudo apt-get install nginx`  
 
 ## 在工程目录下建立myweb_uwsgi.ini文件：  
 ```
@@ -391,10 +392,10 @@ http {
 
 ```
 ## 然后运行django项目：  
-        `uwsgi –ini /home/microblog/myweb_uwsgi.ini`  
+    `uwsgi –ini /home/microblog/myweb_uwsgi.ini`  
 
 ## 然后运行或重启nginx：  
-        `service nginx restart`  
+    `service nginx restart`  
 
 ## 成功  
 
