@@ -4,8 +4,9 @@
 
 欢迎大家RSS订阅我的博客,只需要复制 `http://zfb132.github.io/feed.xml`到邮箱或者订阅阅读器之类的地方就可以了.  
 
-## 如何发一篇文章  
->---
+## 如何发一篇文章    
+
+```---
 layout: post  
 title: 第一篇文章的标题  
 subtitle:   "这个是副标题哦"  
@@ -16,15 +17,15 @@ author:     "晨曦"
 header-img: "/img/post/firstblog-bg.jpg"  
 description: 第一篇博客，一些感慨。  
 ---  
+```
   
-文件名例如`2017-05-11-myfirst-blog-test`,日期格式是固定的，不能改变，后面任意即可  
-`layout: post`固定不变  
-`tags : [dplyr,DataBase,RSQLite]`,多个标签要用`,`隔开  
-`categories : [Git]`或者`category : R`都可以表示目录分类  
-`author:    "晨曦 & ZFB"`表示多名作者  
-`header-img: "/img/post/dplyr1-bg.jpg"`(引用本地`jpg`文件)或`header-img: "https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png"`(引用外部文件，一定要是https)  
-头文件中加上`mathjax: true`, 实现数学公式渲染  
-
+`2017-05-11-myfirst-blog-test`  文件名示例,日期格式是固定的，不能改变，后面任意  
+`layout: post`  固定不变  
+`tags : [dplyr,DataBase,RSQLite]`  多个标签要用`,`隔开  
+`categories : [Git]` 或者 `category : R` 都可以表示目录分类  
+`author:    "晨曦 & ZFB"`  表示多名作者  
+`header-img: "/img/post/dplyr1-bg.jpg"` (引用本地`jpg`文件)或 `header-img: "https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png"` (引用外部文件，一定是https)  
+`mathjax: true`  加在头文件中,实现数学公式渲染  
 
 
 ### 关于博客样式主题及开源证书
