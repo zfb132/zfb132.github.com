@@ -45,14 +45,17 @@ description: "FB Zhang"
 <p>本博客除商业转载外，不需要申请授权。</p>
 
 
-<h3 id="section-3">关于博客样式主题及开源证书</h3>
-
-<p>Modified by<a href="https://github.com/BruceZhaoR">BruceZhaoR</a>. Powered by <a href="https://github.com/mojombo/jekyll">Jekyll</a> and <a href="http://jekyllbootstrap.com">Jekyll-bootstrap</a>, Licensed under the<a href="/LICENSE">Apache License, Version 2.0</a>.</p>
              <!-- disqus 评论框 start -->
               <div class="comment">
                   <div id="disqus_thread" class="disqus-thread"></div>
               </div>
               <!-- disqus 评论框 end -->
+
+
+              <!-- 畅言 评论框 start -->
+              <div id="SOHUCS" sid="About-Me" ></div>
+              <!-- 畅言 评论框 end -->
+
             </div>
         </div>
     </div>
@@ -69,6 +72,16 @@ description: "FB Zhang"
         (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
     })();
 </script>
+
+<!-- 畅言公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+(function(){
+var appid = 'cyt0r3DPA';
+var conf = 'prod_9f689acf279f6cafa48eff93be14cdf6';
+var width = window.innerWidth || document.documentElement.clientWidth;
+if (width < 960) {
+window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})}); } })(); </script>
+<!-- 畅言公共JS代码 end -->
 
 <!-- async load function -->
 <script>
