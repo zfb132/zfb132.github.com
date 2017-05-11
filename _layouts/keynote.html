@@ -29,7 +29,7 @@ layout: default
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                     <div class="post-heading">
-                    
+
                         <h1>{{ page.title }}</h1>
 
                         {% comment %} if page.subtitle {% endcomment %}
@@ -67,39 +67,39 @@ layout: default
 					<strong><em>Published under<a href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/">(CC) BY-NC-SA 3.0 CN</a>.
 					</em></strong>
 				</span>
-				
-					
-				
+
+
+
 				</p>
-	
+
 					<hr>
 					{% unless page.categories == empty %}
 					<ul class="tag_box list-unstyled list-inline">
 					<li><i class="fa fa-folder-open"></i></li>
 					{% assign categories_list = page.categories %}
 					{% if categories_list.first[0] == null %}
-						{% for category in categories_list %} 
+						{% for category in categories_list %}
 							<li><a href="{{ site.BASE_PATH }}/{{ site.categories_path }}#{{ category }}-ref">
 								{{ category | join: "/" }} <span>({{ site.categories[category].size }})</span>
 								{% unless forloop.last %},{% endunless %}
 							</a></li>
 						{% endfor %}
 					{% else %}
-						{% for category in categories_list %} 
+						{% for category in categories_list %}
 							<li><a href="{{ site.BASE_PATH }}/{{ site.categories_path }}#{{ category[0] }}-ref">
 								{{ category[0] | join: "/" }} <span>/{{ category[1].size }})</span>
 							</a></li>
 						{% endfor %}
 					{% endif %}
 					</ul>
-					{% endunless %}  
-			
+					{% endunless %}
+
 					{% unless page.tags == empty %}
 					<ul class="list-inline">
 					<li><i class="fa fa-tags"></i></li>
 					{% assign tags_list = page.tags %}
 					{% if tags_list.first[0] == null %}
-						{% for tag in tags_list %} 
+						{% for tag in tags_list %}
 							<li>
 								<a href="{{ site.BASE_PATH }}/{{ site.tags_path }}#{{ tag }}-ref">
 								{{ tag }} <span>({{ site.tags[tag].size }})</span>
@@ -108,20 +108,20 @@ layout: default
 							</li>
 						{% endfor %}
 					{% else %}
-						{% for tag in tags_list %} 
+						{% for tag in tags_list %}
 							<li>
 								<a href="{{ site.BASE_PATH }}/{{ site.tags_path }}#{{ tag[0] }}-ref">
 									{{ tag[0] }} <span>({{ tag[1].size }})</span>
 									{% unless forloop.last %},{% endunless %}
 								</a>
 							</li>
-						
+
 						{% endfor %}
 					{% endif %}
 					{% assign tags_list = nil %}
 					</ul>
-					{% endunless %}  
-			
+					{% endunless %}
+
                 <hr>
 
 			{% if site.duoshuo_share && site.duoshuo_username %}
@@ -179,7 +179,7 @@ layout: default
                 </div>
                 <!-- 多说评论框 end -->
                 {% endif %}
-				
+
                 {% if site.disqus %}
                 <!-- disqus 评论框 start -->
                 <div class="comment">
@@ -187,6 +187,13 @@ layout: default
                 </div>
                 <!-- disqus 评论框 end -->
                 {% endif %}
+
+                {% if site.changyan %}
+                <!-- 畅言 评论框 start -->
+                <div id="SOHUCS" sid="{{site.BASE_PATH}}{{page.url}}" ></div>
+                <!-- 畅言 评论框 end -->
+                {% endif %}
+
             </div>
     </div>
 		<!-- Sidebar Container -->
@@ -267,6 +274,18 @@ layout: default
     })();
 </script>
 <!-- disqus 公共JS代码 end -->
+{% endif %}
+
+{% if site.changyan %}
+<!-- 畅言公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+(function(){
+var appid = '{{site.cy_appid}}';
+var conf = '{{site.cy_conf}}';
+var width = window.innerWidth || document.documentElement.clientWidth;
+if (width < 960) {
+window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="http://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("http://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})}); } })(); </script>
+<!-- 畅言公共JS代码 end -->
 {% endif %}
 
 {% if site.anchorjs %}
