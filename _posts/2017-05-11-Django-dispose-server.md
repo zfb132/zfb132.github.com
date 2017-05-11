@@ -54,31 +54,31 @@ description:  "这是花费了一个月的时间摸索整理出来的一份总�
 
 ## django项目如何创建呢？  
 
-### 首先需要在ubuntu上面安装python-pip  
-        `sudo apt-get install python3-pip`  
-### 升级pip  
-        `(sudo) pip3 install –upgrade pip`  
-### 安装django  
-        `sudo pip3 install Django==1.8.0`  
-### 创建工程项目microblog  
-        `django-admin.py startproject microblog`    
-此时的情况：       
+### 首先需要在ubuntu上面安装python-pip    
+        `sudo apt-get install python3-pip`      
+### 升级pip      
+        `(sudo) pip3 install –upgrade pip`    
+### 安装django    
+        `sudo pip3 install Django==1.8.0`    
+### 创建工程项目microblog    
+        `django-admin.py startproject microblog`      
+此时的情况：         
 ```
-	│── microblog    
-	│   ├── db.sqlite3    
-	│   ├── manage.py    
-	│   └── microblog    
-	│       ├── __init__.py    
-	│       ├── __pycache__    
-	│       │      ├── __init__.cpython-35.pyc    
-	│       ├── settings.py    
-	│       ├── urls.py    
-   	│       └── wsgi.py    
+	│── microblog      
+	│   ├── db.sqlite3      
+	│   ├── manage.py      
+	│   └── microblog      
+	│       ├── __init__.py      
+	│       ├── __pycache__      
+	│       │      ├── __init__.cpython-35.pyc      
+	│       ├── settings.py      
+	│       ├── urls.py      
+   	│       └── wsgi.py      
 ``` 
-  
-### 创建app项目blog（此命令在manage.py同级的目录处执行）    
-        `python3 manage.py startapp blog`  
-### 首先在settings.py中添加自己的app名称：    
+    
+### 创建app项目blog（此命令在manage.py同级的目录处执行）      
+        `python3 manage.py startapp blog`    
+### 首先在settings.py中添加自己的app名称：      
 ```python
 	INSTALLED_APPS = (
 	'django.contrib.admin',
