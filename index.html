@@ -38,14 +38,14 @@ header-img: "/img/home-bg.jpg"
   {% if paginator.previous_page %}
   <li class="home previous">
     {% if paginator.previous_page == 1 %}
-    <a href="{{ site.BASE_PATH }}/">&larr; 上一篇</a>
+    <a href="{{ site.BASE_PATH }}/">&larr; 上一页</a>
     {% else %}
-    <a href="{{ site.BASE_PATH }}/{{ site.paginate_path | replace: ':num', paginator.previous_page }}">&larr; 上一篇</a>
+    <a href="{{ site.BASE_PATH }}/{{ site.paginate_path | replace: ':num', paginator.previous_page }}">&larr; 上一页</a>
     {% endif %}
   </li>
   {% else %}
   <li class="home previous disabled">
-    <a>&larr; 上一篇</a>
+    <a>&larr; 上一页</a>
   </li>
   {% endif %}
 
@@ -55,11 +55,11 @@ header-img: "/img/home-bg.jpg"
 
   {% if paginator.next_page %}
   <li class="home next">
-    <a href="{{ site.BASE_PATH }}/{{ site.paginate_path | replace: ':num', paginator.next_page }}">下一篇 &rarr;</a>
+    <a href="{{ site.BASE_PATH }}/{{ site.paginate_path | replace: ':num', paginator.next_page }}">下一页 &rarr;</a>
   </li>
   {% else %}
   <li class="home next disabled">
-    <a>下一篇 &rarr;</a>
+    <a>下一页 &rarr;</a>
   </li>
   {% endif %}
 
