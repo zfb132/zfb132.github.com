@@ -10,12 +10,12 @@ header-img: "/img/post/django-bg.png"
 description:  "这是花费了一个月的时间摸索整理出来的一份总结。分享出来一方面是给新人一个借鉴，另一方面对自己也算是个备份。"
 ---
 
-title 服务器配置全教程：   
+***
+# django部分  
+***
+## 整个django项目：   
 
-***
-#django部分
-***
-##整个django项目：  
+```
 ├── examples.desktop  
 ├── microblog  
 │   ├── blog  
@@ -49,34 +49,36 @@ title 服务器配置全教程：
 │   ├── 1A  
 │   │   ├── setup.py  
 │   │   └── testA.py  
-
+```
 这是整个项目的样子：  
 
-##django项目如何创建呢？  
+## django项目如何创建呢？  
 
-###首先需要在ubuntu上面安装python-pip  
+### 首先需要在ubuntu上面安装python-pip  
         `sudo apt-get install python3-pip`  
-###升级pip  
+### 升级pip  
         `(sudo) pip3 install –upgrade pip`  
-###安装django  
+### 安装django  
         `sudo pip3 install Django==1.8.0`  
-###创建工程项目microblog  
-        `django-admin.py startproject microblog`  
-	此时的情况：  
-	│── microblog  
-	│   ├── db.sqlite3  
-	│   ├── manage.py  
-	│   └── microblog  
-	│       ├── __init__.py  
-	│       ├── __pycache__  
-	│       │      ├── __init__.cpython-35.pyc  
-	│       ├── settings.py  
-	│       ├── urls.py  
-   	│       └── wsgi.py  
-
-###创建app项目blog（此命令在manage.py同级的目录处执行）  
+### 创建工程项目microblog  
+        `django-admin.py startproject microblog`    
+此时的情况：       
+```
+	│── microblog    
+	│   ├── db.sqlite3    
+	│   ├── manage.py    
+	│   └── microblog    
+	│       ├── __init__.py    
+	│       ├── __pycache__    
+	│       │      ├── __init__.cpython-35.pyc    
+	│       ├── settings.py    
+	│       ├── urls.py    
+   	│       └── wsgi.py    
+``` 
+  
+### 创建app项目blog（此命令在manage.py同级的目录处执行）    
         `python3 manage.py startapp blog`  
-###首先在settings.py中添加自己的app名称：  
+### 首先在settings.py中添加自己的app名称：    
 ```python
 	INSTALLED_APPS = (
 	'django.contrib.admin',
@@ -89,9 +91,9 @@ title 服务器配置全教程：
 	'blog',
 	)
 ```
-新建的 app 如果不加到 INSTALL_APPS 中的话, django 就不能自动找到app中的模板文件(app-name/templates/下的文件)和静态文件(app-name/static/中的文件)  
+新建的 app 如果不加到 INSTALL_APPS 中的话, django 就不能自动找到app中的模板文件(app-name/templates/下的文件)和静态文件(app-name/static/中的文件)    
 
-###在views.py中定义视图函数：  
+### 在views.py中定义视图函数：    
 ```python
 # coding:utf-8
 # !usr/bin/env python3
@@ -122,7 +124,7 @@ def user(request):
     else:
         return HttpResponse("这是get请求")
 ```
-###在urls.py中定义视图函数相关的url：   
+### 在urls.py中定义视图函数相关的url：   
 ```python
 # coding:utf-8
 # !usr/bin/env python3
@@ -146,7 +148,7 @@ urlpatterns = [
 ]
 
 ```
-（注意需要在settings.py添加模板的路径，顺便添加静态文件位置，以及ALLOWED_HOSTS：
+（注意需要在settings.py添加模板的路径，顺便添加静态文件位置，以及ALLOWED_HOSTS：  
 ```python
 # 需要在DIRS中添加模板文件路径
 TEMPLATES = [
@@ -187,18 +189,17 @@ STATICFILES_DIRS = (
 	`python3 manage.py migrate`  
 
 ### 此时运行：  
-	`python3 manage.py runserver 8000`  
-
-	(默认在8000端口运行)  
+	`python3 manage.py runserver 8000`    
+(默认在8000端口运行)    
 
 ***
-# 服务器部分
+# 服务器部分  
 ***
 
 ## 安装pip3：  
         `sudo apt install python3-pip`
 
-## 安装django
+## 安装django  
 
 ## 在服务器上下载uwsgi：  
         `sudo python3 -m pip install uwsgi`  
@@ -262,7 +263,7 @@ daemonize = /home/log/blogserver.log
 log-maxsize = 1000000
 
 ```
-##然后进入/etc/nginx目录下：  
+## 然后进入/etc/nginx目录下：    
 ```
 mylinux@VM-11-11-mylinux:/home/microblog$ cd /etc/nginx
 mylinux@VM-11-11-mylinux:/etc/nginx$ ls
@@ -271,7 +272,7 @@ fastcgi.conf    koi-win     proxy_params  sites-enabled    win-utf
 fastcgi_params  mime.types  scgi_params   snippets
 mylinux@VM-11-11-mylinux:/etc/nginx$ 
 ```
-然后`sudo vi nginx.conf`后不更该其他内容，只在`http{}`内进行操作：
+然后`sudo vi nginx.conf`后不更该其他内容，只在`http{}`内进行操作：  
 ```
 user www-data;
 worker_processes auto;
@@ -389,20 +390,20 @@ http {
 #}
 
 ```
-##然后运行django项目：  
+## 然后运行django项目：  
         `uwsgi –ini /home/microblog/myweb_uwsgi.ini`  
 
-##然后运行或重启nginx：  
+## 然后运行或重启nginx：  
         `service nginx restart`  
 
-##成功。  
+## 成功  
 
 
 ***
-#附录：各文件内容
+# 附录：各文件内容  
 ***
   
-##manage.py   
+## manage.py   
 ```python
 # manage.py
 #!/usr/bin/env python
@@ -418,7 +419,7 @@ if __name__ == "__main__":
     execute_from_command_line(sys.argv)
 ```
 ***
-##settings.py  
+## settings.py  
 ```python
 # coding:utf-8
 # !usr/bin/env python3
@@ -566,7 +567,7 @@ STATICFILES_FINDERS = (
 '''
 ```
 ***
-##urls.py  
+## urls.py  
 ```python
 # coding:utf-8
 # !usr/bin/env python3
@@ -591,7 +592,7 @@ urlpatterns = [
 ]
 ```
 ***
-##wsgi.py  
+## wsgi.py  
 ```python
 # wsgi.py
 """
@@ -612,7 +613,7 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE", "microblog.settings")
 application = get_wsgi_application()
 ```
 ***
-##admin.py  
+## admin.py  
 ```python
 # coding:utf-8
 # !usr/bin/env python3
@@ -627,7 +628,7 @@ class ArticleAdmin(admin.ModelAdmin):
     list_display = ('title', 'pub_date', 'update_time',)
 ```
 ***
-##views.py
+## views.py
 ```python
 # coding:utf-8
 # !usr/bin/env python3
@@ -667,7 +668,7 @@ admin.site.register(Article, ArticleAdmin)
 admin.site.register(Person, PersonAdmin)
 ```
 ***
-##models.py  
+## models.py  
 ```python
 # coding:utf-8
 # !usr/bin/env python3
@@ -708,7 +709,7 @@ class Person(models.Model):
 
 ```
 ***
-##tests.py  
+## tests.py  
 ```python
 # tests.py
 from django.test import TestCase
@@ -716,5 +717,5 @@ from django.test import TestCase
 # Create your tests here.
 ```
 ***
-结束  
+结束    
 
