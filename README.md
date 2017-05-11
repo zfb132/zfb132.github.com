@@ -6,7 +6,8 @@
 
 ## 如何发一篇文章    
 
-```---
+```
+---  
 layout: post  
 title: 第一篇文章的标题  
 subtitle:   "这个是副标题哦"  
@@ -26,7 +27,16 @@ description: 第一篇博客，一些感慨。
 `author:    "晨曦 & ZFB"`  表示多名作者  
 `header-img: "/img/post/dplyr1-bg.jpg"` (引用本地`jpg`文件)或 `header-img: "https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png"` (引用外部文件，一定是https)  
 `mathjax: true`  加在头文件中,实现数学公式渲染  
-
+  
+```
+## 目录  
+{: .no_toc}  
+  
+* 目录  
+{:toc}  
+  
+```
+中间两个是纯空行，且每一行后面没有加空格。这一段代码用来自动添加目录(检索`<h2>`标签)  
 
 ### 关于博客样式主题及开源证书
 
