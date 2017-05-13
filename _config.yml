@@ -16,6 +16,7 @@ gems:
 
 # 国内用多
 disqus: zfb132
+disqus_base: http://blog.whuzfb.cn/
 
 #Google Analytics https://developers.google.com/analytics/devguides/collection/analyticsjs/
 #去_layout/default.html的头文件中去设置.
