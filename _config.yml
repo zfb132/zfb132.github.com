@@ -34,7 +34,7 @@ tags_path: tags
 archive_path: archives
 about_path: about
 
-BASE_PATH:
+BASE_PATH: "/blog" 
 
 
 # SNS settings
