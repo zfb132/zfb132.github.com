@@ -39,7 +39,10 @@ description: "FB Zhang"
 <h2 id="section-1">Hello World!</h2>
 
 <p>搭建这个博客的目的是将自己在学习代码过程中的一些心得、经验分享到这里，主要为了方便自己以后查阅，也欢迎大家提出宝贵意见。</p>
-
+{% if site.WeChatPublic %}
+<p><img src='{{ site.WeChatPublic }}' alt="微信公众号" align="center"></p>
+<p align="center">这是我的微信公众号，不定时更新一些文章，大家可以关注一下。</p>
+{% endif %}
 <h2 id="section-2">关于本博客</h2>
 
 <p>本博客除商业转载外，不需要申请授权。</p>

@@ -28,6 +28,7 @@ permalink: /blog/:year/:month/:day/:title/
 
 #默认底图
 header-img: /img/default-bg.jpg
+WeChatPublic: /img/qrcode_WeChatPublic.jpg
 
 RSS: feed.xml
 categories_path: categories
