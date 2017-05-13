@@ -40,7 +40,7 @@ BASE_PATH:
 
 
 # SNS settings
-
+zhihu_username: zfb-chenxi
 weibo_username:     zfb
 facebook_username:
 github_username:    zfb132
