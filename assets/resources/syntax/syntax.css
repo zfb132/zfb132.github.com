@@ -12,7 +12,7 @@
 .highlight pre code {
   white-space: pre;
 }
-
+.highlight pre, pre, .highlight .hll { background-color: #000038; border: 1px solid #000; padding: 6px 10px; border-radius: 3px; }
 .highlight  { background: #ffffff; }
 .highlight .c { color: #999988; font-style: italic } /* Comment */
 .highlight .err { color: #a61717; background-color: #e3d2d2 } /* Error */
