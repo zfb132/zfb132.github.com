@@ -38,6 +38,20 @@ description: 第一篇博客，一些感慨。
 ```
 中间两个是纯空行，且每一行后面没有加空格。这一段代码用来自动添加目录(检索`<h2>`标签)  
 
+```
+{% highlight ruby linenos %}
+def foo
+  puts 'foo'
+end
+{% endhighlight %}
+
+```
+
+如果不加`linenos`的话，就只高亮代码，不显示代码行数。  
+
+>为了正常展示高亮部分，你需要包含一个样式表，比如[syntax.css](https://github.com/mojombo/tpw/blob/master/css/syntax.css)。这个样式表与GitHub的代码格式化方案相同，这个文件你可以自由使用。如果要显示行号，那么你可能需要在文件里添加一个lineno的定义
+
+
 ### 关于博客样式主题及开源证书
 
 修改自[BruceZhaoR](https://github.com/BruceZhaoR)和[Hux](https://github.com/Huxpro/huxpro.github.io).   
