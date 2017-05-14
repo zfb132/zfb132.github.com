@@ -78,8 +78,8 @@ friends: [
         title: "LeetCode",
         href: "https://leetcode.com/"
         },{
-        title: "Archive",
-        href: "https://archive.org/"
+        title: "Jekyll",
+        href: "http://jekyllrb.com/docs/templates/"
         },{
         title: "MSDN",
         href: "https://msdn.microsoft.com/zh-cn/library/ms310241/"
