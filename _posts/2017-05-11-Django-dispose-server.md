@@ -166,8 +166,8 @@ TEMPLATES = [
         },
     },
 ]
-
-ALLOWED_HOSTS = ['182.254.154.186','www.whuzfb.cn']
+# 此处填写Ip(比如23.12.34.56)和对应的域名(www.baidu.com)
+ALLOWED_HOSTS = ['XX.XXX.XX.X','XXX']
 
 STATIC_URL = '/static/'
 
@@ -290,8 +290,9 @@ http {
 
 
         server {
-        listen 80 ;
-        server_name www.whuzfb.cn ;
+        listen 80 ;
+# 此处填写域名，比如www.baidu.com
+        server_name XX ;
         charset UTF-8 ;
         access_log /home/log/myweb_access.log ;
         error_log /home/log/myweb_error.log ;
