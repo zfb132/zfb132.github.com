@@ -204,11 +204,7 @@ layout: default
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script src="{{ site.BASE_PATH }}/assets/js/scrollgress.min.js"></script>
 <script>
-$('article').scrollgress({
-	success: function() {
-		console.log('Scrollgress has been initiated.');
-	}
-});
+$('article').scrollgress();
 </script>
 {% if site.duoshuo_username %}
 <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
