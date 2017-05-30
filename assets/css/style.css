@@ -34,3 +34,11 @@ input[type=text] {
 input[type=text]:focus {
     width: 95%;
 }
+.progress-indicator {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 4px;
+    z-index: 99;
+    background-color: red;
+}
