@@ -37,7 +37,8 @@
 </head>
 
 <body ontouchstart="">
-
+<!-- 文章进度条 -->
+<div class="progress-indicator" style="width: 0%;"></div>
 	{% include nav.html %}
 
 	{{ content }}
@@ -91,7 +92,7 @@
 <script type="text/javascript" src="{{ site.BASE_PATH }}/assets/js/jquery-tagcloud.js"></script>
 
 <!-- 文章进度条 -->
-<div class="progress-indicator" style="width: 0%;"></div>
+
 <script>
     /* 顶部进度条 */
     (function() {
