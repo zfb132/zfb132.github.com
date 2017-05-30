@@ -31,7 +31,7 @@ layout: default
 <article >
 <!-- Main Content -->
 	<div class="container">
-		<div class="row" id="forscroll" style="overflow-y: scroll | auto">
+		<div class="row">
 
 		<!-- Post Container -->
     		<div class="
@@ -204,7 +204,11 @@ layout: default
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script src="{{ site.BASE_PATH }}/assets/js/scrollgress.min.js"></script>
 <script>
-$('forscroll').scrollgress();
+    $('body').scrollgress({
+    	success: function() {
+            console.log('Scrollgress has been initiated.');
+        }
+    });
 </script>
 {% if site.duoshuo_username %}
 <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
