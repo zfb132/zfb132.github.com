@@ -28,10 +28,10 @@ layout: default
     </div>
 </header>
 
-<article style="overflow-y: scroll;">
+<article >
 <!-- Main Content -->
 	<div class="container">
-		<div class="row" >
+		<div class="row" id="forscroll" style="overflow-y: scroll | auto">
 
 		<!-- Post Container -->
     		<div class="
@@ -204,7 +204,7 @@ layout: default
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script src="{{ site.BASE_PATH }}/assets/js/scrollgress.min.js"></script>
 <script>
-$('article').scrollgress();
+$('forscroll').scrollgress();
 </script>
 {% if site.duoshuo_username %}
 <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
