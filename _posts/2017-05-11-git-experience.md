@@ -34,7 +34,7 @@ description:  "本文主要介绍一些简单的命令：包括clone, add, commi
 ## add  
   如果当前目录下有一个文件test.py想要纳入版本控制，需要使用此命令:  
 `git add test.py`  
-  需要注意的是，add命令后面支持简化的[正则表达式](http://baike.baidu.com/item/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/ "正则表达式的百科介绍")，比如：  
+  需要注意的是，add命令后面支持简化的[正则表达式](https://msdn.microsoft.com/zh-cn/library/ae5bf541.aspx "正则表达式的百科介绍")，比如：  
   `git add *.py`  
   `git add .`
   前者表示将该目录下所有扩展名为py的加入版本控制，后者表示将该目录下所有文件加入版本控制。  
