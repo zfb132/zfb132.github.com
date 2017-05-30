@@ -90,6 +90,28 @@
 <script type="text/javascript" src="{{ site.BASE_PATH }}/assets/js/blog.js"></script>
 <script type="text/javascript" src="{{ site.BASE_PATH }}/assets/js/jquery-tagcloud.js"></script>
 
+<!-- 文章进度条 -->
+<div class="progress-indicator" style="width: 0%;"></div>
+<script>
+    /* 顶部进度条 */
+    (function() {
+      var $w = $(window);
+      var $prog2 = $('.progress-indicator');
+      var wh = $w.height();
+      var h = $('body').height();
+      var sHeight = h - wh;
+      $w.on('scroll', function() {
+        window.requestAnimationFrame(function(){
+          var perc = Math.max(0, Math.min(1, $w.scrollTop() / sHeight));
+          updateProgress(perc);
+        });
+      });
+
+      function updateProgress(perc) {
+        $prog2.css({width: perc * 100 + '%'});
+      }
+    }());
+</script>
 <!-- async load function -->
 <script>
     function async(u, c) {
