@@ -43,10 +43,10 @@ BASE_PATH:
 
 # SNS settings
 zhihu_username: zfb-chenxi
-weibo_username:     zfb
+weibo_username:     zfb132
 facebook_username:
 github_username:    zfb132
-google_username:    zfb132
+google_username:    104120776813991713779
 RSS: feed.xml
 email: zfb132@gmail.com
 linkedin:
