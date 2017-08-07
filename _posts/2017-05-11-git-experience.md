@@ -76,7 +76,7 @@ description:  "本文主要介绍一些简单的命令：包括clone, add, commi
   如果当前分支只有一个追踪分支，可以继续省略：  
 `git pull`  
   
-## push  
+### push  
   push命令与pull命令是类似的，因此只举一个例子，上传本地当前分支到远程master分支：  
 `git push -u origin master`  
   
