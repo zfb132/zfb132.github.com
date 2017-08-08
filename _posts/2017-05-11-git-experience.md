@@ -90,7 +90,7 @@ description:  "本文主要介绍一些简单的命令：包括clone, add, commi
   
 ## 示例  
 以下内容是在安装配置好git的前提下才能正常进行的，如果你需要将自己的远程仓库下载到本地`E:\github`目录下，修改后再上传到原仓库的`master`分支  
-按照以下步骤：  
+按照以下步骤：
 * 切换到你的工作目录`E:\github`  
 * 下载远程仓库到本地：`git clone git@github.com:zfb132/zfb132.github.com.git`，其中`git@github.com:zfb132/zfb132.github.com.git`是在点击下载按钮时显示的地址，不同的仓库对应不同的地址  
 * 在本地修改后，终端切换到`E:\github\zfb132.github.com`，其中`zfb132.github.com`是自动生成的对应于这个仓库的目录  
@@ -99,4 +99,5 @@ description:  "本文主要介绍一些简单的命令：包括clone, add, commi
 * 输入`git commit -m "修复bug"`，提交修改记录  
 * 输入`git remote add origin git@github.com:zfb132/zfb132.github.com.git`（大部分时候并不需要）  
 * 输入`git push -u origin master`（`master`为刚才查看的分支名）  
+
 等待完成后，再进入网页查看就已经更新了
