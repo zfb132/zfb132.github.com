@@ -20,7 +20,7 @@ description:  "目前安卓的主流开发语言是Java，在正式开始Android
 ## Android介绍  
 Android是一个基于Linux内核的开放源代码移动操作系统，由Google成立的Open Handset Alliance（OHA，开放手持设备联盟）持续领导与开发，主要设计用于触屏移动设备如智能手机和平板电脑与其他便携式设备  
 Android一词最早出现于法国作家利尔亚当（Auguste Villiers de l'Isle-Adam）在1886年发表的科幻小说《未来夏娃》（L'Ève future）中，他将外表像人的机器人取名为Android  
-Android是一个全身绿色的机器人，颜色采用了PMS 376C和RGB中十六进制的#A4C639来绘制，这是Android操作系统的品牌象征  
+Android是一个全身绿色的机器人，颜色采用了PMS 376C和RGB中十六进制的<span style="color:#A4C639">#A4C639</span>来绘制，这是Android操作系统的品牌象征  
 Android OS（Operating System）使用开放免费代码许可证，一切代码为公开免费的。Google将Android的大部分以[Apache开源条款2.0](http://www.apache.org/licenses/LICENSE-2.0.html "介绍")发布，剩下的Linux内核部分则继承[GPLv2](http://www.gnu.org/licenses/old-licenses/gpl-2.0.html "介绍")许可  
 Android操作系统是完全免费开源的，任何厂商都不须经过Google和开放手持设备联盟的授权随意使用Android操作系统   
 2005年7月11日，Google收购了Android科技公司，Android科技公司成为Google旗下的一部分  
