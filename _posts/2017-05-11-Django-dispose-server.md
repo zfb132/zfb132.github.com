@@ -11,9 +11,9 @@ description:  "这是花费了一个月的时间摸索整理出来的一份总�
 ---
 
 ***
-# django部分  
+# Django[ˈdʒæŋɡoʊ]部分  
 ***
-## 整个django项目：   
+## 整个Django项目：   
 
 ```
 ├── examples.desktop  
@@ -52,7 +52,7 @@ description:  "这是花费了一个月的时间摸索整理出来的一份总�
 ```
 这是整个项目的样子：  
 
-## django项目如何创建呢？  
+## Django项目如何创建呢？  
 
 ### 首先需要在ubuntu上面安装python-pip    
         `sudo apt-get install python3-pip`
@@ -91,7 +91,7 @@ description:  "这是花费了一个月的时间摸索整理出来的一份总�
 	'blog',
 	)
 ```
-新建的 app 如果不加到 INSTALL_APPS 中的话, django 就不能自动找到app中的模板文件(app-name/templates/下的文件)和静态文件(app-name/static/中的文件)    
+新建的 app 如果不加到 INSTALL\_APPS 中的话, Django 就不能自动找到app中的模板文件(app-name/templates/下的文件)和静态文件(app-name/static/中的文件)    
 
 ### 在views.py中定义视图函数：    
 ```python
@@ -200,7 +200,7 @@ STATICFILES_DIRS = (
 ## 安装pip3：  
     `sudo apt install python3-pip`  
 
-## 安装django  
+## 安装Django  
 
 ## 在服务器上下载uwsgi：  
     `sudo python3 -m pip install uwsgi`  
@@ -392,7 +392,7 @@ http {
 #}
 
 ```
-## 然后运行django项目：  
+## 然后运行Django项目：  
     `uwsgi –ini /home/microblog/myweb_uwsgi.ini`  
 
 ## 然后运行或重启nginx：  
