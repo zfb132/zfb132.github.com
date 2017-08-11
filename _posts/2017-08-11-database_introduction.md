@@ -85,14 +85,13 @@ Apache CouchDB（Cluster Of Unreliable Commodity Hardware DataBase）是一个�
 Apache HBase最初是Powerset公司为了处理自然语言搜索产生的海量数据而开展的项目。不过现在它已经是Apache基金会的顶级项目，它是一个开源的非关系型分布式数据库（NoSQL），参考了谷歌的BigTable建模，实现的编程语言为 Java，运行于HDFS文件系统之上，为 Hadoop 提供类似于BigTable 规模的服务。因此，它可以容错地存储海量稀疏的数据。它在列上实现了BigTable论文提到的压缩算法、内存操作和布隆过滤器。HBase的表能够作为MapReduce任务的输入和输出，可以通过Java API来访问数据，也可以通过REST、Avro或者Thrift的API来访问  
 #### Cassandra
 Apache Cassandra（社区内一般简称为C\*）是一套开源分布式NoSQL数据库系统。它最初由Facebook开发，用于储存收件箱等简单格式数据，是一种流行的分布式结构化数据存储方案。**它的数据并不存储在分布式文件系统如GFS或HDFS中，而是直接存于本地**   
-使用了Google 设计的 BigTable的数据模型，与面向行(row)的传统的关系型数据库或键值存储的key-value数据库不同，Cassandra使用的是宽列存储模型(Wide Column Stores)，每行数据由row key唯一标识之后，可以有最多20亿个列，每个列由一个column key标识，每个column key下对应若干value。这种模型可以理解为是一个二维的key-value存储，即被定义成一个类似**map<key1, map<key2,value>>**的类型。它的row key决定了该行数据存储在哪些节点中，因此row key需要按哈希来存储，不能顺序的扫描或读取，而一个row内的column key是顺序存储的，可以进行有序的扫描或范围查找  
+使用了Google 设计的 BigTable的数据模型，与面向行(row)的传统的关系型数据库或键值存储的key-value数据库不同，Cassandra使用的是宽列存储模型(Wide Column Stores)，每行数据由row key唯一标识之后，可以有最多20亿个列，每个列由一个column key标识，每个column key下对应若干value。这种模型可以理解为是一个二维的key-value存储，即被定义成一个类似`map<key1, map<key2,value>>`的类型。它的row key决定了该行数据存储在哪些节点中，因此row key需要按哈希来存储，不能顺序的扫描或读取，而一个row内的column key是顺序存储的，可以进行有序的扫描或范围查找  
 ### 图数据库
 图数据库（Graph database）也可称为面向/基于图的数据库。它的基本含义是以“图”这种数据结构存储和查询数据，不是存储图片的数据库。图数据库的基本存储单元为：节点、关系、属性。实体会被作为顶点，而实体之间的关系则会被作为边
 #### FlockDB
 FlockDB是Twitter为进行关系数据分析而构建的。FlockDB迄今为止还没有稳定的版本，对于它是否是一个真正的图形数据库，尚有争议。FlockDB和其它图形数据库（如Neo4j、OrientDB）的区别在于图的遍历，Twitter的数据模型不需要遍历社交图谱
 #### Neo4j
 Neo4j是一个流行的图形数据库，它是开源的。最近，Neo4j的社区版已经由遵循AGPL许可协议转向了遵循GPL许可协议。尽管如此，Neo4j的企业版依然使用AGPL许可。Neo4j基于Java实现，兼容ACID特性，也支持其他编程语言，如Ruby和Python
-##### 
 ## 特点  
 **实现数据共享**：包含所有用户可同时存取数据库中的数据，也包括用户可以用各种方式通过接口使用数据库，并提供数据共享  
 **减少数据的冗余度**：由于数据库实现了数据共享，从而避免了用户各自建立应用文件，减少了大量重复数据，减少了数据冗余  
