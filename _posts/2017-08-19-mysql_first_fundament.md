@@ -6,7 +6,7 @@ category : [MySQL]
 tags : [MySQL]
 date:       2017-08-19
 author:     "晨曦"
-header-img: "/img/post/mysql-bg.jpg"
+header-img: "/img/post/mysql-bg.png"
 description:  "本文主要介绍使用MySQL对数据记录进行一些基本的操作，所有内容仅限单表操作"
 ---
 
@@ -101,7 +101,7 @@ MySQL具有一套对字符、单词以及特殊符号的使用规定, 它通过�
 使用`create database`语句可完成对数据库的创建，创建命令的格式如下：  
 `create database if not exists test_db character set gbk;`  
 其中`if not exists`是该语句的可选子句，可防止创建数据库服务器中已存在的新数据库的错误；`character set gbk`也是该语句的可选子句，在创建时将数据库字符编码指定为`gbk`   
-{% highlight mysql %}
+```mysql
 mysql> create database if not exists test_db character set gbk;
 Query OK, 1 row affected (0.03 sec)
 
@@ -118,7 +118,7 @@ mysql> show databases;
 | world              |
 +--------------------+
 7 rows in set (0.00 sec)
-{% endhighlight %}
+```
 ### 删除数据库
 删除数据库意味着数据库中的所有数据和关联对象将被永久删除，并且无法撤消。使用`drop database`语句可以删除指定数据库，命令格式如下：  
 `drop database if exists test_db;`  
