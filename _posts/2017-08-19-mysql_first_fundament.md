@@ -49,7 +49,7 @@ PS C:\Windows\system32> net stop MySQL57
 MySQL57 服务正在停止.
 MySQL57 服务已成功停止。
 ```  
-如果在安装过程中同意创建快键方式到桌面的话，可以双击打开MySQL服务，<img src="/img/post/mysql-screenshot-service.png" width="768" alt="ScreenShot">  
+如果在安装过程中同意创建快键方式到桌面的话，可以双击打开MySQL服务，<img src="/img/post/mysql-screenshot-service.png" width="768" alt="ScreenShot">
 然后在最小化图标处可视化开启/关闭服务  
 服务开启以后，在命令行窗口输入`mysql -u root -p`，回车并键入密码  
 ```bash
@@ -73,8 +73,9 @@ mysql>
 * -D：选择登录数据库后要连接的数据库（`world`为数据库名称）
 * -h：指定客户端所要登录的MySQL主机名, 登录当前机器该参数可以省略
 * -u：指定登录的用户名
-* -p: 告诉服务器将会使用一个密码来登录, 如果所要登录的用户名密码为空, 可以忽略此参数
-**[更改数据默认保存编码](http://blog.csdn.net/yuanyuan_186/article/details/12376783 "MySQL改变默认编码为UTF-8")**
+* -p: 告诉服务器将会使用一个密码来登录, 如果所要登录的用户名密码为空, 可以忽略此参数  
+
+**[更改数据默认保存编码](http://blog.csdn.net/yuanyuan_186/article/details/12376783 "MySQL改变默认编码为UTF-8")**  
 ## 语法规则
 MySQL具有一套对字符、单词以及特殊符号的使用规定, 它通过执行SQL脚本来完成对数据库的操作, 该脚本由一条或多条MySQL语句(SQL语句 + 扩展语句)组成, 保存时脚本文件后缀名一般为`.sql`。在控制台下, MySQL客户端也可以对语句进行单句的执行而不用保存为`.sql`文件。**标识符**用来命名一些对象, 如数据库、表、列、变量等, 以便在脚本中的其他地方引用。对于标识符是否大小写敏感取决于当前的操作系统, **Windows下是不敏感**的, 但对于大多数 Linux\Unix 系统来说, 这些标识符是大小写敏感的；MySQL语句**以分号`;`作为语句的结束**（`USE`和`QUIT`可不加）, 若在语句结尾不添加`;`时, 命令提示符会以`->`提示你继续输入
 ### 查看基本信息
@@ -100,7 +101,7 @@ MySQL具有一套对字符、单词以及特殊符号的使用规定, 它通过�
 使用`create database`语句可完成对数据库的创建，创建命令的格式如下：  
 `create database if not exists test_db character set gbk;`  
 其中`if not exists`是该语句的可选子句，可防止创建数据库服务器中已存在的新数据库的错误；`character set gbk`也是该语句的可选子句，在创建时将数据库字符编码指定为`gbk`   
-```mysql
+{% highlight mysql %}
 mysql> create database if not exists test_db character set gbk;
 Query OK, 1 row affected (0.03 sec)
 
@@ -117,7 +118,7 @@ mysql> show databases;
 | world              |
 +--------------------+
 7 rows in set (0.00 sec)
-```  
+{% endhighlight %}
 ### 删除数据库
 删除数据库意味着数据库中的所有数据和关联对象将被永久删除，并且无法撤消。使用`drop database`语句可以删除指定数据库，命令格式如下：  
 `drop database if exists test_db;`  
