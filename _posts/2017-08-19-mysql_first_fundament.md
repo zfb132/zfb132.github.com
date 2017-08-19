@@ -35,9 +35,9 @@ description:  "本文主要介绍使用MySQL对数据记录进行一些基本的
 * 主键：主键是唯一的；可以使用主键来查询数据
 * 外键：用于关联两个表
 * 复合键：复合键（组合键）将多个列作为一个索引键
-* 索引：是对数据库表中一列或多列的值进行排序的一种结构；可快速访问数据库表中的特定信息
+* 索引：是对数据库表中一列或多列的值进行排序的一种结构；可快速访问数据库表中的特定信息  
 ## 前期准备
-从[MySQL官网](https://dev.mysql.com/downloads/ "MySQL官网")下载并安装MySQL社区版，成功安装后就可以使用了。可以在[命令行](https://baike.baidu.com/item/%E5%91%BD%E4%BB%A4%E6%8F%90%E7%A4%BA%E7%AC%A6 "命令行介绍")窗口**以管理员身份**运行命令`net start MySQL57`打开MySQL服务；运行命令`net stop MySQL57`关闭MySQL服务（其中MySQL57为自己创建的服务名）  
+从[MySQL官网](https://dev.mysql.com/downloads/ "MySQL官网")下载并安装MySQL社区版，成功安装后就可以使用了。可以在[命令行](https://baike.baidu.com/item/%E5%91%BD%E4%BB%A4%E6%8F%90%E7%A4%BA%E7%AC%A6 "命令行介绍")窗口**以管理员身份**运行命令`net start MySQL57`打开MySQL服务；运行命令`net stop MySQL57`关闭MySQL服务（其中MySQL57为自己创建的服务名）   
 ```bash
 PS C:\Windows\system32> net start MySQL57
 MySQL57 服务正在启动 ..
@@ -46,8 +46,9 @@ MySQL57 服务已经启动成功。
 PS C:\Windows\system32> net stop MySQL57
 MySQL57 服务正在停止.
 MySQL57 服务已成功停止。
-```
-如果在安装过程中同意创建快键方式到桌面的话，可以双击打开MySQL服务，<img src="/img/post/mysql-screenshot-service.png" width="768" alt="ScreenShot">然后在最小化图标处可视化开启/关闭服务  
+```  
+如果在安装过程中同意创建快键方式到桌面的话，可以双击打开MySQL服务，<img src="/img/post/mysql-screenshot-service.png" width="768" alt="ScreenShot">  
+然后在最小化图标处可视化开启/关闭服务  
 服务开启以后，在命令行窗口输入`mysql -u root -p`，回车并键入密码  
 ```bash
 PS C:\Windows\system32> mysql -u root -p
@@ -65,7 +66,7 @@ owners.
 Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
 
 mysql>
-```
+```  
 **注意**：登录数据库的完整指令参数是`mysql -D world -h localhost -u root -p`，每个参数的意思如下：
 * -D：选择登录数据库后要连接的数据库（`world`为数据库名称）
 * -h：指定客户端所要登录的MySQL主机名, 登录当前机器该参数可以省略
@@ -96,8 +97,8 @@ MySQL具有一套对字符、单词以及特殊符号的使用规定, 它通过�
 ### 创建数据库
 使用`create database`语句可完成对数据库的创建，创建命令的格式如下：  
 `create database if not exists test_db character set gbk;`  
-其中`if not exists`是该语句的可选子句，可防止创建数据库服务器中已存在的新数据库的错误；`character set gbk`也是该语句的可选子句，在创建时将数据库字符编码指定为`gbk`  
-```bash
+其中`if not exists`是该语句的可选子句，可防止创建数据库服务器中已存在的新数据库的错误；`character set gbk`也是该语句的可选子句，在创建时将数据库字符编码指定为`gbk`   
+```mysql
 mysql> create database if not exists test_db character set gbk;
 Query OK, 1 row affected (0.03 sec)
 
@@ -114,7 +115,7 @@ mysql> show databases;
 | world              |
 +--------------------+
 7 rows in set (0.00 sec)
-```
+```  
 ### 删除数据库
 删除数据库意味着数据库中的所有数据和关联对象将被永久删除，并且无法撤消。使用`drop database`语句可以删除指定数据库，命令格式如下：  
 `drop database if exists test_db;`  
