@@ -23,7 +23,8 @@ description:  "本文主要介绍使用MySQL对数据记录进行一些基本的
 * 每行为各种记录名称
 * 每列为记录名称所对应的数据域
 * 许多的行和列组成一张表单
-* 若干的表单组成数据库
+* 若干的表单组成数据库  
+
 还有一些RDBMS的常用术语如下：  
 * 数据库: 一些关联表的集合
 * 数据表: 表是数据的矩阵；一个数据库中的表看起来像一个简单的电子表格
@@ -36,8 +37,9 @@ description:  "本文主要介绍使用MySQL对数据记录进行一些基本的
 * 外键：用于关联两个表
 * 复合键：复合键（组合键）将多个列作为一个索引键
 * 索引：是对数据库表中一列或多列的值进行排序的一种结构；可快速访问数据库表中的特定信息  
+
 ## 前期准备
-从[MySQL官网](https://dev.mysql.com/downloads/ "MySQL官网")下载并安装MySQL社区版，成功安装后就可以使用了。可以在[命令行](https://baike.baidu.com/item/%E5%91%BD%E4%BB%A4%E6%8F%90%E7%A4%BA%E7%AC%A6 "命令行介绍")窗口**以管理员身份**运行命令`net start MySQL57`打开MySQL服务；运行命令`net stop MySQL57`关闭MySQL服务（其中MySQL57为自己创建的服务名）   
+从[MySQL官网](https://dev.mysql.com/downloads/ "MySQL官网")下载并安装MySQL社区版，成功安装后就可以使用了。可以在[命令行](https://baike.baidu.com/item/%E5%91%BD%E4%BB%A4%E6%8F%90%E7%A4%BA%E7%AC%A6 "命令行介绍")窗口**以管理员身份**运行命令`net start MySQL57`打开MySQL服务；运行命令`net stop MySQL57`关闭MySQL服务（其中MySQL57为自己创建的服务名）     
 ```bash
 PS C:\Windows\system32> net start MySQL57
 MySQL57 服务正在启动 ..
