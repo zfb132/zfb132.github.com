@@ -160,7 +160,9 @@ mysql> describe mytest;
 | school   | varchar(90)       | YES  |     | WHU     |                |
 +----------+-------------------+------+-----+---------+----------------+
 5 rows in set (0.01 sec)
-```
+```  
+**另外，也可复制其他表结构来创建一个新表**：  
+`create table mytest2 like mytest;`  
 ### 修改表结构
 使用`alter table`来更改现有表的结构，可用来**添加列，删除列，更改列的数据类型，添加主键，重命名表等等**，命令格式举例如下：  
 
@@ -172,10 +174,20 @@ mysql> describe mytest;
 `change id`表示**更改列**`id`**属性**的操作；`id int(15) not null auto_increment`是修改后的列定义
 * `alter table mytest add primary key(sex);`   
 `add primary key(sex)`表示**将列**`sex`**定义为主键**，此时要注意的是：**MySQL不能单独定义两个主键，在创建表时定义主键后就不能再修改了，只有在建表时未定义主键才可使用此方法；不过在创建表时可以创建一个复合主键**`primary key(id,sex)`
-* `alter table mytest rename to test_tb`  
+* `alter table mytest rename to test_tb;`  
 注意，在**重命名表**之前，应该认真考虑是否影响数据库和应用程序层
 
 ### 删除数据表
 使用`drop table`语句可以删除指定数据库，命令格式如下：  
 `drop table if exists mytest;`   
 其中`if exists`是该语句的可选子句，可防止删除一个不存在的数据库
+### 插入数据
+使用`insert into`语句可以将数据插入到指定数据表中，命令格式如下：  
+`insert into mytest(id,name,sex) values (1,'Michael','男'),(2,'Jane','女');`  
+其中`mytest`为要插入数据记录的表格；`id,name,sex`为要插入的数据的列；当需要一次性插入**多条数据**时，每组数据之间用`,`隔开；如果为表中的**所有列**指定相应列的值，则可以`insert into mytest values (3,'Maria','女',19980909,'HUST');`
+注意：**不必为自动递增的列指定值**，它会自动将当前的最大值加1作为新纪录的值  
+还可以通过与`select`语句结合实现快速复制表（前提：两个表**结构基本相同**）：  
+`insert into mytest2(id,sex) select id,sex from mytest;`   
+将`mytest`表中的两列数据复制到`mytest2中`  
+`insert into mytest2 select * from mytest;`   
+将`mytest`表中的所有数据复制到`mytest2中`  
