@@ -25,7 +25,7 @@ description: 第一篇博客，一些感慨。
 `tags : [dplyr,DataBase,RSQLite]`  多个标签要用`,`隔开  
 `categories : [Git]` 或者 `category : R` 都可以表示目录分类  
 `author:    "晨曦 & ZFB"`  表示多名作者  
-`header-img: "/img/post/dplyr1-bg.jpg"` (引用本地`jpg`文件)或 `header-img: "https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png"` (引用外部文件，https站点的资源文件一律用https)  
+`header-img: "/img/post/dplyr1-bg.jpg"` (引用本地`jpg`文件)或 `header-img: "https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png"` (引用外部文件，https站点的资源文件一律用https)     
 `mathjax: true`  加在头文件中,实现数学公式渲染  
   
 ```
