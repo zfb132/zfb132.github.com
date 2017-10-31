@@ -178,12 +178,19 @@ mysql> describe mytest;
 注意，在**重命名表**之前，应该认真考虑是否影响数据库和应用程序层
 
 ### 创建索引
-使用`create index`语句在表中创建**索引**，其特点是：  
+#### create  
+使用`create index`语句在表中创建**索引**，其特点是：  
 在表中创建索引的目的是更加快速高效地查询数据；用户无法看到索引，它们只能被用来加速搜索/查询；更新一个包含索引的表需要比更新一个没有索引的表更多的时间，这是由于索引本身也需要更新。因此，理想的做法是仅仅在经常被搜索的列（以及表）上面创建索引。命令格式如下：  
 `create unique index nameIndex on mytest (name desc)`   
 其中`nameIndex`为创建的索引的名字，`unique`表示不允许使用重复的值（可选参数），`mytest`为要操作的表的名字，`name`为`mytest`表中的某一列，`desc`表示以降序索引该列的值（可选参数）。如果希望索引不止一个列，可以在括号中列出这些列的名称，用逗号隔开，例如：  
 `create index allIndex on mytest (name,sex)`   
-### 删除索引  
+#### alter 
+使用`alter table`也可以在表中创建索引，命令格式如下：  
+`alter table mytest add index nameIndex (name)`  
+其中`nameIndex`为创建的索引的名字，`mytest`为要操作的表的名字，`name`为`mytest`表中的某一列。如果希望索引不止一个列，可以在括号中列出这些列的名称，用逗号隔开。  
+`alter table mytest add unique nameIndex (name)`   
+表示创建唯一的索引，其中`nameIndex`为创建的索引的名字，`mytest`为要操作的表的名字，`name`为`mytest`表中的某一列。如果希望索引不止一个列，可以在括号中列出这些列的名称，用逗号隔开。  
+### 删除索引  
 ### 删除数据表
 使用`drop table`语句可以删除指定数据库，命令格式如下：  
 `drop table if exists mytest;`   
