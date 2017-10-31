@@ -186,9 +186,9 @@ mysql> describe mytest;
 `create index allIndex on mytest (name,sex)`   
 #### alter 
 使用`alter table`也可以在表中创建索引，命令格式如下：  
-`alter table mytest add index nameIndex (name)`  
+`alter table mytest add index nameIndex (name)`  
 其中`nameIndex`为创建的索引的名字，`mytest`为要操作的表的名字，`name`为`mytest`表中的某一列。如果希望索引不止一个列，可以在括号中列出这些列的名称，用逗号隔开。  
-`alter table mytest add unique nameIndex (name)`   
+`alter table mytest add unique nameIndex (name)`  
 表示创建唯一的索引，其中`nameIndex`为创建的索引的名字，`mytest`为要操作的表的名字，`name`为`mytest`表中的某一列。如果希望索引不止一个列，可以在括号中列出这些列的名称，用逗号隔开。  
 ### 删除索引  
 ### 删除数据表
