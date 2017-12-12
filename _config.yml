@@ -74,8 +74,8 @@ sidebar-avatar: /img/me2.jpg     # img前面加`/`绝对引用。
 # Friends
 friends: [
 	{
-        title: "果壳任意门",
-        href: "http://gate.guokr.com/"
+        title: "主页",
+        href: "https://www.whuzfb.cn/"
         },{
         title: "LeetCode",
         href: "https://leetcode.com/"
