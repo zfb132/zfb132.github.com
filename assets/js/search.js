@@ -63,11 +63,9 @@
         'categories': window.store[key].categories,
         'content': window.store[key].content
       });
-
-      var results = this.search(searchTerm); // Get lunr to perform a search
-      displaySearchResults(results, window.store, searchTerm);
     }
     });
-
+    var results = idx.search(searchTerm); // Get lunr to perform a search
+    displaySearchResults(results, window.store, searchTerm);
   }
 })();
