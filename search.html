@@ -53,7 +53,7 @@ s.parentNode.insertBefore(bdcs, s);
         "title": "{{ post.title | xml_escape }}",
         "author": "{{ post.author | xml_escape }}",
         "categories": "{{ post.categories}}",
-        "content": {{ post.content | strip_html | strip_new_lines | smartify | truncate: 200 | jsonify }},
+        "content": {{ post.content | strip_html | strip_new_lines | smartify | jsonify }},
         "url": "{{ post.url | xml_escape }}"
       }
       {% unless forloop.last %},{% endunless %}
