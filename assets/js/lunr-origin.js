@@ -258,7 +258,12 @@ lunr.tokenizer = function (obj) {
     }
 
   }
-
+  var rs = str.split(/[\ |\~|\`|\!|\@|\#|\$|\%|\^|\&|\*|\uFE30-\uFFA0|\(|\)|\-|\_|\+|\=|\||\\|\[|\]|\{|\}|\;|\:|\"|\'|\,|\<|\.|\>|\/|\?]+/)
+  .map(function (token) {
+    var t = token.replace(/[\ |\~|\`|\!|\@|\#|\$|\%|\^|\&|\*|\uFE30-\uFFA0|\(|\)|\-|\_|\+|\=|\||\\|\[|\]|\{|\}|\;|\:|\"|\'|\,|\<|\.|\>|\/|\?]/g, '').toLowerCase()
+      return t;
+    });
+  
   return tokens
 }
 
@@ -1129,10 +1134,21 @@ lunr.Pipeline.registerFunction(lunr.stopWordFilter, 'stopWordFilter')
  * @see lunr.Pipeline
  */
 lunr.trimmer = function (token) {
+  if(isChineseChar(token)){
+    return token;
+  }
   return token.update(function (s) {
     return s.replace(/^\W+/, '').replace(/\W+$/, '')
   })
 }
+
+/**
+ **check it contains Chinese (including Japanese and Korean)
+ */
+function isChineseChar(str){     
+   var reg = /[\u4E00-\u9FA5\uF900-\uFA2D]/;  
+   return reg.test(str);  
+}  
 
 lunr.Pipeline.registerFunction(lunr.trimmer, 'trimmer')
 /*!
