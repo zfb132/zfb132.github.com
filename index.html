@@ -31,8 +31,13 @@ header-img: "/img/home-bg.jpg"
 <hr>
 {% endfor %}
 <script src="//cdn1.lncld.net/static/js/2.5.0/av-min.js"></script>
-  <script>AV.initialize("JOlpycoXPlWpliHaQCATuSMI-gzGzoHsz", "aOrAECRcUnwpNiY8RtEoxMzX");</script>
-  <script>
+<script>
+  var APP_ID = 'JOlpycoXPlWpliHaQCATuSMI-gzGzoHsz';
+  var APP_KEY = 'aOrAECRcUnwpNiY8RtEoxMzX';
+	AV.init({
+        appId: APP_ID,
+        appKey: APP_KEY
+    });
     function showTime(Counter) {
       var query = new AV.Query(Counter);
       var entries = [];
@@ -118,11 +123,11 @@ header-img: "/img/home-bg.jpg"
 
     $(function() {
       var Counter = AV.Object.extend("Counter");
-      if ($('.leancloud_visitors').length == 1) {
+      //if ($('.leancloud_visitors').length == 1) {
         addCount(Counter);
-      } else if ($('.post-title-link').length > 1) {
+      //} else if ($('.post-title-link').length > 1) {
         showTime(Counter);
-      }
+     // }
     });
   </script>
 
