@@ -25,12 +25,51 @@ header-img: "/img/home-bg.jpg"
 		{% endif %}
     </a>
     <p class="post-meta">
-        Posted on {{ post.date | date: "%B %-d, %Y" }};&nbsp;浏览量:&nbsp;<span data-hk-page="{{ post.url | prepend: site.url}}"> - </span>次.&nbsp;字数:&nbsp;{{ post.content | number_of_words }}
+        Posted on {{ post.date | date: "%B %-d, %Y" }};&nbsp;浏览量:&nbsp;<span id="<%= url_for(post.path) %>" class="leancloud_visitors" data-flag-title="<%- post.title %>"> - </span>次.&nbsp;字数:&nbsp;{{ post.content | number_of_words }}
     </p>
 </div>
 <hr>
 {% endfor %}
-
+<script src="//cdn1.lncld.net/static/js/2.5.0/av-min.js"></script>
+<script>
+    var APP_ID = 'JOlpycoXPlWpliHaQCATuSMI-gzGzoHsz';
+    var APP_KEY = 'aOrAECRcUnwpNiY8RtEoxMzX';
+    AV.init({
+        appId: APP_ID,
+        appKey: APP_KEY
+    });
+    // 显示次数
+    function showTime(Counter) {
+        var query = new AV.Query("Counter");
+        if($(".leancloud_visitors").length > 0){
+            var url = $(".leancloud_visitors").attr('id').trim();
+            // where field
+            query.equalTo("words", url);
+            // count
+            query.count().then(function (number) {
+                // There are number instances of MyClass where words equals url.
+                $(document.getElementById(url)).text(number?  number : '--');
+            }, function (error) {
+                // error is an instance of AVError.
+            });
+        }
+    }
+    // 追加pv
+    function addCount(Counter) {
+        var url = $(".leancloud_visitors").length > 0 ? $(".leancloud_visitors").attr('id').trim() : 'icafebolger.com';
+        var Counter = AV.Object.extend("Counter");
+        var query = new Counter;
+        query.save({
+            words: url
+        }).then(function (object) {
+        })
+    }
+    $(function () {
+        var Counter = AV.Object.extend("Counter");
+        addCount(Counter);
+        showTime(Counter);
+    });
+</script>
 
 <!-- Pager -->
 <ul class="pager">
