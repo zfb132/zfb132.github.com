@@ -6,7 +6,7 @@ category : [JavaScript]
 tags : [JavaScript]
 date:       2019-01-05
 author:     "晨曦"
-header-img: "/img/default-bg.png"
+header-img: "/img/default-bg.jpg"
 description:  "对于Jekyll创建的博客不如Hexo的模板丰富，很多功能都需要自己动手完成"
 ---
 
@@ -16,13 +16,13 @@ Jekyll 是一个简单的免费的 Blog 生成工具，类似 WordPress 。它�
 ## 准备工作
 第一步，需要已经成功使用 GitHub Pages ，然后去[ leancloud 官网](https://www.leancloud.cn/ "官网")注册一个用户并登录  
 第二步，创建新应用：应用名称可以随意填写，计价方案选择`开发版`，然后点击创建
-<img src="/img/post/reading-create-app.png" width="768" alt="创建应用">  
+<img src="/img/post/reading-create-app.png" width="768" alt="创建应用">
 第三步，创建class：名字为`Counter`，其他都保持默认值即可  
-<img src="/img/post/reading-create-class.png" width="768" alt="创建Class">  
+<img src="/img/post/reading-create-class.png" width="768" alt="创建Class">
 第四步，为`Counter`添加列：默认会有四个列字段，不要改动。自己选择`添加列`，然后依次添加三个列，分别是`url`（String 类型），`time`（Number 类型），`title`（String 类型）  
-<img src="/img/post/reading-create-column.png" width="768" alt="创建列字段">  
+<img src="/img/post/reading-create-column.png" width="768" alt="创建列字段">
 最后，添加网址白名单：左侧的`设置`栏目，点击`安全中心`，在`Web 安全域名`处填写自己博客网站的域名  
-<img src="/img/post/reading-add-whitelist.png" width="768" alt="填写网址白名单">  
+<img src="/img/post/reading-add-whitelist.png" width="768" alt="填写网址白名单">
 ## 模板文件修改
 首先，打开`index.html`，在文中合适位置添加以下代码：  
 ```浏览量:&nbsp;<span id="{{ post.url }}" class="leancloud_visitors" data-flag-title="{{ post.title }}"> - </span>次.```
@@ -114,8 +114,8 @@ Jekyll 是一个简单的免费的 Blog 生成工具，类似 WordPress 。它�
 </script>
 ```
 其中，`appid`和`appkey`可以在 leancloud 网站的设置的`应用Key`处找到并粘贴  
-<img src="/img/post/reading-appid.png" width="768" alt="AppID和AppKey">  
+<img src="/img/post/reading-appid.png" width="768" alt="AppID和AppKey">
 最后，等待修改生效即可。如果没有意外的话，这里将会看到如下结果：
-<img src="/img/post/reading-ideal-result.png" width="768" alt="理想结果">  
+<img src="/img/post/reading-ideal-result.png" width="768" alt="理想结果">
 ## 写在最后
 这个阅读量统计的功能本身实现并不难，并不需要多么复杂的逻辑和 JavaScript 代码，我原本是打算使用自己的服务器创建一系列的接口并使用数据库来保存这些信息的。后来考虑到我的服务器可能没那么稳定，以及 leancloud 的免费个人开发版的接口调用次数限制对我这个超级冷清的博客来说已经足够了，最重要的大概是我太懒了吧，不想自己再实现一套接口，就这样吧，希望能对遇到此问题的朋友以帮助
