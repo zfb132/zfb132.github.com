@@ -102,7 +102,7 @@ MySQL具有一套对字符、单词以及特殊符号的使用规定, 它通过�
 使用`create database`语句可完成对数据库的创建，创建命令的格式如下：  
 `create database if not exists test_db character set gbk;`  
 其中`if not exists`是该语句的可选子句，可防止创建数据库服务器中已存在的新数据库的错误；`test_db`是新创建的数据库的名字；`character set gbk`也是该语句的可选子句，在创建时将数据库字符编码指定为`gbk`   
-```mysql
+```sql
 mysql> create database if not exists test_db character set gbk;
 Query OK, 1 row affected (0.03 sec)
 
@@ -126,7 +126,7 @@ mysql> show databases;
 其中`if exists`是该语句的可选子句，可防止删除一个不存在的数据库
 ### 创建数据表
 使用`create table`语句可以在数据库中创建一个新表，命令格式如下：    
-```mysql
+```sql
 create table if not exists mytest(
     id int(11) not null auto_increment,
     name varchar(45) default null,
@@ -138,7 +138,7 @@ create table if not exists mytest(
 ```
 [MySQL支持的数据类型](http://blog.whuzfb.cn/ "待添加")有很多，这里不再介绍。`if not exists`是可选语句，防止创建已存在的新表而产生错误；`mytest`是新建的数据表的名称；`()`内部的都是列定义，`id`、`name`、`sex`、`birthday`、`school`是每列的名称，`int(11)`指定该列数据为整数型，宽度为11；`not null`表示该列不接受`null`值；`default 'WHU'`表示该列的默认值为`'WHU'`；`auto_increment`表示每当将新行插入到表中时，该列的值会自动增加，**每个表中最多只能有一列被设置为此属性**，具有该属性的列一般为主键；`primary key(id)`表示将表的特定列`id`设置为主键；`engine=InnoDB`是可选语句，用于设置表的存储引擎（MySQL支持的存储引擎：`InnoDB，MyISAM，HEAP，EXAMPLE，CSV，ARCHIVE，MERGE，FEDERATED、NDBCLUSTER`），默认为`InnoDB`；`charset`是可选语句，用于设置编码格式  
 控制台输出如下：  
-```mysql
+```sql
 mysql> create table if not exists mytest(
     ->     id int(11) not null auto_increment,
     ->     name varchar(45) default null,
