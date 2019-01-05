@@ -25,7 +25,7 @@ description:  "微信公众号默认的自动回复功能太弱了，许多功�
 第四步：主代码的编写，主要有两种方法：  
 一种方法，直接下载我已经写好的代码运行即可：  
 `git clone git@github.com:zfb132/wechatPlatform.git`  
-另二种方法，自己逐个创建代码，创建所有代码后的目录文件结构如下：  
+另一种方法，自己逐个创建代码，创建所有代码后的目录文件结构如下：  
 ```
 wechatPlatform/
 wechatPlatform/app/
@@ -184,7 +184,7 @@ def txtreply(msg,txt):
     return xml
 ```
 `uwsgi_wechat.ini`文件内容：  
-```uwsgi
+```
 [uwsgi]
 # http协议对客户端开发的端口号
 http = 0.0.0.0:8111
