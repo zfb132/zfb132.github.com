@@ -2,8 +2,8 @@
 layout: post
 title: 微信公众平台开发
 subtitle: "转发用户消息到自己服务器来扩展公众号的功能"
-category : [Python,Flask]
-tags : [Python,Flask]
+category : [Python,Flask,Linux,Ubuntu]
+tags : [Python,Flask,Linux,Ubuntu]
 date:       2019-01-06
 author:     "晨曦"
 header-img: "/img/default-bg.jpg"
@@ -58,7 +58,10 @@ wechatPlatform/runserver.py
 `service nginx restart`  
 最后启动本代码在后台运行：  
 `uwsgi uwsgi_wechat.ini -d ./server.log`  
-至此，服务器端的代码已经全部编写并部署完成
+至此，服务器端的代码已经全部编写并部署完成  
+**注意**：在启动uwsgi后会生成四个进程监听8111端口，如果想要杀死他们，先查看占用8111端口的所有进程的ID（不能直接关闭uwsgi，这可能会影响到其他项目），终端输入`lsof -i:8111`命令即可查看，然后使用`kill -9 id`依次杀死各个进程；这种方法比较麻烦，另一种快速的方法是：  
+`kill -9 $(lsof -t -i:8111)`  
+此命令可一步到位杀死所有占用8111端口的进程
 ## 微信平台网页端配置
 浏览器打开[微信公众平台](https://mp.weixin.qq.com "官网")登录自己的管理员账户，点击`开发`栏目，选择`基本配置`，根据网页提示填写这三个内容（一般选择明文模式）：
 <img src="/img/post/wechat-platform-web.png" width="768" alt="网页端配置">
@@ -141,7 +144,7 @@ def handlemsg(data):
     msg = parse_message(data)
     print(msg)
     logging.debug('handle msg:'.format(msg))
-    xml = txtreply(msg,config.DEFAULTMSG + msg.content)
+    xml = txtreply(msg,msg.content)
     return xml
 
 # 微信消息接口
