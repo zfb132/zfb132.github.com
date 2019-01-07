@@ -69,6 +69,10 @@ Android所使用的开发语言平台Java是Oracle（甲骨文）公司研制的
 22|5.1|Lollipop|棒棒糖|2015.03.10|  
 23|6.0|Marshmallow|棉花糖|2015.10.05|  
 24|7.0|Nougat|牛轧糖|2016.08.22|  
+25|7.1|Nougat|牛轧糖|2016.10.04|  
+26|8.0|Oreo|奥利奥|2017.08.21|  
+27|8.1|Oreo|奥利奥|2017.12.05|  
+28|9|Pie|派|2018.08.06|  
   
 ## 分支版本  
 LineageOS、YunOS、Fire OS、360OS、Flyme OS、Funtouch OS、氢OS、LeWa OS、XobotOS、Resurrection Remix OS、MIUI（米柚）、华为EMUI、Zen UI、Hive UI、LG Optimus UI、HTC Sense、三星TouchWiz、MoKee（魔趣）、Nokia X Software Platform、OPhone、AOKP、Baidu Yi、Barnes & Noble Nook、CyanogenMod、Replicant、OmniROM  
