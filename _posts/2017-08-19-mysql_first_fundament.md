@@ -98,6 +98,7 @@ MySQL具有一套对字符、单词以及特殊符号的使用规定, 它通过�
 `show table status from world;` 显示`world`数据库中所有表的信息  
 `show table status from world like 'wor%' \G;` 显示`world`数据库中表名以`wor`开头的数据表的信息，并按列打印    
 `select * from test;` 显示`test`数据表的内容   
+`select count(*) from test;` 显示`test`数据表的记录的个数   
 ### 创建数据库
 使用`create database`语句可完成对数据库的创建，创建命令的格式如下：  
 `create database if not exists test_db character set gbk;`  
