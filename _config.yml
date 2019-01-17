@@ -5,7 +5,7 @@ timezone: Asia/Shanghai
 paginate: 10 # pagination based on number of posts
 paginate_path: "page:num"
 highlighter: rouge
-url: "http://blog.whuzfb.cn"
+url: "https://blog.whuzfb.cn"
 baseurl: ""
 markdown: kramdown
 kramdown:
