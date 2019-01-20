@@ -58,12 +58,6 @@ changyan: true
 cy_appid: cyt0r3DPA
 cy_conf: prod_9f689acf279f6cafa48eff93be14cdf6
 
-# 评论系统
-# Duoshuo settings
-#duoshuo_username: brucezhaor
-# Share component is depend on Comment so we can NOT use share only.
-#duoshuo_share: true                     # set to false if you want to use Comment without Sharing
-#url: "http://zfb132.github.io"
 
 # page Sidebar settings
 sidebar-about-description: "在代码的道路上渐行渐远"
