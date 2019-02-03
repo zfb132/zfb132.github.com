@@ -1,7 +1,3 @@
-bootstrap
-http://www.w3schools.com/bootstrap/bootstrap_images.asp
-
-
 # 插入图片链接
 	<a href="{{ site.BASE_PATH }}/">
 		<img src="http://pic.yupoo.com/{{site.author.yupoo}}" class="img-responsive" />
