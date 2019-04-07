@@ -199,9 +199,6 @@ STATICFILES_DIRS = (
 
 ## 安装pip3：  
     `sudo apt install python3-pip`  
-
-## 安装Django  
-
 ## 在服务器上下载uwsgi：  
     `sudo python3 -m pip install uwsgi`  
 
