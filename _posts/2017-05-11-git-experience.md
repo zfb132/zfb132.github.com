@@ -51,6 +51,8 @@ description:  "本文主要介绍一些简单的命令：包括clone, add, commi
 `git branch test`  
   切换分支到test（如果当前不在test分支的话）：  
 `git checkout test`  
+在本地创建并切换到test分支：  
+`git checkout -b test`  
   在本地删除一个名为test的分支：  
 `git branch -d test`  
   在远程删除test分支只需要再加上`-r`参数即可  
@@ -80,7 +82,8 @@ description:  "本文主要介绍一些简单的命令：包括clone, add, commi
 ## push  
   push命令与pull命令是类似的，因此只举一个例子，上传本地当前分支到远程master分支：  
 `git push -u origin master`  
-  
+  如果已经在本地新建一个dev分支，但是远程仓库并没有这个分支，可以使用以下命令在远程建立dev分支的同时把本地的dev分支推送到远程的dev分支（需要**保证此时在dev分支下**执行命令）：  
+  `git push origin dev:dev`  
 ## reset  
   彻底回退所有内容到上一个提交的版本：  
 `git reset --hard HEAD^`  
