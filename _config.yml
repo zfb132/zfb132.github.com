@@ -54,7 +54,7 @@ linkedin:
 anchorjs: true                          # 修改在default.html->footer
 
 #畅言评论系统
-changyan: true
+changyan: false
 cy_appid: cyt0r3DPA
 cy_conf: prod_9f689acf279f6cafa48eff93be14cdf6
 
