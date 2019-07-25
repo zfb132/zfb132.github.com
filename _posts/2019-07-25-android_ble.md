@@ -30,9 +30,10 @@ description:  "在设计基于蓝牙定位的App过程中需要解析蓝牙广�
 <img src="/img/post/beacon-advertising-packet12.png" width="768" alt="WireShark捕获的第一个数据帧">
 
 可以看到，软件会自动把每个部分的数据进行解释，如果你的英语水平可以的话，以下内容就不需要看了。数据包内容：  
-
+```
     04 3e 38 0d 01 1b 00 01 8b 03 00 b0 01 c2 01 00 ff 7f af 00 00 00 00 00 00 00 00 00 1e
-    02 0a 00 08 16 f0 ff 64 27 11 4c b9 11 09 4d 69 6e 69 42 65 61 63 6f 6e 5f 30 30 39 30 37  
+    02 0a 00 08 16 f0 ff 64 27 11 4c b9 11 09 4d 69 6e 69 42 65 61 63 6f 6e 5f 30 30 39 30 37
+```
 下面是每个字节对应的含义：  
 ```text
 第一个字节是HCI Packet Type，04表示这是HCI Event；剩下的58bytes则是HCI Event的具体内容
@@ -63,9 +64,10 @@ af 代表RSSI的大小，此处是-81dbm
 <img src="/img/post/beacon-advertising-packet2.png" width="768" alt="WireShark捕获的第二个数据帧">
 
 此数据包才是最重要的，59bytes的数据包内容如下：  
-
+```
     04 3e 38 0d 01 13 00 01 8b 03 00 b0 01 c2 01 00 ff 7f af 00 00 00 00 00 00 00 00 00 1e
-    02 01 06 1a ff 4c 00 02 15 fd a5 06 93 a4 e2 4f b1 af cf c6 eb 07 64 78 25 27 11 4c b9 c5  
+    02 01 06 1a ff 4c 00 02 15 fd a5 06 93 a4 e2 4f b1 af cf c6 eb 07 64 78 25 27 11 4c b9 c5
+```
 下面是每个字节对应的含义：  
 ```text
 第一行数据同上，不再分析，重点分析第二行（也就是广播数据部分）
