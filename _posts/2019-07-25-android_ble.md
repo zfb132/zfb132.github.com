@@ -32,8 +32,8 @@ description:  "在设计基于蓝牙定位的App过程中需要解析蓝牙广�
 可以看到，软件会自动把每个部分的数据进行解释，如果你的英语水平可以的话，以下内容就不需要看了。数据包内容：  
 
     04 3e 38 0d 01 1b 00 01 8b 03 00 b0 01 c2 01 00 ff 7f af 00 00 00 00 00 00 00 00 00 1e
-    02 0a 00 08 16 f0 ff 64 27 11 4c b9 11 09 4d 69 6e 69 42 65 61 63 6f 6e 5f 30 30 39 30 37
-下面是每个字节对应的含义：
+    02 0a 00 08 16 f0 ff 64 27 11 4c b9 11 09 4d 69 6e 69 42 65 61 63 6f 6e 5f 30 30 39 30 37  
+下面是每个字节对应的含义：  
 ```text
 第一个字节是HCI Packet Type，04表示这是HCI Event；剩下的58bytes则是HCI Event的具体内容
 第二个字节是EventCode，3e是此事件的代码；第三个字节是Parameter Length，0x38(十进制56)表示后面数据长度56bytes
@@ -65,8 +65,8 @@ af 代表RSSI的大小，此处是-81dbm
 此数据包才是最重要的，59bytes的数据包内容如下：  
 
     04 3e 38 0d 01 13 00 01 8b 03 00 b0 01 c2 01 00 ff 7f af 00 00 00 00 00 00 00 00 00 1e
-    02 01 06 1a ff 4c 00 02 15 fd a5 06 93 a4 e2 4f b1 af cf c6 eb 07 64 78 25 27 11 4c b9 c5
-下面是每个字节对应的含义：
+    02 01 06 1a ff 4c 00 02 15 fd a5 06 93 a4 e2 4f b1 af cf c6 eb 07 64 78 25 27 11 4c b9 c5  
+下面是每个字节对应的含义：  
 ```text
 第一行数据同上，不再分析，重点分析第二行（也就是广播数据部分）
 －－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－
@@ -89,7 +89,7 @@ c5 是txPower的补码，计算可知原码是-59
 对于Android 开发中，系统会把packetB中的第二行数据(30bytes，长度不定)和packetA(30bytes)中的第二行数据连接在一起，最后总的数据长度为62bytes，不够的话用0填充，如下所示：  
 **02 01 06 1a ff 4c 00 02 15 fd a5 06 93 a4 e2 4f b1 af cf c6 eb 07 64 78 25 27 11 4c b9 c5** 02 0a 00 08 16 f0 ff 64 27 11 4c b9 11 09 4d 69 6e 69 42 65 61 63 6f 6e 5f 30 30 39 30 37 00 00  
 ## 4. 使用Java解析各数据
-以下是主要解析代码，兼容Android P最新版本和Android 较低版本：
+以下是主要解析代码，兼容Android P最新版本和Android 较低版本：  
 
 ```java
 //Android Lollipop 版本以上的扫描回调函数
@@ -259,8 +259,8 @@ public String parseBLEData(byte[] scanRecord, int startIndex) {
 数据包内容：  
 
     04 3e 38 0d 01 1b 00 01 8b 03 00 b0 01 c2 01 00 ff 7f af 00 00 00 00 00 00 00 00 00 1e
-    02 0a 00 08 16 f0 ff 64 27 11 4c b9 11 09 4d 69 6e 69 42 65 61 63 6f 6e 5f 30 30 39 30 37
-下面是每个字节对应的含义（WireShark软件的解析）：
+    02 0a 00 08 16 f0 ff 64 27 11 4c b9 11 09 4d 69 6e 69 42 65 61 63 6f 6e 5f 30 30 39 30 37  
+下面是每个字节对应的含义（WireShark软件的解析）：  
 ```text
 Bluetooth HCI H4
     [Direction: Rcvd (0x01)]
@@ -308,8 +308,8 @@ Bluetooth HCI Event - LE Meta
 数据包内容：  
 
     04 3e 38 0d 01 13 00 01 8b 03 00 b0 01 c2 01 00 ff 7f af 00 00 00 00 00 00 00 00 00 1e
-    02 01 06 1a ff 4c 00 02 15 fd a5 06 93 a4 e2 4f b1 af cf c6 eb 07 64 78 25 27 11 4c b9 c5
-下面是每个字节对应的含义（WireShark软件的解析）：
+    02 01 06 1a ff 4c 00 02 15 fd a5 06 93 a4 e2 4f b1 af cf c6 eb 07 64 78 25 27 11 4c b9 c5  
+下面是每个字节对应的含义（WireShark软件的解析）：  
 ```text
 Bluetooth HCI H4
     [Direction: Rcvd (0x01)]
