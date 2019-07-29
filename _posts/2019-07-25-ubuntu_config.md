@@ -22,6 +22,35 @@ description:  "平时工作需要，可能会经常重装Ubuntu系统，所以�
 `sudo apt-get remove libreoffice-common`  
 `sudo apt-get remove unity-webapps-common`  
 对于Amazon软件，可以在图标上右键选择移除
+## 修改软件更新和安装的apt源
+首先备份原始文件：  
+`sudo cp /etc/apt/sources.list /etc/apt/sources.list.bk`  
+然后用gedit打开（也可以安装使用vim编辑器`sudo apt-get install vim`）文件：  
+`sudo gedit /etc/apt/sources.list`  
+把文件中的内容替换为下面的内容（对于Ubuntu 18.04，中科大的源）：  
+```
+deb https://mirrors.ustc.edu.cn/ubuntu/ bionic main restricted universe multiverse
+deb-src https://mirrors.ustc.edu.cn/ubuntu/ bionic main restricted universe multiverse
+deb https://mirrors.ustc.edu.cn/ubuntu/ bionic-updates main restricted universe multiverse
+deb-src https://mirrors.ustc.edu.cn/ubuntu/ bionic-updates main restricted universe multiverse
+deb https://mirrors.ustc.edu.cn/ubuntu/ bionic-backports main restricted universe multiverse
+deb-src https://mirrors.ustc.edu.cn/ubuntu/ bionic-backports main restricted universe multiverse
+deb https://mirrors.ustc.edu.cn/ubuntu/ bionic-security main restricted universe multiverse
+deb-src https://mirrors.ustc.edu.cn/ubuntu/ bionic-security main restricted universe multiverse
+deb https://mirrors.ustc.edu.cn/ubuntu/ bionic-proposed main restricted universe multiverse
+deb-src https://mirrors.ustc.edu.cn/ubuntu/ bionic-proposed main restricted universe multiverse
+```
+最后保存文件并执行：`sudo apt-get update`  
+## 修改安装python库的pip源
+首先在用户主目录（`~/`）下新建文件夹`mkdir .pip`，然后进入该文件夹`cd ~/.pip`，在此文件夹下新建文件`vi pip.conf`，然后在文件中输入以下内容并保存文件（以中科大的源为例）：  
+```
+[global]
+index-url = https://mirrors.ustc.edu.cn/pypi/web/simple
+trusted-host = mirrors.ustc.edu.cn
+timeout = 60
+```
+另外，如果只是希望指定某一次安装python库的源地址，则可以使用以下代码（以清华的源为例）：  
+`pip install -i https://pypi.tuna.tsinghua.edu.cn/simple package_name`
 ## 安装并设置搜狗输入法
 打开终端输入以下代码：  
 `sudo apt install fcitx`  
