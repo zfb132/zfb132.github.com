@@ -46,9 +46,9 @@ zhihu_username: zfb-chenxi
 weibo_username:     zfb132
 facebook_username:
 github_username:    zfb132
-google_username:    104120776813991713779
+google_username:
 RSS: feed.xml
-email: zfb@whuzfb.cn
+email: admin@whuzfb.cn
 linkedin:
 
 anchorjs: true                          # 修改在default.html->footer
@@ -68,30 +68,37 @@ sidebar-avatar: /img/me2.jpg     # img前面加`/`绝对引用。
 # Friends
 friends: [
 	{
-        title: "主页",
-        href: "https://www.whuzfb.cn/"
-        },{
-        title: "LeetCode",
-        href: "https://leetcode.com/"
-        },{
-        title: "Jekyll",
-        href: "http://jekyllrb.com/docs/templates/"
-        },{
-        title: "MSDN",
-        href: "https://msdn.microsoft.com/zh-cn/library/ms310241/"
-        },{
-        title: "IconFont",
-        href: "http://www.iconfont.cn/"
-    },{
-        title: "微信公众平台",
-        href: "https://mp.weixin.qq.com/wiki"
-        },{
-        title: "Hux-模板来源",
-        href: "https://github.com/Huxpro/huxpro.github.io"
-        },{
-        title: "brucezhaor",
-        href: "https://github.com/BruceZhaoR"
-        }
+    title: "CSDN",
+    href: "https://blog.csdn.net/qq_32507255/"
+  },
+  {
+    title: "博客园",
+    href: "https://www.cnblogs.com/zfb132/"
+  },
+  {
+    title: "简书",
+    href: "https://www.jianshu.com/u/8ee7e271d4f5/"
+  },
+  {
+    title: "Jekyll",
+    href: "http://jekyllrb.com/docs/templates/"
+  },
+  {
+    title: "IconFont",
+    href: "http://www.iconfont.cn/"
+  },
+  {
+    title: "微信公众平台",
+    href: "https://mp.weixin.qq.com/wiki"
+  },
+  {
+    title: "Hux-模板来源",
+    href: "https://github.com/Huxpro/huxpro.github.io"
+  },
+  {
+    title: "brucezhaor",
+    href: "https://github.com/BruceZhaoR"
+  }
 ]
 
 
