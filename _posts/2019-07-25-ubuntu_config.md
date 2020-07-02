@@ -102,6 +102,8 @@ XDG_VIDEOS_DIR="$HOME/Videos"
 `git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting`  
 然后在`~/.zshrc`文件中合适位置：  
 `plugins=( [plugins...] zsh-syntax-highlighting)`  
+另一个比较好的插件是**command-not-found**，它可以直接在oh-my-zsh中启用，即在`~/.zshrc`文件中合适位置：  
+`plugins=( [plugins...] command-not-found)`  
 ## 安装chrome
 打开终端依次输入以下命令：  
 `sudo wget http://www.linuxidc.com/files/repo/google-chrome.list -P /etc/apt/sources.list.d/`  
