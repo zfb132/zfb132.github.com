@@ -92,8 +92,12 @@ header-img: "/img/home-bg.jpg"
           var item = results[i];
           var url = item.get('url');
           var time = item.get('time');
-          var element = document.getElementById(url);
-          element.textContent = time;
+          try {
+            var element = document.getElementById(url);
+            element.textContent = time;
+          } catch (error) {
+            console.log("获取"+url+"的网页元素出错："+error);
+          }
         }
         // 当某个span含有默认值时说明需要创建记录
         if($('.leancloud_visitors').text().indexOf("-") != -1){

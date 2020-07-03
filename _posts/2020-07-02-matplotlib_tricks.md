@@ -4,7 +4,7 @@ title: matplotlib常见问题
 subtitle: "安装python的matplotlib库的时候可能会遇到一些问题"
 category : [Windows,Ubuntu]
 tags : [Windows,Ubuntu,Python]
-date:       2020-07-02
+date:       2020-07-02 21:51:12 +0800
 author:     "晨曦"
 header-img: "/img/post/matplotlib-bg.png"
 description:  "记录自己遇到安装matplotlib库时遇到的一些问题和解决方法"
