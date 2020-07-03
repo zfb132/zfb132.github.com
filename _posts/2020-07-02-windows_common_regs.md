@@ -60,3 +60,15 @@ Windows Registry Editor Version 5.00
 @="powershell.exe -noexit -command \"(ipconfig) -match 'IPv4';python -m http.server 8080\""
 ```
 或者直接下载[蓝奏云文件](https://zfb132.lanzous.com/iqboWe8v5eh "open-httpserver-here.reg")，将下载得到的文件名删除`.txt`后缀，双击即可实现功能  
+## 4. USB3.0连接安卓手机刷机出现问题  
+如果在使用小米刷机助手对手机刷机的时候，将手机通过USB3.0接口连接电脑，出现刷机失败的情况，考虑修改注册表。新建文件`usb-hack.reg`，内容如下：  
+```reg
+Windows Registry Editor Version 5.00
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\usbflags\18D1D00D0100]
+"osvc"=hex:00,00
+"SkipContainerIdQuery"=hex:01,00,00,00
+"SkipBOSDescriptorQuery"=hex:01,00,00,00
+
+```
+或者直接下载[蓝奏云文件](https://zfb132.lanzous.com/itOdPe9of9g "usb-hack.reg")，将下载得到的文件名删除`.txt`后缀，双击即可实现功能  
