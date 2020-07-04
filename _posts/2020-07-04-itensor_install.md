@@ -41,11 +41,11 @@ description:  "主要介绍ITensor的下载、编译、安装以及简单测试"
 
 ## 2. 如何创建和编译itensor项目
 ### 2.1 第一种方法（推荐）
-1. 编写代码文件myappname.cpp和头文件myclass.h
-2. 创建文件命名为Makefile，内容在下面
+1. 编写代码文件[myappname.cpp](https://github.com/zfb132/itensor/blob/master/itensor-install/first-method/myappname.cpp)和头文件[myclass.h](https://github.com/zfb132/itensor/blob/master/itensor-install/first-method/myclass.h)以及头文件[myappname.h](https://github.com/zfb132/itensor/blob/master/itensor-install/first-method/myappname.h)
+2. 创建文件命名为`Makefile`，内容在下面
 3. 编译项目
 `make`
-4. 此时项目文件夹下回生成myappname文件，运行代码
+4. 此时项目文件夹下会生成`myappname`文件，运行代码
 `./myappname`
 
 Makefile文件的所有内容
@@ -100,11 +100,11 @@ mkdebugdir:
 ```
 **注意**：这里换行之后必须用TAB键缩进，不能用空格
 ### 2.2 第二种方法
-1. 编写代码文件test.cpp和头文件myclass.h
+1. 编写代码文件[test.cpp](https://github.com/zfb132/itensor/blob/master/itensor-install/second-method/test.cpp)和头文件[myclass.h](https://github.com/zfb132/itensor/blob/master/itensor-install/second-method/myclass.h)
 2. 编译项目
 ```bash
 g++ -m64 -std=c++17 -fPIC -c -I. -I/home/zfb/itensor -o test.o test.cpp
 g++ -m64 -std=c++17 -fPIC -I. -I/home/zfb/itensor test.o -o test -L/home/zfb/itensor/lib -litensor -lpthread -L/usr/lib -lblas -llapack
 ```
-3. 此时项目文件夹下回生成test文件，运行代码
+3. 此时项目文件夹下会生成`test`文件，运行代码
 `./test`
