@@ -45,7 +45,7 @@ frp的系统架构和最终实现的效果如下图
 ## 2. 云主机A安装与启动frps
 步骤见[云主机安装frp-server](https://blog.whuzfb.cn/blog/2020/07/05/frp_install/#2-%E4%BA%91%E4%B8%BB%E6%9C%BAa%E4%B8%8B%E8%BD%BD%E5%92%8C%E9%85%8D%E7%BD%AEfrp-server)
 ## 3. 客户端B下载与配置frpc
-在github仓库[frp]("https://github.com/fatedier/frp/releases")根据本机版本（64位linux）下载`linux-amd64`版本（不需要客户端与云主机的CPU位宽一致，但是frp的版本号尽量保持一致），解压为文件夹`frp_linux_amd64`并放在`/home/myserver/`目录下，在`frp_linux_amd64`文件夹创建`log`目录用于保存日志。修改`frpc.ini`文件为如下  
+在github仓库[frp](https://github.com/fatedier/frp/releases)根据本机版本（64位linux）下载`linux-amd64`版本（不需要客户端与云主机的CPU位宽一致，但是frp的版本号尽量保持一致），解压为文件夹`frp_linux_amd64`并放在`/home/myserver/`目录下，在`frp_linux_amd64`文件夹创建`log`目录用于保存日志。修改`frpc.ini`文件为如下  
 ```conf
 [common]
 # 云主机A的公网ip

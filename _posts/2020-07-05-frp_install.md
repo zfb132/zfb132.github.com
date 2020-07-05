@@ -43,7 +43,7 @@ frp的系统架构和最终实现的效果如下图
 <img src="/img/post/frp-architecture.png" width="768px" alt="frp内网穿透">
 
 ## 2. 云主机A下载和配置frp-server
-在github仓库[frp]("https://github.com/fatedier/frp/releases")下载`linux-amd64`版本，解压为文件夹`frp_linux_amd64`并放在`/home/ubuntu/`目录下，在`frp_linux_amd64`文件夹创建`log`目录用于保存日志。修改`frps.ini`文件为如下
+在github仓库[frp](https://github.com/fatedier/frp/releases)下载`linux-amd64`版本，解压为文件夹`frp_linux_amd64`并放在`/home/ubuntu/`目录下，在`frp_linux_amd64`文件夹创建`log`目录用于保存日志。修改`frps.ini`文件为如下
 ```conf
 [common]
 # 绑定的IP地址，支持IPv6，不指定默认0.0.0.0
@@ -146,7 +146,7 @@ sudo rm /etc/init.d/start_frp.sh
 sudo update-rc.d -f start_frp remove
 ```
 ## 6. 内网服务器B安装配置frp-client
-在github仓库[frp]("https://github.com/fatedier/frp/releases")下载`linux-amd64`版本，解压为文件夹`frp_linux_amd64`并放在`/home/myserver/`目录下，在`frp_linux_amd64`文件夹创建`log`目录用于保存日志。修改`frpc.ini`文件为如下  
+在github仓库[frp](https://github.com/fatedier/frp/releases)下载`linux-amd64`版本，解压为文件夹`frp_linux_amd64`并放在`/home/myserver/`目录下，在`frp_linux_amd64`文件夹创建`log`目录用于保存日志。修改`frpc.ini`文件为如下  
 ```conf
 [common]
 # 云主机的公网ip
