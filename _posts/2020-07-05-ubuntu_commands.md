@@ -29,7 +29,7 @@ sudo service ssh restart
 sudo vim /etc/ssh/sshd_config
 ```
 ssh的配置文件`sshd_config`主要参数说明如下：  
-```ini
+```conf
 # 这个是ssh服务的监听端口，在实际生产环境中一般都不用默认的22端口 
 Port 22
 # AddressFamily 设置为any：默认ipv4和ipv6地址均可连接
@@ -60,6 +60,7 @@ PrintLastLog yes
 TCPKeepAlive yes
 ```
 具体对于`PermitRootLogin`选项来说，它可以设置为以下几个值（其中`without-password`也写为`prohibit-password`），且对于含义如下表：  
+
 参数类别|是否允许ssh登陆|登录方式|交互shell|  
 :--:|:--:|:--:|:--:|  
 yes|允许|没有限制|没有限制|  
