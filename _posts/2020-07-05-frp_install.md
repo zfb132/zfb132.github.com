@@ -111,7 +111,7 @@ tcp_mux = true
 停止nginx服务：`sudo service nginx stop`  
 重启nginx服务：`sudo service nginx restart`  
 **为域名example.cn添加一条名为frp的A记录解析到67.89.12.34**  
-## 4. 云主机A设置frps开机自启动（/etc/systemd/system/）
+## 4. 云主机A设置frps开机自启动（systemd）
 打开`frp_linux_amd64`文件夹下的`systemd`目录，编辑`frps.service`文件（`frps@.service`文件只是多了个自定义ini文件的功能），将其中的`user=nobody`改为`user=ubuntu`（即本机的用户名），**如果不改，启动时候会报错无法写入日志文件，权限禁止**  
 然后修改`ExecStart、ExecReload`中的路径为自己的文件路径  
 将修改后的`frps.service`文件复制到`/etc/systemd/system/`：`sudo cp ./frps.service /etc/systemd/system/`  
@@ -121,7 +121,7 @@ tcp_mux = true
 手动重启frps服务：`systemctl restart frps`或`service frps restart`  
 查看frps运行状态：`systemctl status frps`或`service frps status`  
 **关闭frps开机启动**：`systemctl disable frps`  
-## 5. 云主机A设置frps开机自启动（/etc/init.d/）
+## 5. 云主机A设置frps开机自启动（init.d）
 创建`start_frp.sh`文件：`vi start_frp.sh`，内容如下（注释不可删除）：  
 ```bash
 #!/bin/sh
@@ -212,7 +212,7 @@ remote_port = 8000
 # 新的用于ssh访问内网服务器B2的端口
 # remote_port = 8001
 ```
-## 7. 内网服务器B设置frpc开机自启动（/etc/systemd/system/）
+## 7. 内网服务器B设置frpc开机自启动（systemd）
 打开`frp_linux_amd64`文件夹下的`systemd`目录，编辑`frpc.service`文件（`frpc@.service`文件只是多了个自定义ini文件的功能），将其中的`user=nobody`改为`user=myserver`（即本机的用户名），**如果不改，启动时候会报错无法写入日志文件，权限禁止**  
 然后修改`ExecStart、ExecReload`中的路径为自己的文件路径  
 将修改后的`frpc.service`文件复制到`/etc/systemd/system/`：`sudo cp ./frpc.service /etc/systemd/system/`  
@@ -222,7 +222,7 @@ remote_port = 8000
 手动重启frpc服务：`systemctl restart frpc`或`service frpc restart`  
 查看frpc运行状态：`systemctl status frpc`或`service frpc status`  
 **关闭frpc开机启动**：`systemctl disable frpc`  
-## 8. 内网服务器B设置frpc开机自启动
+## 8. 内网服务器B设置frpc开机自启动（init.d）
 创建start_frp.sh文件：`vi start_frp.sh`，内容如下（注释不可删除）：  
 ```bash
 #!/bin/sh
