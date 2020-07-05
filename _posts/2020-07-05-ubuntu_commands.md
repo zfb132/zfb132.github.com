@@ -72,7 +72,7 @@ no|不允许|N/A|N/A|
 ### 2.1 配置服务器端
 SSH总是被强行中断，导致效率低下，可以在服务端配置，让server每隔30秒向client发送一个keep-alive包来保持连接：`sudo vim /etc/ssh/sshd_config`
 添加以下内容：  
-```ini
+```conf
 ClientAliveInterval 30
 ClientAliveCountMax 60
 ```
@@ -82,7 +82,7 @@ ClientAliveCountMax 60
 ### 2.2 配置客户端
 如果服务端没有权限配置，或者无法配置，可以配置客户端ssh，使客户端发起的所有会话都保持连接：`sudo vim /etc/ssh/ssh_config`
 添加以下内容：  
-```ini
+```conf
 ServerAliveInterval 30
 ServerAliveCountMax 60
 ```
@@ -90,7 +90,7 @@ ServerAliveCountMax 60
 本地ssh每隔30s向server端sshd发送keep-alive包，如果连续发送60次，server仍然无回应断开连接
 ### 2.3 共享ssh连接
 如果需要在多个窗口中打开同一个服务器连接，可以尝试添加`~/.ssh/config`，添加以下两行：  
-```ini
+```conf
 ControlMaster auto
 ControlPath ~/.ssh/connection-%r@%h:%p
 ```
@@ -99,7 +99,7 @@ ControlPath ~/.ssh/connection-%r@%h:%p
 如果希望每次SSH连接建立之后，此条连接会被保持4小时，退出服务器之后依然可以重用，则需要设置：  
 `ControlPersist 4h`  
 最终，一个示例`~/.ssh/config`文件配置如下:  
-```ini
+```conf
 Host *
 	ServerAliveInterval 3
 	ServerAliveCountMax 20
@@ -119,7 +119,7 @@ Host *
 如果需要让此用户有`root`权限，在`root`用户下修改`/etc/sudoers`文件：  
 `root@ubuntu:~# sudo vim /etc/sudoers`  
 修改文件如下：  
-```ini
+```conf
 # User privilege specification
 root ALL=(ALL) ALL
 username ALL=(ALL) ALL
