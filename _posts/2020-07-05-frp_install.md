@@ -38,7 +38,7 @@ IP: 192.160.0.135
     使用如下代码来将内网服务器B的/home/myserver/test.txt文件下载到用户C的机器上
     scp -P 8000 myserver@67.89.12.34:/home/myserver/test.txt ./Desktop/
 ```
-用户C（**用户端**），只需要**具备ssh连接的软件**和**Xming软件**（用于显示内网服务器B的GUI，若只需要访问内网服务器B的终端，则用户不需要安装此软件）  
+用户C（**用户端**），只需要**具备ssh连接的软件**  
 frp的系统架构和最终实现的效果如下图  
 <img src="/img/post/frp-architecture.png" width="768px" alt="frp内网穿透">
 
@@ -145,7 +145,7 @@ tcp_mux = true
 sudo rm /etc/init.d/start_frp.sh
 sudo update-rc.d -f start_frp remove
 ```
-## 6. 在内网服务器B安装配置frp-client
+## 6. 内网服务器B安装配置frp-client
 在github仓库[frp]("https://github.com/fatedier/frp/releases")下载`linux-amd64`版本，解压为文件夹`frp_linux_amd64`并放在`/home/myserver/`目录下，在`frp_linux_amd64`文件夹创建`log`目录用于保存日志。修改`frpc.ini`文件为如下  
 ```conf
 [common]
@@ -213,15 +213,15 @@ remote_port = 8000
 # remote_port = 8001
 ```
 ## 7. 内网服务器B设置frpc开机自启动（/etc/systemd/system/）
-打开`frp_linux_amd64`文件夹下的`systemd`目录，编辑`frpc.service`文件（`frpc@.service`文件只是多了个自定义ini文件的功能），将其中的`user=nobody`改为`user=myserver`（即本机的用户名），**如果不改，启动时候会报错无法写入日志文件，权限禁止**
-然后修改`ExecStart、ExecReload`中的路径为自己的文件路径
-将修改后的`frpc.service`文件复制到`/etc/systemd/system/`：`sudo cp ./frpc.service /etc/systemd/system/`
-激活frpc开机启动：`systemctl enable frpc`
-手动运行frpc服务：`systemctl start frpc`或`service frpc start`
-手动停止frpc服务：`systemctl stop frpc`或`service frpc stop`
-手动重启frpc服务：`systemctl restart frpc`或`service frpc restart`
-查看frpc运行状态：`systemctl status frpc`或`service frpc status`
-**关闭frpc开机启动**：`systemctl disable frpc`
+打开`frp_linux_amd64`文件夹下的`systemd`目录，编辑`frpc.service`文件（`frpc@.service`文件只是多了个自定义ini文件的功能），将其中的`user=nobody`改为`user=myserver`（即本机的用户名），**如果不改，启动时候会报错无法写入日志文件，权限禁止**  
+然后修改`ExecStart、ExecReload`中的路径为自己的文件路径  
+将修改后的`frpc.service`文件复制到`/etc/systemd/system/`：`sudo cp ./frpc.service /etc/systemd/system/`  
+激活frpc开机启动：`systemctl enable frpc`  
+手动运行frpc服务：`systemctl start frpc`或`service frpc start`  
+手动停止frpc服务：`systemctl stop frpc`或`service frpc stop`  
+手动重启frpc服务：`systemctl restart frpc`或`service frpc restart`  
+查看frpc运行状态：`systemctl status frpc`或`service frpc status`  
+**关闭frpc开机启动**：`systemctl disable frpc`  
 ## 8. 内网服务器B设置frpc开机自启动
 创建start_frp.sh文件：`vi start_frp.sh`，内容如下（注释不可删除）：  
 ```bash
@@ -246,9 +246,9 @@ remote_port = 8000
 sudo rm /etc/init.d/start_frp.sh
 sudo update-rc.d -f start_frp remove
 ```
-## 6. SSH保活的几种方法
+## 9. SSH保活的几种方法
 见[ssh保活](https://blog.whuzfb.cn/blog/2020/07/05/ubuntu_commands/#2-ssh%E4%BF%9D%E6%B4%BB%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E6%B3%95)
-## 7. 测试内网穿透
+## 10. 测试内网穿透
 保证`frps.service`与`frpc.service`处于运行状态，用户C（可以是linux系统、Windows系统等）在本机使用ssh命令即可连接到内网服务器B：  
 * 使用如下代码来远程ssh连接内网服务器B  
 `ssh -p 8000 myserver@67.89.12.34`  
