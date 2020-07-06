@@ -4,7 +4,7 @@ title: 浏览器中使用JavaScript自动批量下载文件
 subtitle: "有时候爬虫的事情交给JavaScript可以更好更快解决"
 category : [Ubuntu,Windows,JavaScript]
 tags : [Ubuntu,Windows,JavaScript]
-date:       2020-07-05 17:40:09 +08:00
+date:       2020-07-06 17:40:09 +08:00
 author:     "晨曦"
 header-img: "/img/post/javascript-bg.png"
 description:  "JavaScript通常是作为开发Web页面的脚本语言，本文介绍的JavaScript代码均运行在指定网站的控制台窗口"

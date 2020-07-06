@@ -4,7 +4,7 @@ title: JavaScript代码实现浏览器网页的自动滚动并点击
 subtitle: "有时候网页很长需要用户一直用鼠标滚动，还要点击，JavaScript解决它"
 category : [Ubuntu,Windows,JavaScript]
 tags : [Ubuntu,Windows,JavaScript]
-date:       2020-07-05 16:34:18 +08:00
+date:       2020-07-06 16:34:18 +08:00
 author:     "晨曦"
 header-img: "/img/post/javascript-bg.png"
 description:  "JavaScript通常是作为开发Web页面的脚本语言，本文介绍的JavaScript代码需要运行在特定网站的控制台窗口"
