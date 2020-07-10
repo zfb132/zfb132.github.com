@@ -13,7 +13,7 @@ title: 第一篇文章的标题
 subtitle:   "这个是副标题哦"  
 categories : [Git]  
 tags : [Git]  
-date:       2017-05-11  
+date:       2017-05-11 08:15:26 +08:00  
 author:     "晨曦"  
 header-img: "/img/post/firstblog-bg.jpg"  
 description: 第一篇博客，一些感慨。  
