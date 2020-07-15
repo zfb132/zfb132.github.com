@@ -140,6 +140,26 @@ username ALL=(ALL) ALL
 再使用`su root`切换`root`用户发现认证失败  
 启用root登录：  
 `sudo passwd -u root`  
+### 3.5 多用户共享目录
+在root用户下创建文件夹，再创建新的用户组，将原有的用户添加进入这个新组。不妨假设，新的用户组为`share_grp`，新的共享文件夹目录为`/home/data_share/`（也可以为`/media/data_share`），需要互相共享的用户为user1、user2，每个用户都可以通过`cd /home/data_share/`访问到此文件夹的内容。具体操作步骤如下：  
+* 首先切换当前账户为root账户，然后创建文件夹`mkdir /home/data_share/`
+* 然后创建新的用户组share_grp，使用命令`sudo groupadd share_grp`
+* 为文件夹更改所属的组`sudo chgrp share_grp /home/data_share`
+* 更改文件夹权限`sudo chmod 770 /home/data_share`
+* 保证子文件夹也是一样的权限`sudo chmod +s /home/data_share`
+* 为用户1添加附属组，不影响用户原来所在的组`sudo usermod -a -G share_grp user1`
+* 同理用户2，使用命令`sudo usermod -a -G share_grp user2`
+
+此时，两个用户都可以访问目录`/home/data_share/`，另外，查看用户组相关的命令如下：  
+* `groups`：查看当前用户的组
+* `cat /etc/group`：查看本机所有用户和组
+
+如果不想继续共享，可以通过在root账户下使用以下命令删除用户1、用户2的附属组（不影响原来所在的组）  
+```bash
+sudo usermod -G "" user1
+sudo usermod -G "" user1
+sudo groupdel share_grp
+```
 ## 4. 查看当前活跃的用户
 查看所有用户列表  
 `cat /etc/passwd|grep -v nologin|grep -v halt|grep -v shutdown|awk -F":" '{ print $1"|"$3"|"$4 }'|more`  
