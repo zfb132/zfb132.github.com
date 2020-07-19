@@ -205,3 +205,23 @@ alias maxmem="ps -aux|head -1;ps -aux | sort -k4nr | head "
 # -k4则是针对第4列的内容进行排序
 # maxmem -4表示显示4条结果
 ```
+## 6. ubuntu设置开机自启程序
+对于桌面版Ubuntu而言，只需要打开程序列表的图标，选择`启动应用程序、Startup applications`图标，根据提示输入路径即可
+## 7. 修改ubuntu显示管理器为lightdm
+向日葵这款远程控制软件似乎不支持Ubuntu的原始gdm3的桌面，具体表现为：使用Windows远程到服务器的Ubuntu系统上进行调试，总是出现`连接已断开`；而反过来控制却可以，所以安装lightdm替换默认的桌面显示管理器：  
+```bash
+sudo apt-get update
+sudo apt-get upgrade
+# 安装过程中会提示选择默认显示管理器，选择lightdm即可
+sudo apt install lightdm
+```
+然后重启设备，此时再测试即可正常连接  
+如果需要卸载lightdm，重新使用gdm3，则只需输入以下命令：  
+```bash
+# 查看当前使用的显示管理器
+cat /etc/X11/default-display-manager
+# 重新选择gdm为显示管理器，然后重启
+sudo dpkg-reconfigure gdm3
+# 卸载lightdm
+sudo apt-get --purge remove lightdm
+```
