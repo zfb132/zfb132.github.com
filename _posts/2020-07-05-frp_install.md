@@ -95,6 +95,10 @@ tcp_mux = true
 ```conf
     server{
         listen 80;
+        # 如果需要ssl，参考https://blog.whuzfb.cn/blog/2020/07/07/web_https/
+        # listen 443 ssl;
+        # include ssl/example.cn.ssl.conf;
+        # 此时支持http与https
         server_name frp.example.cn;
         access_log /home/ubuntu/frp_linux_amd64/log/access.log;
         error_log /home/ubuntu/frp_linux_amd64/log/error.log;
@@ -254,3 +258,88 @@ sudo update-rc.d -f start_frp remove
 `ssh -p 8000 myserver@67.89.12.34`  
 * 使用如下代码来将内网服务器B的`/home/myserver/test.txt`文件下载到用户C的机器上  
 `scp -P 8000 myserver@67.89.12.34:/home/myserver/test.txt ./Desktop/`  
+## 11. frp暴露多个内网web服务
+### 云主机配置
+修改`frps.ini`文件，添加以下内容：  
+```conf
+# 不需要和frpc.ini一致，与frpc的端口无关
+vhost_http_port = 6888
+subdomain_host = example.cn
+
+[myjupyter]
+type = http
+subdomain = myjupyter
+
+[web02]
+type = http
+subdomain = web02
+```
+然后修改nginx的配置文件`sudo vim /etc/nginx/nginx.conf`  
+```conf
+    server{
+        listen 80;
+        server_name myjupyter.example.cn;
+        # 如果需要ssl，参考https://blog.whuzfb.cn/blog/2020/07/07/web_https/
+        # listen 443 ssl;
+        # include ssl/example.cn.ssl.conf;
+        # 此时支持http与https
+        access_log /home/ubuntu/frp_linux_amd64/log/access_jupyter.log;
+        error_log /home/ubuntu/frp_linux_amd64/log/error_jupyter.log;
+        location /{
+            proxy_set_header Host $host;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_redirect off;
+            proxy_buffering off;
+            proxy_pass http://127.0.0.1:8888;
+        }
+        location /api/kernels/ {
+            proxy_pass            http://127.0.0.1:8888;
+            proxy_set_header      Host $host;
+            # websocket support
+            proxy_http_version    1.1;
+            proxy_set_header      Upgrade "websocket";
+            proxy_set_header      Connection "Upgrade";
+            proxy_read_timeout    86400;
+        }
+    }
+
+    server{
+        listen 80;
+        server_name web02.example.cn;
+        # include ssl/example.cn.ssl.conf;
+        access_log /home/ubuntu/frp_linux_amd64/log/access_web.log;
+        error_log /home/ubuntu/frp_linux_amd64/log/error_web.log;
+        location /{
+            proxy_set_header Host $host;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_redirect off;
+            proxy_buffering off;
+            proxy_pass http://127.0.0.1:8888;
+        }
+        location /api/kernels/ {
+            proxy_pass            http://127.0.0.1:8888;
+            proxy_set_header      Host $host;
+            # websocket support
+            proxy_http_version    1.1;
+            proxy_set_header      Upgrade "websocket";
+            proxy_set_header      Connection "Upgrade";
+            proxy_read_timeout    86400;
+        }
+    }
+```
+### 内网服务器配置
+修改frpc.ini文件，添加以下内容：  
+```conf
+[myjupyter]
+type = http
+# 此端口运行web服务
+local_port = 7777
+subdomain = myjupyter
+
+[web02]
+type = http
+# 此端口运行web服务
+local_port = 7778
+subdomain = web02
+```
+分别重启nginx、frps与frpc即可配置成功

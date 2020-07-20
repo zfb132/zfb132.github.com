@@ -153,6 +153,7 @@ root ALL=(ALL) ALL
 username ALL=(ALL) ALL
 ```
 保存退出，`username`用户就拥有了`root`权限  
+或者`sudo usermod -a -G sudo username`
 ### 3.2 切换用户
 从当前用户切换到`username`用户的命令：`su username`  
 从普通用户切换到`root`用户还可以使用命令：`sudo su`  
