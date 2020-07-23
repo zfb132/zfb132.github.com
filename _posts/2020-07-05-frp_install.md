@@ -258,7 +258,9 @@ sudo update-rc.d -f start_frp remove
 `ssh -p 8000 myserver@67.89.12.34`  
 * 使用如下代码来将内网服务器B的`/home/myserver/test.txt`文件下载到用户C的机器上  
 `scp -P 8000 myserver@67.89.12.34:/home/myserver/test.txt ./Desktop/`  
+
 ## 11. frp暴露多个内网web服务
+本部分是针对jupyterlab搭建浏览器开发环境的过程  
 ### 云主机配置
 修改`frps.ini`文件，添加以下内容：  
 ```conf
@@ -301,6 +303,15 @@ subdomain = web02
             proxy_set_header      Connection "Upgrade";
             proxy_read_timeout    86400;
         }
+        location /terminals/ {
+            proxy_pass            http://127.0.0.1:8888;
+            proxy_set_header      Host $host;
+            # websocket support
+            proxy_http_version    1.1;
+            proxy_set_header      Upgrade "websocket";
+            proxy_set_header      Connection "Upgrade";
+            proxy_read_timeout    86400;
+        }
     }
 
     server{
@@ -317,6 +328,15 @@ subdomain = web02
             proxy_pass http://127.0.0.1:8888;
         }
         location /api/kernels/ {
+            proxy_pass            http://127.0.0.1:8888;
+            proxy_set_header      Host $host;
+            # websocket support
+            proxy_http_version    1.1;
+            proxy_set_header      Upgrade "websocket";
+            proxy_set_header      Connection "Upgrade";
+            proxy_read_timeout    86400;
+        }
+        location /terminals/ {
             proxy_pass            http://127.0.0.1:8888;
             proxy_set_header      Host $host;
             # websocket support
