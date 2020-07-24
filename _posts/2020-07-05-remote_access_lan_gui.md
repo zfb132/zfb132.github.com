@@ -142,3 +142,36 @@ putty.exe -load MyServerConf -pw Myser123456ver -m start_display.sh
 ```
 `putty.exe`的`-pw`选项后跟服务器的密码，至于服务器的ip、登录端口和用户名均在`MyServerConf`保存；`-m`选项表示ssh连接成功后立即在服务器上执行的脚本  
 最后，双击批处理文件`start_auto_putty.bat`，即可自动打开装有xfce4的服务器上指定的GUI程序
+## 注意事项
+如果遇到显示GUI报错  
+```txt
+Gdk-CRITICAL **: file gdkfont.c: 1ine 237 (gdk_font_ref): assertion `font !=NULL` failed.
+Gdk-CRITICAL **: file gdkfont.c: line 335 (gdk_string_width): assertion `font !=NULL` failed.
+Gdk-CRITICAL **: file gdkfont.c: line 411 (gdk_text_width_wc): assertion `font !=NULL` failed.
+```
+可能需要[安装VcXsrv](https://sourceforge.net/projects/vcxsrv/files/vcxsrv/)来作为显示管理器，下载最新版本（ 目前64位版本1.20.8.1）并安装（第6步也就不需要了）  
+打开目录下的`C:\Program Files\VcXsrv\xlaunch.exe`软件，配置各项设置然后保存，可参考如下内容来配置选项（也可直接复制下面内容并创建文件`VcXsrv.xlaunch`，将内容写入保存）  
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<XLaunch 
+    WindowMode="MultiWindow" 
+    ClientMode="NoClient" 
+    LocalClient="False" 
+    Display="-1" 
+    LocalProgram="xcalc" 
+    RemoteProgram="xterm" 
+    RemotePassword="" 
+    PrivateKey="" 
+    RemoteHost="" 
+    RemoteUser="" 
+    XDMCPHost="" 
+    XDMCPBroadcast="False" 
+    XDMCPIndirect="False" 
+    Clipboard="True" 
+    ClipboardPrimary="True" 
+    ExtraParams="" 
+    Wgl="False" 
+    DisableAC="False" 
+    XDMCPTerminate="False"
+/>
+```
