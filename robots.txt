@@ -40,4 +40,4 @@ User-agent: psbot
 Disallow: 
 User-agent: *
 Disallow: 
-Sitemap: http://blog.whuzfb.cn/sitemap.xml
+Sitemap: https://blog.whuzfb.cn/sitemap.xml
