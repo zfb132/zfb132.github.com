@@ -28,6 +28,7 @@ jobs:
           # 格式为：e.coding.net/组织名/项目名/仓库名.git
           coding_ref: ${{ secrets.CODING_REF }}
         run: |
+          export message=$(git log --pretty=format:"%s" -1)
           rm CNAME
           rm -rf .github
           rm -rf .git
@@ -36,7 +37,6 @@ jobs:
           git config --local user.email "zfb132@gmail.com"
           git config --local user.name "zfb"
           git config core.filemode false
-          export message=$(git log --pretty=format:"%s" -1)
           git remote set-url origin https://${coding_ref}
           git add .
           git commit -m $message
