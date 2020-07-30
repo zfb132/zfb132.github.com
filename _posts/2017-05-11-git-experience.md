@@ -90,6 +90,23 @@ description:  "本文主要介绍一些简单的命令：包括clone, add, commi
   彻底回退所有内容到指定版本04ag58，先用`git log`查看历史提交记录，再指定回退的版本号（提交代号的前六位）：  
 `git log`  
 `git reset --hard 04ag58`  
+
+## log
+**对于Windows系统**查看日志，如果commit message包含中文可能会有乱码，如下所示，实际提交内容为`添加cnzz统计`，显示结果如下：  
+```text
+PS E:\github\zfb132.github.com> git show -s --format=%s
+<E6><B7><BB><E5><8A><A0>cnzz<E7><BB><9F><E8><AE><A1>
+```
+此命令的作用是显示上一次提交的message信息（与此命令功能一致`git log --pretty=format:"%s" -1`）  
+解决办法：在终端输入以下两行命令  
+```bash
+# 设置提交时message以utf-8编码保存
+git config --global i18n.commitEncoding utf-8
+# 设置查看时message以utf-8编码传递给查看器
+git config --global i18n.logOutputEncoding utf-8
+```
+然后再添加环境变量，选择用户变量即可，变量名为`LESSCHARSET`，内容为`utf-8`  
+对于Linux系统而言，只需要最后一步改为`export LESSCHARSET=utf-8`  
   
 ## 示例  
 以下内容是在安装配置好git的前提下才能正常进行的，如果你需要将自己的远程仓库下载到本地`E:\github`目录下，修改后再上传到原仓库的`master`分支  
