@@ -35,6 +35,7 @@ jobs:
           cd coding_dir && mv .git ../ && cd ../ && rm -rf coding_dir
           git config --local user.email "zfb132@gmail.com"
           git config --local user.name "zfb"
+          git config core.filemode false
           export message=$(git log --pretty=format:"%s" -1)
           git remote set-url origin https://${coding_ref}
           git add .
