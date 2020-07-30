@@ -19,6 +19,8 @@ jobs:
       - name: 设置提交者的个人信息
         # 这三个变量的值都放在 https://github.com/zfb132/zfb132.github.com/settings/secrets
         env:
+          # 设置时区
+          TZ: Asia/Shanghai
           # 在coding.net的某个仓库新建访问令牌出现的秘钥
           coding_token: ${secrets.DEPLOY_CODING}
           # 团队中的某个人的用户名，一般默认是本人手机号码
@@ -28,9 +30,13 @@ jobs:
         run: |
           rm CNAME
           rm -rf .github
+          rm -rf .git
+          git clone https://${coding_username}:${coding_token}@${coding_ref} coding_dir
+          cd coding_dir && mv .git ../ && cd ../ && rm -rf coding_dir
           git config --local user.email "zfb132@gmail.com"
           git config --local user.name "zfb"
           export message=$(git log --pretty=format:"%s" -1)
           git remote set-url origin https://${coding_ref}
+          git add .
           git commit -m $message
           git push --force --quiet "https://${coding_username}:${coding_token}@${coding_ref}" master:master
