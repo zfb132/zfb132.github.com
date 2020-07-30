@@ -31,7 +31,7 @@ jobs:
           rm CNAME
           rm -rf .github
           rm -rf .git
-          git clone https://${coding_username}:${coding_token}@${coding_ref} coding_dir
+          git clone "https://${coding_username}:${coding_token}@${coding_ref}" coding_dir
           cd coding_dir && mv .git ../ && cd ../ && rm -rf coding_dir
           git config --local user.email "zfb132@gmail.com"
           git config --local user.name "zfb"
