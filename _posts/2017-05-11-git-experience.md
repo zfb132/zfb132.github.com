@@ -84,45 +84,40 @@ description:  "本文主要介绍一些简单的命令：包括clone, add, commi
 `git push -u origin master`  
   如果已经在本地新建一个dev分支，但是远程仓库并没有这个分支，可以使用以下命令在远程建立dev分支的同时把本地的dev分支推送到远程的dev分支（需要**保证此时在dev分支下**执行命令）：  
   `git push origin dev:dev`  
-## reset  
-  彻底回退所有内容到上一个提交的版本：  
-`git reset --hard HEAD^`  
-  彻底回退所有内容到指定版本04ag58，先用`git log`查看历史提交记录，再指定回退的版本号（提交代号的前六位）：  
-`git log`  
-`git reset --hard 04ag58`  
 
 ## log
-查看最近5次的提交日志：  
+  查看最近5次的提交日志：  
 `git log -5`  
-**对于Windows系统**查看日志，如果commit message包含中文可能会有乱码，如下所示，实际提交内容为`添加cnzz统计`，显示结果如下：  
+  **对于Windows系统**查看日志，如果commit message包含中文可能会有乱码，如下所示，实际提交内容为`添加cnzz统计`，显示结果如下：  
 ```text
 PS E:\github\zfb132.github.com> git show -s --format=%s
 <E6><B7><BB><E5><8A><A0>cnzz<E7><BB><9F><E8><AE><A1>
 ```
-此命令的作用是显示上一次提交的message信息（与此命令功能一致`git log --pretty=format:"%s" -1`）  
-解决办法：在终端输入以下两行命令  
+  此命令的作用是显示上一次提交的message信息（与此命令功能一致`git log --pretty=format:"%s" -1`）  
+  解决办法：在终端输入以下两行命令  
 ```bash
 # 设置提交时message以utf-8编码保存
 git config --global i18n.commitEncoding utf-8
 # 设置查看时message以utf-8编码传递给查看器
 git config --global i18n.logOutputEncoding utf-8
 ```
-然后再添加环境变量，选择用户变量即可，变量名为`LESSCHARSET`，内容为`utf-8`  
-**对于Linux系统**而言，只需要最后一步改为`export LESSCHARSET=utf-8`  
+  然后再添加环境变量，选择用户变量即可，变量名为`LESSCHARSET`，内容为`utf-8`  
+  **对于Linux系统**而言，只需要最后一步改为`export LESSCHARSET=utf-8`  
 
 ## reset
 * `git reset HEAD`表示当前版本，运行后并不会有什么变化
-* `git reset --hard HEAD~1`表示回退到上一个版本
-* `git reset --hard ffffffffffa6b556a6b556a6b556a6b556461461`表示回退到指定的commit版本
+* `git reset --hard HEAD~1`表示彻底回退所有内容到上一个提交的版本
+* `git reset --hard HEAD^`表示彻底回退所有内容到上一个提交的版本
+* `git reset --hard ffffffffffa6b556a6b556a6b556a6b556461461`表示彻底回退所有内容到指定的commit版本（也可使用hash值的前六位代表这次提交）
 
-撤销已经push到远程的commit的方法：  
+  撤销已经push到远程的commit的方法：  
 * 先使用上面的方法回退
 * 然后执行如下命令推送到远程`git push -f origin master`，此时远程就看不到已经撤回的记录了，而且tree是干净的
 
   
 ## 示例  
-以下内容是在安装配置好git的前提下才能正常进行的，如果你需要将自己的远程仓库下载到本地`E:\github`目录下，修改后再上传到原仓库的`master`分支  
-按照以下步骤：
+  以下内容是在安装配置好git的前提下才能正常进行的，如果你需要将自己的远程仓库下载到本地`E:\github`目录下，修改后再上传到原仓库的`master`分支  
+  按照以下步骤：
 * 切换到你的工作目录`E:\github`  
 * 下载远程仓库到本地：`git clone git@github.com:zfb132/zfb132.github.com.git`，其中`git@github.com:zfb132/zfb132.github.com.git`是在点击下载按钮时显示的地址，不同的仓库对应不同的地址  
 * 在本地修改后，终端切换到`E:\github\zfb132.github.com`，其中`zfb132.github.com`是自动生成的对应于这个仓库的目录  
@@ -132,4 +127,4 @@ git config --global i18n.logOutputEncoding utf-8
 * 输入`git remote add origin git@github.com:zfb132/zfb132.github.com.git`（大部分时候并不需要）  
 * 输入`git push -u origin master`（`master`为刚才查看的分支名）  
 
-等待完成后，再进入网页查看就已经更新了
+  等待完成后，再进入网页查看就已经更新了
