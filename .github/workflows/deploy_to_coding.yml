@@ -26,12 +26,12 @@ jobs:
           # 团队中的某个人的用户名，一般默认是本人手机号码
           coding_username: ${secrets.CODING_USERNAME}
           # 格式为：e.coding.net/组织名/项目名/仓库名.git
-          coding_ref: ${secrets.CODING_REF}
+          coding_ref: $CODING_REF
         run: |
           rm CNAME
           rm -rf .github
           rm -rf .git
-          git clone https://$secrets.DEPLOY_CODING:$secrets.CODING_USERNAME@$secrets.CODING_REF coding_dir
+          git clone https://${coding_username}:${coding_token}@${coding_ref} coding_dir
           cd coding_dir && mv .git ../ && cd ../ && rm -rf coding_dir
           git config --local user.email "zfb132@gmail.com"
           git config --local user.name "zfb"
