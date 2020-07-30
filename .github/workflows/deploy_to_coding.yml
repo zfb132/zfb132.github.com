@@ -1,0 +1,36 @@
+name: Auto deploy to coding pages
+
+# 在push主分支时触发构建
+on:
+  push:
+    branches:
+      - 'master'
+
+jobs:
+  # job的名字：推送到coding
+  deploy:
+    name: Deploy to Coding
+    # job的运行平台
+    runs-on: ubuntu-18.04
+    # test任务的步骤
+    steps:
+      # 使用别人写好的指定版本的actions脚本，名称是checkout，下载本仓库
+      - uses: actions/checkout@v2
+      - name: 设置提交者的个人信息
+        # 这三个变量的值都放在 https://github.com/zfb132/zfb132.github.com/settings/secrets
+        env:
+          # 在coding.net的某个仓库新建访问令牌出现的秘钥
+          coding_token: ${secrets.DEPLOY_CODING}
+          # 团队中的某个人的用户名，一般默认是本人手机号码
+          coding_username: ${secrets.CODING_USERNAME}
+          # 格式为：e.coding.net/组织名/项目名/仓库名.git
+          coding_ref: ${secrets.CODING_REF}
+        run: |
+          rm CNAME
+          rm -rf .github
+          git config --local user.email "zfb132@gmail.com"
+          git config --local user.name "zfb"
+          export message=$(git log --pretty=format:"%s" -1)
+          git remote set-url origin https://${coding_ref}
+          git commit -m $message
+          git push --force --quiet "https://${coding_username}:${coding_token}@${coding_ref}" master:master
