@@ -92,6 +92,7 @@ description:  "本文主要介绍一些简单的命令：包括clone, add, commi
 `git reset --hard 04ag58`  
 
 ## log
+查看最近5次的提交日志：`git log -5`  
 **对于Windows系统**查看日志，如果commit message包含中文可能会有乱码，如下所示，实际提交内容为`添加cnzz统计`，显示结果如下：  
 ```text
 PS E:\github\zfb132.github.com> git show -s --format=%s
@@ -106,7 +107,17 @@ git config --global i18n.commitEncoding utf-8
 git config --global i18n.logOutputEncoding utf-8
 ```
 然后再添加环境变量，选择用户变量即可，变量名为`LESSCHARSET`，内容为`utf-8`  
-对于Linux系统而言，只需要最后一步改为`export LESSCHARSET=utf-8`  
+**对于Linux系统**而言，只需要最后一步改为`export LESSCHARSET=utf-8`  
+
+## reset
+* `git reset HEAD`表示当前版本，运行后并不会有什么变化
+* `git reset --hard HEAD~1`表示回退到上一个版本
+* `git reset --hard ffffffffffa6b556a6b556a6b556a6b556461461`表示回退到指定的commit版本
+
+撤销已经push到远程的commit的方法：  
+* 先使用上面的方法回退
+* 然后执行如下命令推送到远程`git push -f origin master`，此时远程就看不到已经撤回的记录了，而且tree是干净的
+
   
 ## 示例  
 以下内容是在安装配置好git的前提下才能正常进行的，如果你需要将自己的远程仓库下载到本地`E:\github`目录下，修改后再上传到原仓库的`master`分支  
