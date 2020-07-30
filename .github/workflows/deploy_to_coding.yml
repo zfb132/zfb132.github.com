@@ -22,11 +22,11 @@ jobs:
           # 设置时区
           TZ: Asia/Shanghai
           # 在coding.net的某个仓库新建访问令牌出现的秘钥
-          coding_token: ${secrets.DEPLOY_CODING}
+          coding_token: ${{ secrets.DEPLOY_CODING }}
           # 团队中的某个人的用户名，一般默认是本人手机号码
-          coding_username: ${secrets.CODING_USERNAME}
+          coding_username: ${{ secrets.CODING_USERNAME }}
           # 格式为：e.coding.net/组织名/项目名/仓库名.git
-          coding_ref: $CODING_REF
+          coding_ref: ${{ secrets.CODING_REF }}
         run: |
           rm CNAME
           rm -rf .github
