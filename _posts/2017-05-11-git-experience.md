@@ -92,7 +92,8 @@ description:  "本文主要介绍一些简单的命令：包括clone, add, commi
 `git reset --hard 04ag58`  
 
 ## log
-查看最近5次的提交日志：`git log -5`  
+查看最近5次的提交日志：  
+`git log -5`  
 **对于Windows系统**查看日志，如果commit message包含中文可能会有乱码，如下所示，实际提交内容为`添加cnzz统计`，显示结果如下：  
 ```text
 PS E:\github\zfb132.github.com> git show -s --format=%s
