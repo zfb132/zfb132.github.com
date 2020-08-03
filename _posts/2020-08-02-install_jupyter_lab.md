@@ -376,6 +376,9 @@ custom_domains = lab.example.cn
         server_name lab.example.cn;
         access_log /home/ubuntu/frp_linux_amd64/log/access_jupyter.log;
         error_log /home/ubuntu/frp_linux_amd64/log/error_jupyter.log;
+        # 防止jupyter保存文件时413 Request Entity Too Large
+        # client_max_body_size 50m; 0表示关闭检测
+        client_max_body_size 0;
         location /{
             proxy_set_header Host $host;
             proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
