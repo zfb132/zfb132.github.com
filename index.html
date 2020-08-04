@@ -97,7 +97,8 @@ header-img: "/img/home-bg.jpg"
           var time = item.get('time');
           try {
             var element = document.getElementById(url);
-            if(element.textContent == '-' || parseInt(element.textContent) < time){
+            // 删除原字符串中的空格
+            if(element.textContent.replace(/\s+|&nbsp;/ig,'') == '-' || parseInt(element.textContent) < time){
               element.textContent = time;
             }
           } catch (error) {
