@@ -62,7 +62,10 @@ header-img: "/img/home-bg.jpg"
         // 顺便更新显示span为默认值0
         elements[i].textContent=0;
       }
-
+      // 判断是否需要新建记录
+      if(allcounter.length == 0){
+        return;
+      }
       AV.Object.saveAll(allcounter).then(function (todo) {
         // 成功保存记录之后
         console.log('创建记录成功！');
@@ -94,9 +97,11 @@ header-img: "/img/home-bg.jpg"
           var time = item.get('time');
           try {
             var element = document.getElementById(url);
-            element.textContent = time;
+            if(element.textContent == '-' || parseInt(element.textContent) < time){
+              element.textContent = time;
+            }
           } catch (error) {
-            console.log("获取"+url+"的网页元素出错："+error);
+            // console.log("获取"+url+"的网页元素出错："+error);
           }
         }
         // 当某个span含有默认值时说明需要创建记录
