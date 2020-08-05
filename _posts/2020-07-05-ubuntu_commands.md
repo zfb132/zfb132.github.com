@@ -226,3 +226,44 @@ sudo dpkg-reconfigure gdm3
 # 卸载lightdm
 sudo apt-get --purge remove lightdm
 ```
+## 8. nohup与&的使用
+* `nohup`的意思是忽略SIGHUP信号，一般用在正常命令语句之前。如果用户关闭shell, 那么使用`nohup`启动的进程还是存在的（因为关闭终端会发送SIGHUP信号，而nohup对SIGHUP信号免疫）。如果不将`nohup`命令的输出重定向，输出将附加到当前目录的`nohup.out`文件中。如果当前目录的`nohup.out`文件不可写，输出重定向到`$HOME/nohup.out`文件中
+* 输出重定向：程序在后台运行的时候，可以把输出重定向到某个文件中，相当于一个日志文件，记录运行过程中的输出。例如`nohup command > out.txt 2>&1 &`命令的意思是
+    * 将`command`的输出重定向到`out.txt`文件，即输出内容不打印到屏幕上
+	* 0 – stdin (standard input)，1 – stdout (standard output)，2 – stderr (standard error)
+	* `2>&1`是将标准错误（2）重定向到标准输出（&1），标准输出（&1）再被重定向输入到`out.txt`文件中
+
+* `&`的意思是在后台运行，一般用在正常命令语句之后。即使用户使用`Ctrl+C`，那么使用`&`启动的程序照样运行（因为对SIGINT信号免疫）
+
+所以可以使用如下命令来实现类似守护进程的功能：  
+`nohup command > out.file 2>&1 &`  
+
+## 9. 命令的挂起和前后台切换
+Linux提供了`fg`和`bg`命令，可以调度正在运行的任务。假如发现前台运行的一个程序需要很长的时间，但是需要干其他的事情，此时可以用`Ctrl+Z`挂起这个程序，然后可以看到系统提示：  
+`[1]+ Stopped /root/bin/rsync.sh`  
+然后可以把程序调度到后台执行，使前台可以执行其他任务。该命令的运行效果与在指令后面添加符号`&`的效果是相同的，都是将其放到系统后台执行（bg 后面的数字为作业号）  
+```bash
+bg 1
+# 终端回显如下
+# [1]+ /root/bin/rsync.sh &
+```
+用`jobs`命令查看正在运行的任务（只看当前终端生效的，关闭终端重新打开则无法看到）：  
+```bash
+jobs
+# 终端回显如下
+# [1]+ Running /root/bin/rsync.sh &
+```
+如果想把某个任务调回到前台运行，可以用  
+```bash
+fg 1
+# 终端回显如下
+# /root/bin/rsync.sh
+```
+这样，在终端上就只能等待这个任务完成了
+## 10. 远程收发文件
+在不安装第三方工具的情况下有两种方法：  
+* 使用`scp`命令：例如`scp -P 8899 -r root@45.67.89.12:/root/test/ ./Desktop/`命令表示将服务器的`/root/test/`文件夹递归下载到本地的`./Desktop/`文件夹下面，`8899`是ssh的端口，默认为`22`
+* 使用`rsync`命令（支持断点续传）：例如`rsync -avzP --rsh='ssh -p 8899' root@45.67.89.12:/root/test/ ./Desktop`命令表示将服务器的`/root/test/`文件夹下载到本地的`./Desktop/`文件夹下面，`8899`是ssh的端口，默认为`22`
+
+使用[脚本](https://github.com/GitHub30/gdrive.sh)下载Google Drive文件，使用方法为  
+`curl gdrive.sh | bash -s https://drive.google.com/file/d/0B4y35FiV1wh7QWpuVlFROXlBTHc/view`
