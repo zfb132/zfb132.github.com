@@ -243,7 +243,7 @@ jobs:
 * `cd coding_dir && mv .git ../ && cd ../ && rm -rf coding_dir`是把coding.net的`.git`文件夹替换掉原来的，并且删除临时文件夹  
 * `git config --local user.email "zfb132@gmail.com"`是设置提交者的电子邮箱地址  
 * `git config --local user.name "zfb"`是设置提交者的名字  
-* `git config core.filemode false`忽略文件属性的问题，因为github的文件模式不一定与coding.net的相同  
+* `git config core.filemode false`忽略文件属性的问题，因为github的文件模式（权限）不一定与coding.net的相同  
 * `git remote set-url origin https://${coding_ref}`是设置远程仓库的地址为coding.net的仓库  
 * `git add .`是添加文件到暂存区  
 * `git commit -m "$message"`设置commit的信息与github一致  
