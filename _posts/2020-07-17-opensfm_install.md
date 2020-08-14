@@ -31,7 +31,7 @@ description:  "主要介绍如何编译安装opengv、ceres以及opensfm"
 如果速度慢，可以使用`git config --global https.https://github.com.proxy socks5://127.0.0.1:1080`  
 注意，递归方式才会下载`OpenSfM/opensfm/src/third_party/pybind11`文件夹下的内容，否则要自己下载pybind11的zip文件解压在对应位置：  
 `rmdir pybind11/ && git clone https://github.com/pybind/pybind11.git`  
-* 也可以opensfm下载release版本0.4.0，然后解压进入pybind11文件夹下载pybind11的zip文件
+* 也可以opensfm下载release版本0.5.1，然后解压进入pybind11文件夹下载pybind11的zip文件
 ### 2.2 安装依赖
 使用如下命令安装依赖：  
 ```bash
