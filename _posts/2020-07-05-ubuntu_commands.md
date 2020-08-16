@@ -267,3 +267,11 @@ fg 1
 
 使用[脚本](https://github.com/GitHub30/gdrive.sh)下载Google Drive文件，使用方法为  
 `curl gdrive.sh | bash -s https://drive.google.com/file/d/0B4y35FiV1wh7QWpuVlFROXlBTHc/view`
+## 11. 查找文件
+find命令可以在指定目录及其子目录下查找指定扩展名的文件，如下所示是在当前目录及子目录下查找JPG文件，并把它们移动到当前目录：  
+`find . -name "*.JPG" -exec mv {} ./ \;`  
+`find .`表示在当前目录及其子目录下查找  
+`-name "*.JPG"`表示只搜索扩展名为JPG的文件  
+`-exec `后面接bash命令，表示对文件进行的操作  
+`{}`指代找到的每一个文件  
+`\;`bash命令的结尾需要添加`;`，这里需要转义  
