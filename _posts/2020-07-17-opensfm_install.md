@@ -67,9 +67,67 @@ python3 -m http.server
 ```
 点击`viewer`文件夹，选择`reconstruction.html`打开，然后选择上面命令生成的文件`data/berlin/reconstruction.meshed.json`；也可以在`undistorted`文件夹下面找到`merged.ply`文件打开即可  
 如果使用SIFT提取特征，需要`pip3 install -i https://pypi.tuna.tsinghua.edu.cn/simple opencv-contrib-python==3.4.2.16`（opencv-python版本不用改动）
-## 4. 配置文件
+## 4. 注意事项
+如果PATH环境变量设置的是某个python虚拟环境优先（即运行`which python3`看到某个虚拟环境的路径），同时又想把opensfm配置到系统python里面：严格按照[官网安装链接](https://www.opensfm.org/docs/building.html)，只是把其中的`python3`换成`/usr/bin/python3`，`pip3`换成`/usr/bin/pip3`（如果本机的PATH修改过），即  
+```bash
+# 完整下载OpenSfM仓库（2317fbb），包括里面的pybind11等
+git clone --recursive https://github.com/mapillary/OpenSfM opensfm
+# 进入opensfm主目录
+cd opensfm
+# 再次更新子模块保证最新
+git submodule update --init --recursive
+# 更新源
+sudo apt-get update
+# 安装依赖的包
+sudo apt-get install -y \
+    build-essential vim curl cmake git \
+    libatlas-base-dev libeigen3-dev \
+    libgoogle-glog-dev libopencv-dev libsuitesparse-dev \
+    python3-dev python3-numpy python3-opencv python3-pip \
+    python3-pyproj python3-scipy python3-yaml
+# ---------编译安装ceres---------
+# 创建临时目录
+mkdir source && cd source
+# 下载ceres v1.14并解压
+curl -L http://ceres-solver.org/ceres-solver-1.14.0.tar.gz | tar xz
+# 创建编译文件夹
+cd ceres-solver-1.14.0 && mkdir build && cd build
+# cmake
+cmake .. -DCMAKE_C_FLAGS=-fPIC -DCMAKE_CXX_FLAGS=-fPIC -DBUILD_EXAMPLES=OFF -DBUILD_TESTING=OFF
+# 开启48线程编译安装
+sudo make -j48 install
+# ----------编译安装opengv-------
+# 回到source文件夹下
+cd ../../
+# 下载opengv
+git clone https://github.com/paulinus/opengv.git
+# 更新子模块保证代码最新
+cd opengv && git submodule update --init --recursive
+# 创建编译文件夹
+mkdir build && cd build
+# cmake
+cmake .. -DBUILD_TESTS=OFF \
+         -DBUILD_PYTHON=ON \
+         -DPYBIND11_PYTHON_VERSION=3.6 \
+         -DPYTHON_INSTALL_DIR=/usr/local/lib/python3.6/dist-packages/
+# 开启48线程编译安装
+sudo make -j48 install
+# 安装opensfm需要的python库
+/usr/bin/pip3 install \
+    exifread==2.1.2 gpxpy==1.1.2 networkx==1.11 \
+    numpy pyproj==1.9.5.1 pytest==3.0.7 \
+    python-dateutil==2.6.0 PyYAML==3.12 \
+    scipy xmltodict==0.10.2 \
+    loky repoze.lru
+# ----------编译opensfm----------
+/usr/bin/python3 setup.py build
+# 安装特定版本的opencv-contrib，此时可用SIFT特征提取算法
+/usr/bin/pip3 install -i https://pypi.tuna.tsinghua.edu.cn/simple opencv-contrib-python==3.4.2.16
+```
+安装以后，使用时首先`export PATH=`，把`/usr/bin`放在第一位，保证`python3`调用的是`/usr/bin/python3`  
+## 5. 配置文件
 每次运行opensfm生成点云，不仅需要原始图片数据，还需要一个配置文件`config.yaml`，文件结构如下：  
-```txt
+```txt  
 lab
 ├── config.yaml
 └── images
