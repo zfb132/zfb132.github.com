@@ -275,3 +275,58 @@ find命令可以在指定目录及其子目录下查找指定扩展名的文件�
 `-exec `后面接bash命令，表示对文件进行的操作  
 `{}`指代找到的每一个文件  
 `\;`bash命令的结尾需要添加`;`，这里需要转义  
+## 12. swap分区操作
+### 12.1 增加分区大小
+系统默认已经有了swap分区，但是运行某些程序很耗内存，想临时添加swap分区大小：  
+```bash
+# 创建交换分区的文件：增加64G=65536M大小的交换分区，则命令写法如下
+# 其中的bs等于想要的块大小，of是交换文件的名称和位置
+# 以下命令如果提示权限不足，加上sudo
+dd if=/dev/zero of=/home/swap bs=1M count=65536
+# 设置交换分区文件，建立swap的文件系统
+mkswap /home/swap
+# 如果提示 swapon: /home/swap: insecure permissions 0644, 0600 suggested.
+chmod -R 0600 /home/swap
+# 立即启用交换分区文件，swapon -p -2 /home/swap可以设置该swap的优先级
+swapon /home/swap
+# 如果还需要使系统开机时自动启用，在文件/etc/fstab中添加一行：
+# /home/swap swap swap defaults 0 0
+```
+此时可以查看分区大小是否添加成功（系统原始的交换空间是swap分区，大小为64G）：  
+```txt
+zfb@myServer:~$ free -m
+              total        used        free      shared  buff/cache   available
+Mem:         128804       77303         590          78       50910       50386
+Swap:        126570         387      126183
+zfb@myServer:~$ cat /proc/swaps
+Filename         Type         Size       Used       Priority
+/dev/sda2        partition    62499836   397288     -2
+/home/swap       file         67108860   0          -3
+zfb@myServer:~$ 
+```
+这里的`cat /proc/swaps`命令等价于`swapon -s`，在使用多个swap分区或者文件的时候，还有一个优先级的概念，值越大优先级越高（-1的优先级最高，-1表示在安装系统时创建的）  
+内核在使用swap空间的时候总是先使用优先级高的空间，后使用优先级低的；如果把多个swap空间的优先级设置成一样的，那么两个swap空间将会以轮询方式并行进行使用；如果两个swap放在两个不同的硬盘上，相同的优先级可以起到类似RAID0的效果
+### 12.2 删除自己添加的swap文件
+按照以下操作：  
+```bash
+# 关闭指定swap，swapoff -a表示关闭所有
+swapoff /home/swap
+# 如果增加分区有设置开机自动挂载，就需要删除或者注释文件/etc/fstab中的对应行
+# 正常删除文件即可
+rm /home/swap
+```
+### 12.3 设置swap的使用情况
+按照如下方法设置即可：  
+```bash
+# 查看系统默认的 swappiness 值
+# swappiness=0   表示最大限度使用物理内存
+# swappiness=100 表示积极的使用swap分区
+cat /proc/sys/vm/swappiness
+# 修改swappiness值为10，临时性的修改，重启系统后会恢复默认值
+sudo sysctl vm.swappiness=10
+# 永久修改swappiness，打开文件/etc/sysctl.conf
+# 在文件最后添加一行  vm.swappiness = 10
+sudo vi /etc/sysctl.conf
+# 使修改立即生效
+sudo sysctl -p
+```
