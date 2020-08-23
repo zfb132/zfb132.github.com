@@ -287,7 +287,7 @@ dd if=/dev/zero of=/home/swap bs=1M count=65536
 mkswap /home/swap
 # 如果提示 swapon: /home/swap: insecure permissions 0644, 0600 suggested.
 chmod -R 0600 /home/swap
-# 立即启用交换分区文件，swapon -p -2 /home/swap可以设置该swap的优先级
+# 立即启用交换分区文件，swapon -p 2 /home/swap可以设置该swap的优先级
 swapon /home/swap
 # 如果还需要使系统开机时自动启用，在文件/etc/fstab中添加一行：
 # /home/swap swap swap defaults 0 0
@@ -304,7 +304,7 @@ Filename         Type         Size       Used       Priority
 /home/swap       file         67108860   0          -3
 zfb@myServer:~$ 
 ```
-这里的`cat /proc/swaps`命令等价于`swapon -s`，在使用多个swap分区或者文件的时候，还有一个优先级的概念，值越大优先级越高（-1的优先级最高，-1表示在安装系统时创建的）  
+这里的`cat /proc/swaps`命令等价于`swapon -s`，在使用多个swap分区或者文件的时候，还有一个优先级的概念，值越大优先级越高（-1的优先级最高，-1表示在安装系统时创建的）。设置swap分区时未指定优先级，则将优先级分配为-1，后添加的swap则依次为-2，-3；而用户指定优先级时必须以正数表示，也就是说用户指定的优先级必然高于系统优先级  
 内核在使用swap空间的时候总是先使用优先级高的空间，后使用优先级低的；如果把多个swap空间的优先级设置成一样的，那么两个swap空间将会以轮询方式并行进行使用；如果两个swap放在两个不同的硬盘上，相同的优先级可以起到类似RAID0的效果
 ### 12.2 删除自己添加的swap文件
 按照以下操作：  
