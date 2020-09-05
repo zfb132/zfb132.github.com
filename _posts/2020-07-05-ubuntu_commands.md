@@ -330,3 +330,22 @@ sudo vi /etc/sysctl.conf
 # 使修改立即生效
 sudo sysctl -p
 ```
+## 13 查看历史登录记录
+使用命令`last`即可列出所有相关信息  
+```txt
+zfb@myServer:~$ last
+zfb      pts/2        127.0.0.1        Sat Sep  5 12:29   still  logged in
+zfb      pts/1        :pts/0:S.0       Sat Sep  5 09:23   still  logged in
+zfb      pts/1        :pts/0:S.0       Thu Sep  3 22:38 - 22:38  (00:00)
+zfb      pts/1        127.0.0.1        Wed Jul  8 17:20 - 17:21  (00:00)
+user1    pts/0        127.0.0.1        Wed Jul  8 17:07 - 17:21  (00:13)
+user2    pts/0        127.0.0.1        Wed Jul  8 15:49 - 15:49  (00:00)
+zfb      pts/0        127.0.0.1        Wed Jul  8 15:42 - 15:45  (00:03)
+reboot   system boot  4.15.0-108-gener Wed Jul  8 15:40 - 12:00  (10+20:20)
+zfb      pts/2        127.0.0.1        Wed Jul  8 15:19 - 15:20  (00:00)
+user2    :0           :0               Wed Jul  8 15:00 - down   (00:38)
+reboot   system boot  4.15.0-108-gener Wed Jul  8 22:09 - 14:48  (-7:21)
+reboot   system boot  4.15.0-108-gener Wed Jul  8 21:28 - 21:29  (00:00)
+
+wtmp begins Wed Jul  8 21:28:47 2019
+```
