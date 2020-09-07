@@ -349,3 +349,49 @@ reboot   system boot  4.15.0-108-gener Wed Jul  8 21:28 - 21:29  (00:00)
 
 wtmp begins Wed Jul  8 21:28:47 2019
 ```
+## 14 使用FTP下载文件
+FTP（文件传输协议）是一个较老且最常用的标准网络协议，用于在两台计算机之间通过网络上传/下载文件。它通过用户凭证（用户名和密码）传输数据，没有进行加密。它是一个8位的客户端-服务器协议，能操作任何类型的文件而不需要进一步处理，就像MIME或Unicode一样。但是，FTP有着极高的延时，这意味着，从开始请求到第一次接收需求数据之间的时间，会非常长；并且不时的必须执行一些冗长的登录进程  
+一般运行在20和21两个端口。端口20用于在客户端和服务器之间传输数据流，而端口21用于传输控制流，并且是命令通向ftp服务器的进口。当数据通过数据流传输时，控制流处于空闲状态。而当控制流空闲很长时间后，客户端的防火墙会将其会话置为超时  
+FTP UR的格式已在[RFC 1738](https://tools.ietf.org/html/rfc1738)指定，格式为：`ftp://[user[:password]@]host[:port]/url-path`（方括号内为可选参数）  
+首先确保系统已经安装`ftp`命令：  
+`sudo apt-get install ftp`  
+此`ftp`命令的使用方法为，在终端输入以下命令（域名或IP地址或完整FTP网址都可以）：  
+`ftp ftp.ngdc.noaa.gov`  
+一般公开的FTP资源下载站点的用户名都是`anonymous`，密码是空，登录成功后即可打开交互终端  
+```text
+[zfb@myServer ~]# ftp ftp.ngdc.noaa.gov
+Connected to ftp.ngdc.noaa.gov (140.172.190.215).
+220-                     ----- Notice -----
+220-
+220- Questions/Problems should be directed to ngdc.webmaster@noaa.gov
+220
+Name (ftp.ngdc.noaa.gov:root): anonymous
+331 Please specify the password.
+Password:
+230 Login successful.
+Remote system type is UNIX.
+Using binary mode to transfer files.
+ftp> ls
+227 Entering Passive Mode (140,172,190,215,188,178).
+150 Here comes the directory listing.
+-rw-rw-r--    1 ftp      ftp          1516 Feb 04  2016 INDEX.txt
+-rw-rw-r--    1 ftp      ftp          3766 Feb 09  2018 README.txt
+-rw-rw-r--    1 ftp      ftp          9036 Feb 04  2016 ftp.html
+drwxrwsr-x   11 ftp      ftp            11 Dec 19  2017 geomag
+-rw-r--r--    1 ftp      ftp            53 Jul 27  2010 google12c4c939d7b90761.html
+lrwxrwxrwx    1 ftp      ftp             8 Aug 01  2011 index.html -> ftp.html
+226 Directory send OK.
+ftp> cd geomag
+250 Directory successfully changed.
+ftp> ls
+227 Entering Passive Mode (140,172,190,215,74,181).
+150 Here comes the directory listing.
+drwxrwxr-x   10 ftp      ftp            12 Jul 08  2016 Access_Tools
+drwxrwxr-x    4 ftp      ftp             9 Jul 14  2008 Aeromag
+226 Directory send OK.
+```
+在该交互窗口使用命令`lcd /home/zfb/hh/`表示设置下载远程FTP服务器的文件默认保存在本机的`/home/zfb/hh/`目录  
+在该交互窗口使用命令`mget *`表示下载当前目录下的所有文件，忽略所有子文件夹  
+在该交互窗口使用命令`prompt off`表示关闭下载提示  
+**批量遍历下载FTP站点指定目录下的所有数据**：  
+`wget -r -nH -P/home/zfb/hh/ ftp://ftp.ngdc.noaa.gov/ionosonde/mids11/GR13L/individual/2019/* --ftp-user=annoymous --ftp-password=`
