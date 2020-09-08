@@ -294,23 +294,15 @@ subdomain = web02
             proxy_buffering off;
             proxy_pass http://127.0.0.1:8888;
         }
-        location /api/kernels/ {
-            proxy_pass            http://127.0.0.1:8888;
-            proxy_set_header      Host $host;
-            # websocket support
-            proxy_http_version    1.1;
-            proxy_set_header      Upgrade "websocket";
-            proxy_set_header      Connection "Upgrade";
-            proxy_read_timeout    86400;
-        }
-        location /terminals/ {
-            proxy_pass            http://127.0.0.1:8888;
-            proxy_set_header      Host $host;
-            # websocket support
-            proxy_http_version    1.1;
-            proxy_set_header      Upgrade "websocket";
-            proxy_set_header      Connection "Upgrade";
-            proxy_read_timeout    86400;
+        location ~* /(api/kernels/[^/]+/(channels|iopub|shell|stdin)|terminals/websocket)/? {
+            proxy_pass http://127.0.0.1:8888;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header Host $host;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            # WebSocket support
+            proxy_http_version 1.1;
+            proxy_set_header Upgrade $http_upgrade;
+            proxy_set_header Connection "upgrade";
         }
     }
 
@@ -327,23 +319,15 @@ subdomain = web02
             proxy_buffering off;
             proxy_pass http://127.0.0.1:8888;
         }
-        location /api/kernels/ {
-            proxy_pass            http://127.0.0.1:8888;
-            proxy_set_header      Host $host;
-            # websocket support
-            proxy_http_version    1.1;
-            proxy_set_header      Upgrade "websocket";
-            proxy_set_header      Connection "Upgrade";
-            proxy_read_timeout    86400;
-        }
-        location /terminals/ {
-            proxy_pass            http://127.0.0.1:8888;
-            proxy_set_header      Host $host;
-            # websocket support
-            proxy_http_version    1.1;
-            proxy_set_header      Upgrade "websocket";
-            proxy_set_header      Connection "Upgrade";
-            proxy_read_timeout    86400;
+        location ~* /(api/kernels/[^/]+/(channels|iopub|shell|stdin)|terminals/websocket)/? {
+            proxy_pass http://127.0.0.1:8888;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header Host $host;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            # WebSocket support
+            proxy_http_version 1.1;
+            proxy_set_header Upgrade $http_upgrade;
+            proxy_set_header Connection "upgrade";
         }
     }
 ```
