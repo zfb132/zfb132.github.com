@@ -331,6 +331,7 @@ sudo vi /etc/sysctl.conf
 sudo sysctl -p
 ```
 ## 13 查看历史登录记录
+### 13.1 使用last命令
 使用命令`last`即可列出所有相关信息  
 ```txt
 zfb@myServer:~$ last
@@ -349,6 +350,149 @@ reboot   system boot  4.15.0-108-gener Wed Jul  8 21:28 - 21:29  (00:00)
 
 wtmp begins Wed Jul  8 21:28:47 2019
 ```
+### 13.2 使用awk命令
+#### 13.2.1 awk命令详解
+假定`test.txt`文件内容如下：  
+```txt
+Aug 28 19:38:01 localhost CRON[12375]: pam_unix(cron:session): session closed for user root
+Aug 28 19:39:01 localhost CRON[12511]: pam_unix(cron:session): session opened for user root by (uid=0)
+Aug 28 19:39:01 localhost CRON[12511]: pam_unix(cron:session): session closed for user root
+Aug 28 19:39:13 localhost sshd[12493]: Invalid user admin from 25.67.84.30 port 1345
+Aug 28 19:39:14 localhost sshd[12493]: pam_unix(sshd:auth): check pass; user unknown
+Aug 28 19:39:16 localhost sshd[12493]: Failed password for invalid user admin from 25.67.84.30 port 1345 ssh2
+Aug 28 19:39:32 localhost sshd[12493]: Disconnecting invalid user admin 25.67.84.30 port 1345: Change of username not allowed
+Aug 28 19:39:44 localhost sshd[12596]: pam_unix(sshd:auth): check pass; user unknown
+Aug 28 19:40:27 localhost sshd[12679]: Failed password for root from 34.56.78.90 port 6666 ssh2
+Aug 28 19:40:31 localhost sshd[12679]: Failed password for root from 78.90.12.34 port 8888 ssh2
+Aug 28 19:40:53 localhost sshd[12741]: Invalid user admin from 12.34.56.78 port 3810
+Aug 28 19:40:56 localhost sshd[12741]: Failed password for invalid user admin from 12.34.56.78 port 3810 ssh2
+Aug 28 19:40:58 localhost sshd[12741]: Disconnecting invalid user admin 12.34.56.78 port 3810
+Aug 28 19:41:01 localhost CRON[1316]: pam_unix(cron:session): session opened for user root by (uid=0)
+Aug 28 19:41:01 localhost CRON[2316]: pam_unix(cron:session): session closed for user root
+Aug 28 19:41:10 localhost sshd[3328]: Invalid user user from 12.34.56.78 port 9999
+Aug 28 19:41:11 localhost sshd[4328]: pam_unix(sshd:auth): check pass; user unknown
+Aug 28 22:34:58 localhost sshd[18689]: Failed password for root from 199.200.201.202 port 33667 ssh2
+Aug 28 22:56:22 localhost sshd[18560]: Failed password for invalid user pi from 18.19.20.21 port 22222 ssh2
+Aug 28 22:56:23 localhost sshd[18561]: Failed password for invalid user pi from 78.56.34.21 port 41568 ssh2
+Aug 28 22:06:48 localhost sshd[18943]: Failed password for invalid user ubnt from 66.88.99.44 port 33444 ssh2
+Aug 28 22:06:48 localhost sshd[18944]: Failed password for root from 193.116.1.108 port 54360 ssh2
+Aug 28 22:06:48 localhost sshd[18945]: Failed password for root from 193.116.1.108 port 54362 ssh2
+Aug 28 22:06:49 localhost sshd[18942]: Failed password for root from 193.116.1.108 port 54358 ssh2
+Aug 28 22:11:46 localhost sshd[18589]: Failed password for root from 18.19.12.20 port 6688 ssh2
+Aug 28 22:24:08 localhost sshd[18213]: Failed password for root from 185.2.99.114 port 9988 ssh2
+```
+如下所示是一个常用的awk命令的语法  
+```bash
+awk '{print $1, $4}' test.txt
+```
+需要注意的是，awk后面的语句`{print $1, $4}`必须用单引号括起来（这表明是行匹配模式，即对文件中匹配到的每一行执行操作`print $1, $4`），而且awk默认以空格对每一行进行分割并执行对应语句  
+awk的语句**完整流程**为`BEGIN{print "这是匹配前执行的，一般是表头"}{print NR,$1,$2}END{printf("统计完毕")}`，`BEGIN`和`END`语句可以省略  
+awk的**条件**语句`{if($1>3) print $1;else if($2==6) print $4;else print "hh"}`  
+`OFS ORS OFMT`等可以在**BEGIN模块**设置，例如`awk 'BEGIN{FS=",";OFMT="%.3f"} {print $1,$2}' test.txt`  
+* `print`语句内部支持`+-*/`等基础运算
+* `printf("%d--%d\n", $1,$2)`命令与C语言的使用方法类似
+* 如果要使用逗号进行行分割则`awk -F, '{print $1, $4}' test.txt`
+* `$0`表示整行数据，`$1`表示每行的第一部分（按照规则对行分割后的集合），称为第一个**字段**，以此类推；另外，匹配到的第一行称为第一条**记录**
+* `NR`表示当前行的数字（即这在`test.txt`中是第几行），`NF`表示当前行的长度，`FNR`表示当前行的数字（即这在匹配记录中是第几行），`FILENAME`表示当前文件的名称，`FS`表示分隔符（把一行数据分割成`$1`到最后）
+* 创建变量`a`并设置a的值，则使用`awk -va=1 '{print $2,$2+a}' test.txt`
+* `OFS`设置所有输出**字段**分隔符，如果要使得在`print`时候`$i`之间的默认空格改为其他分割则使用`awk -va=1 '{print $2,$2+a}' OFS=", " test.txt`
+* 设置某两个字段之间的连接符，使用代码`awk '{print NR, $1"-"$2, $11}' test.txt`，则字段1和2输出时使用`-`连接
+* `ORS`设置所有输出**记录**分隔符，如果要使得在`print`时候不同行之间的默认空格改为其他分割则使用`awk -va=1 '{print $2,$2+a}' ORS="\n\n " test.txt`
+* `OFMT`设置所有小数的显示格式，默认为`%.6g`，若显示3位小数则`awk '{print NR, $11, $13":"$15, 1/2}' OFMT="%.3f"`
+
+例如执行命令`grep "Failed password for invalid user" test.txt | awk 'BEGIN{printf("%-10s %-10s %-20s\n", "number", "user", "IP:Port")}{printf "%-10s %-10s %-20s\n", FNR, $11, $13":"$15}END{printf("搜索结束，共找到%d条记录", FNR)}'`  
+则输出如下内容，使用`":"`指定`$13`和`$15`字段的连接，如果用`,`则使用默认字段连接符（空格）：  
+```txt
+number     user       IP:Port
+1          admin      25.67.84.30:1345
+2          admin      12.34.56.78:3810
+3          pi         18.19.20.21:22222
+4          pi         78.56.34.21:41568
+5          ubnt       66.88.99.44:33444
+搜索结束，共找到5条记录
+```
+#### 13.2.2 awk过滤并输出记录
+**查看系统的登陆失败的用户及IP信息**（只输出ssh连接时的用户名不存在的情况）：  
+`sudo grep "Failed password for invalid user" /var/log/auth.log | awk 'BEGIN{printf("%-10s %-10s %-20s\n", "number", "user", "IP:Port")}{printf "%-10s %-10s %-20s\n", FNR, $11, $13":"$15}END{printf("搜索结束，共找到%d条记录", FNR)}'`  
+输出示例：  
+```txt
+number     user       IP:Port
+1          admin      25.67.84.30:1345
+2          admin      12.34.56.78:3810
+3          pi         18.19.20.21:22222
+4          pi         78.56.34.21:41568
+5          ubnt       66.88.99.44:33444
+搜索结束，共找到5条记录
+```
+**查看所有登陆失败的信息**：  
+```bash
+# 首先从log文件提取出所有包含Failed password for字符串的行作为awk的输入
+# 然后输出一行表头，并开始执行行匹配
+# match函数的第二个参数是正则表达式（用//包围起来），如果未找到,返回0
+# 有如下三种情况，前两个分别对应awk里面的if命令，第三种情况被过滤了
+# Aug 28 22:11:46 localhost sshd[18589]: Failed password for root from 18.19.12.20 port 6688 ssh2
+# Aug 28 22:56:22 localhost sshd[18560]: Failed password for invalid user pi from 18.19.20.21 port 22222 ssh2
+# Sep 16 17:29:04 localhost sudo:   ubuntu : TTY=pts/0 ; PWD=/home/ubuntu ; USER=root ; COMMAND=/bin/grep : Failed password for /var/log/auth.log
+# 因为在执行awk的同时会在auth.log生成一条记录如下，所以需要if(length($13)>4)这个判断
+# Sep 16 17:10:31 localhost sudo:   ubuntu : TTY=pts/0 ; PWD=/home/ubuntu ; USER=root ; COMMAND=/bin/grep Failed password for /var/log/auth.log
+sudo grep "Failed password for" /var/log/auth.log | awk 'BEGIN{printf("%-10s %-10s %-20s\n", "number", "user", "IP:Port")}{if(match($11, /\./)!=0) printf "%-10s %-10s %-20s\n", FNR, $9, $11":"$13;else if(length($13)>4) printf "%-10s %-10s %-20s\n", FNR, $11, $13":"$15}END{printf("搜索结束，共找到%d条记录\n", FNR)}'
+```
+输出示例：  
+```txt
+number     user       IP:Port
+1          admin      25.67.84.30:1345
+2          root       34.56.78.90:6666
+3          root       78.90.12.34:8888
+4          admin      12.34.56.78:3810
+5          root       199.200.201.202:33667
+6          pi         18.19.20.21:22222
+7          pi         78.56.34.21:41568
+8          ubnt       66.88.99.44:33444
+9          root       193.116.1.108:54360
+10         root       193.116.1.108:54362
+11         root       193.116.1.108:54358
+12         root       18.19.12.20:6688
+13         root       185.2.99.114:9988
+搜索结束，共找到13条记录
+```
+**注意**：此命令也可以写成脚本形式  
+```bash
+# 创建awk脚本文件并写入内容
+vim sshinfo.awk
+# 授予执行权限
+chmod +x sshinfo.awk
+# 执行命令，对于CentOS系统为/var/log/secure文件
+sudo grep "Failed password for" /var/log/auth.log | ./sshinfo.awk
+```
+sshinfo.awk的文件内容如下：  
+```bash
+#! /usr/bin/awk -f
+BEGIN{
+    printf("%-10s %-10s %-20s\n", "number", "user", "IP:Port")
+}
+{
+    if(match($11, /\./)!=0)
+        printf "%-10s %-10s %-20s\n", FNR, $9, $11":"$13;
+    else if(length($13)>4)
+        printf "%-10s %-10s %-20s\n", FNR, $11, $13":"$15
+}
+END{
+    printf("搜索结束，共找到%d条记录\n", FNR)
+}
+```
+**查看系统的登陆成功的用户及IP信息**：  
+`sudo grep "Accepted password for" /var/log/auth.log | awk 'BEGIN{printf("%-10s %-10s %-20s\n", "number", "user", "IP:Port")}{printf "%-10s %-10s %-20s\n", FNR, $11, $13":"$15}END{printf("搜索结束，共找到%d条记录", FNR)}'`  
+输出示例：  
+```txt
+number     user       IP:Port
+1          zfb        11.11.11.11:8888
+2          zfb        11.11.11.11:8888
+3          zfb        11.11.11.11:8888
+4          root       11.11.11.11:8888
+搜索结束，共找到4条记录
+```
+**查看系统登陆失败的次数及对应的IP**：  
+`sudo grep "Failed password for" /var/log/auth.log | awk '{if(match($11, /\./)!=0) print $11}' | sort | uniq -c | sort -nr | more`
 ## 14 使用FTP下载文件
 FTP（文件传输协议）是一个较老且最常用的标准网络协议，用于在两台计算机之间通过网络上传/下载文件。它通过用户凭证（用户名和密码）传输数据，没有进行加密。它是一个8位的客户端-服务器协议，能操作任何类型的文件而不需要进一步处理，就像MIME或Unicode一样。但是，FTP有着极高的延时，这意味着，从开始请求到第一次接收需求数据之间的时间，会非常长；并且不时的必须执行一些冗长的登录进程  
 一般运行在20和21两个端口。端口20用于在客户端和服务器之间传输数据流，而端口21用于传输控制流，并且是命令通向ftp服务器的进口。当数据通过数据流传输时，控制流处于空闲状态。而当控制流空闲很长时间后，客户端的防火墙会将其会话置为超时  
@@ -394,4 +538,4 @@ drwxrwxr-x    4 ftp      ftp             9 Jul 14  2008 Aeromag
 在该交互窗口使用命令`mget *`表示下载当前目录下的所有文件，忽略所有子文件夹  
 在该交互窗口使用命令`prompt off`表示关闭下载提示  
 **批量遍历下载FTP站点指定目录下的所有数据**：  
-`wget -r -nH -P/home/zfb/hh/ ftp://ftp.ngdc.noaa.gov/ionosonde/mids11/GR13L/individual/2019/* --ftp-user=annoymous --ftp-password=`
+`wget -r -nH -P/home/zfb/hh/ ftp://ftp.ngdc.noaa.gov/ionosonde/mids11/GR13L/individual/2019/* --ftp-user=anonymous --ftp-password=`
