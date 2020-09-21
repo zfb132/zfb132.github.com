@@ -56,7 +56,8 @@ pause
 或者直接下载[蓝奏云文件](https://zfb132.lanzous.com/iMtYxgtgd5e "copy_file.bat")，双击即可实现功能。  
 具体功能解释：  
 1. 把需要被复制的文件和文件夹放置在`C:\Users\zfb\Desktop\test-bat\`目录下面  
-```txt
+
+```txt  
 test-bat
 ├── Fig.m
 ├── c.m
@@ -75,8 +76,9 @@ test-bat
 
 11 directories, 3 files
 ```
+
 2. 目标文件夹的结构以及`.bat`文件放置如下：  
-```txt
+```txt  
 dst_dir
 ├── 20051007_tau8
 │   ├── test1
@@ -95,7 +97,8 @@ dst_dir
 9 directories, 4 files
 ```
 3. 要将这两个文件`C:\Users\zfb\Desktop\test-bat\`目录下的所有内容复制到，`copy_file.bat`所在文件夹的每个子目录下。最终效果：  
-```txt
+
+```txt  
 dst_dir
 ├── 20051007_tau8
 │   ├── Fig.m
@@ -155,6 +158,7 @@ dst_dir
 
 42 directories, 14 files
 ```
+
 ## 2. 批量解压文件  
 经常会遇到下载的原始数据是按照特定规律的许多压缩包，它们可能分布在不同的文件夹下面，但是文件的扩展名是一致的。如果想要将每个压缩包`解压到其所在的当前文件夹`、`覆盖已经解压过的文件`（方便程序异常退出后重新运行）、`删除解压成功的压缩包`、`保留解压失败的压缩包及其路径`等操作，则可以新建`unzip_all_files.bat`文件，内容如下：  
 ```bat
