@@ -115,6 +115,21 @@ git config --global i18n.logOutputEncoding utf-8
 * 然后执行如下命令推送到远程`git push -f origin master`，此时远程就看不到已经撤回的记录了，而且tree是干净的
 
   
+## 配置git
+安装Git软件后即可使用其版本控制功能，但是如果想要把修改推送到GitHub还需要配置添加证书，具体操作如下：  
+```bash
+# 生成证书，会提示输入保存密钥对的路径、保护私钥的密码（直接回车表示使用默认设置）
+ssh-keygen -t rsa -C myemail@example.com
+# 以下两个步骤是为了push操作而进行的，如果只需要clone等则不需要执行
+# 设置全局用户名为github的用户名
+git config --global user.name "my_github_username"
+# 设置全局用户名为自己的邮箱
+git config –global user.email myemail@example.com
+# 将输出的内容（以ssh-rsa开头，以myemail@example.com结尾）复制
+cat ~/.ssh/id_rsa.pub
+```
+然后登录自己的GitHub账户，在[设置里面](https://github.com/settings/ssh/new)添加SSH秘钥即可  
+此时在本地终端即可输入`git clone git@github.com:zfb132/zfb132.github.com.git`命令来下载代码  
 ## 示例  
   以下内容是在安装配置好git的前提下才能正常进行的，如果你需要将自己的远程仓库下载到本地`E:\github`目录下，修改后再上传到原仓库的`master`分支  
   按照以下步骤：
