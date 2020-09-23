@@ -87,6 +87,45 @@ XDG_PICTURES_DIR="$HOME/Pictures"
 XDG_VIDEOS_DIR="$HOME/Videos"
 ```
 最后重启电脑即可完成操作
+## 配置代理
+* Git代理  
+第一种方法：修改全局配置文件`vi ~/.gitconfig`  
+```bash
+[http]
+        proxy = socks5://127.0.0.1:1080
+[https]
+        proxy = socks5://127.0.0.1:1080
+```
+第二种方法：配置ssh协议代理  
+```bash
+# 配置一个proxy-wrapper脚本
+vi ~/git-proxy-wrapper
+# 如下部分是内容，其中X5表示socks5
+# #!/bin/bash
+# nc -x127.0.0.1:1080 -X5 $*
+# 赋予可执行权限
+chmod +x ~/git-proxy-wrapper
+# 修改ssh的config文件，添加github
+vi ~/.ssh/config
+# 添加以下内容
+# Host github
+#     HostName github.com
+#     User git
+#     # ProxyCommand nc -X 5 -x 127.0.0.1:1080 %h %p
+#     ProxyCommand /home/zfb/git-proxy-wrapper '%h %p'
+```
+然后即可使用`git clone`等操作时加速了  
+* bash代理  
+使用如下命令：  
+```bash
+# 单独设置http或https代理
+export http_proxy="socks5://127.0.0.1:1080"
+export https_proxy="socks5://127.0.0.1:1080"
+# 或者直接设置ALL_PROXY
+export ALL_PROXY=socks5://127.0.0.1:1080
+# 取消设置代理
+unset ALL_PROXY
+```
 ## 安装oh-my-zsh
 想要安装oh-my-zsh必须首先安装zsh，在终端按顺序依次输入以下命令：  
 `sudo apt-get install zsh`  
