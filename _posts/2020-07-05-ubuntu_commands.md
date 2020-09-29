@@ -221,6 +221,24 @@ chmod ug+x,o-x test.txt
 # 例如：撤销原来的文件权限，只为文件设置可读写权限
 chmod u=rw name.txt
 ```
+### 3.7 测试某个用户是否可以访问文件夹
+使用如下命令：  
+`sudo -u www-data stat /home/ubuntu/frp/log`  
+如果具有权限则显示类似输出：  
+```txt
+  File: /home/ubuntu/frp/log/
+  Size: 4096            Blocks: 8          IO Block: 4096   directory
+Device: fc01h/64513d    Inode: 529293      Links: 2
+Access: (0777/drwxrwxrwx)  Uid: (  500/  ubuntu)   Gid: (  500/  ubuntu)
+Access: 2020-09-28 15:56:40.902601841 +0800
+Modify: 2020-09-28 16:32:40.728799201 +0800
+Change: 2020-09-28 16:32:40.728799201 +0800
+ Birth: -
+```
+否则显示：  
+```txt
+stat: cannot stat '/home/ubuntu/frp/log/': Permission denied
+```
 ## 4. 查看当前活跃的用户
 查看所有用户列表  
 `cat /etc/passwd|grep -v nologin|grep -v halt|grep -v shutdown|awk -F":" '{ print $1"|"$3"|"$4 }'|more`  
@@ -571,3 +589,7 @@ drwxrwxr-x    4 ftp      ftp             9 Jul 14  2008 Aeromag
 在该交互窗口使用命令`prompt off`表示关闭下载提示  
 **批量遍历下载FTP站点指定目录下的所有数据**：  
 `wget -r -nH -P/home/zfb/hh/ ftp://ftp.ngdc.noaa.gov/ionosonde/mids11/GR13L/individual/2019/* --ftp-user=anonymous --ftp-password=`
+## 15 切割日志文件
+可以分为以下两种：  
+* 使用`logrotate`命令：[见教程](https://blog.whuzfb.cn/blog/2020/07/07/web_https/#4-%E4%BD%BF%E7%94%A8logrotate%E8%87%AA%E5%8A%A8%E5%88%87%E5%89%B2%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6)
+* 切割`nginx`日志文件：[见教程](https://blog.whuzfb.cn/blog/2020/07/07/web_https/#5-%E9%85%8D%E7%BD%AEnginx%E5%88%87%E5%89%B2%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6)
