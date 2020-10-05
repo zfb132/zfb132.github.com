@@ -138,6 +138,8 @@ screen -r test_scr
 screen -S test_scr -X quit
 # 清除处于dead状态的screen
 screen -wipe
+# 强制退出其他用户正在使用的screen窗口（防止某用户断线且占用终端导致其他用户无法使用）
+screen -D -r test_scr
 ```
 ## 3. Ubuntu用户管理
 ### 3.1 创建用户
