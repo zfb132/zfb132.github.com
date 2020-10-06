@@ -73,6 +73,8 @@ API以及版本号、英文代号、中文代号、以及发布时间如下：
 26|8.0|Oreo|奥利奥|2017.08.21|  
 27|8.1|Oreo|奥利奥|2017.12.05|  
 28|9|Pie|派|2018.08.06|  
+29|10|Android 10|-|2019.09.03|  
+30|11|Android 11|-|2020.09.08|  
   
 ## 分支版本  
 LineageOS、YunOS、Fire OS、360OS、Flyme OS、Funtouch OS、氢OS、LeWa OS、XobotOS、Resurrection Remix OS、MIUI（米柚）、华为EMUI、Zen UI、Hive UI、LG Optimus UI、HTC Sense、三星TouchWiz、MoKee（魔趣）、Nokia X Software Platform、OPhone、AOKP、Baidu Yi、Barnes & Noble Nook、CyanogenMod、Replicant、OmniROM  
