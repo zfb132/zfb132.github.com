@@ -62,7 +62,7 @@ sidebar-avatar: /img/me2.jpg     # img前面加`/`绝对引用。
 
 # Friends
 friends: [
-	{
+  {
     title: "CSDN",
     href: "https://blog.csdn.net/qq_32507255/"
   },
@@ -83,6 +83,3 @@ friends: [
     href: "https://github.com/BruceZhaoR"
   }
 ]
-
-
-
