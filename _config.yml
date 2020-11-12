@@ -79,6 +79,10 @@ friends: [
     href: "https://my.oschina.net/zfb132"
   },
   {
+    title: "GitHub下载加速",
+    href: "https://ghapi.zfb132.workers.dev/"
+  },
+  {
     title: "brucezhaor",
     href: "https://github.com/BruceZhaoR"
   }
