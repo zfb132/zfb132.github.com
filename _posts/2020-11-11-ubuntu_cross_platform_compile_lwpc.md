@@ -252,7 +252,6 @@ op-area     Mediterranean  30 10 45 -45
 a-noise     ntia june 01 0000 
 start
 quit
-
 ```
 需要注意的是  
 `op-area     Mediterranean  30 10 45 -45`  
