@@ -1,13 +1,13 @@
 ---
 layout: post
 title: Ubuntu系统下ITensor的安装与测试
-subtitle: "使用make命令编译源码安装"
+subtitle: "使用make命令编译源码安装❤️LM"
 category : [Ubuntu]
 tags : [Ubuntu,C++]
 date:       2020-07-04 16:14:57 +08:00
 author:     "晨曦"
 header-img: "/img/post/cplusplus-bg.png"
-description:  "主要介绍ITensor的下载、编译、安装以及简单测试❤️LM"
+description:  "主要介绍ITensor的下载、编译、安装以及简单测试"
 ---
   
 # 目录
@@ -62,6 +62,7 @@ BLAS_LAPACK_LIBFLAGS=-lpthread -L/usr/lib -lblas -llapack
 ```
 ## 2. 如何创建和编译itensor项目
 ### 2.1 第一种方法（推荐）
+整个项目可以在仓库[itensor-install/first-method](https://github.com/zfb132/itensor/tree/master/itensor-install/first-method)下载  
 1. 编写代码文件[myappname.cpp](https://github.com/zfb132/itensor/blob/master/itensor-install/first-method/myappname.cpp)和头文件[myclass.h](https://github.com/zfb132/itensor/blob/master/itensor-install/first-method/myclass.h)以及头文件[myappname.h](https://github.com/zfb132/itensor/blob/master/itensor-install/first-method/myappname.h)
 2. 创建文件命名为`Makefile`，内容在下面
 3. 编译项目
@@ -121,6 +122,7 @@ mkdebugdir:
 ```
 **注意**：这里换行之后必须用TAB键缩进，不能用空格
 ### 2.2 第二种方法
+整个项目可以在仓库[itensor-install/second-method](https://github.com/zfb132/itensor/tree/master/itensor-install/second-method)下载  
 1. 编写代码文件[test.cpp](https://github.com/zfb132/itensor/blob/master/itensor-install/second-method/test.cpp)和头文件[myclass.h](https://github.com/zfb132/itensor/blob/master/itensor-install/second-method/myclass.h)
 2. 编译项目
 ```bash
