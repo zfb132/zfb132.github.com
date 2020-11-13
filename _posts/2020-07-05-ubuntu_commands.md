@@ -319,7 +319,8 @@ fg 1
 
 使用[脚本](https://github.com/GitHub30/gdrive.sh)下载Google Drive文件，使用方法为  
 `curl gdrive.sh | bash -s https://drive.google.com/file/d/0B4y35FiV1wh7QWpuVlFROXlBTHc/view`
-## 11. 查找文件
+## 11. find命令
+### 11.1 查找文件
 find命令可以在指定目录及其子目录下查找指定扩展名的文件，如下所示是在当前目录及子目录下查找JPG文件，并把它们移动到当前目录：  
 `find . -name "*.JPG" -exec mv {} ./ \;`  
 `find .`表示在当前目录及其子目录下查找  
@@ -327,6 +328,40 @@ find命令可以在指定目录及其子目录下查找指定扩展名的文件�
 `-exec `后面接bash命令，表示对文件进行的操作  
 `{}`指代找到的每一个文件  
 `\;`bash命令的结尾需要添加`;`，这里需要转义  
+### 11.2 查找目录
+find命令也可用于查找符合条件的目录，只需要添加参数`-type d`来指定查找类型为目录（directory）。如下所示是在当前目录及其子目录搜索所有以`mat`结尾的文件夹，并把`a.py`复制到所有找到的文件夹中（复制单个文件到多个文件夹）  
+`find . -type d -name "*_mat" -exec cp a.py {} \;`  
+过程如下所示：  
+```txt
+ ~/test > tree
+.
+├── a.py
+└── mat_dir
+    ├── 18_mat
+    ├── 1_mat
+    ├── 2_mat
+    ├── 45_mat
+    └── 9_mat
+
+6 directories, 1 file
+ ~/test > find . -type d -name "*_mat" -exec cp a.py {} \;
+ ~/test > tree
+.
+├── a.py
+└── mat_dir
+    ├── 18_mat
+    │   └── a.py
+    ├── 1_mat
+    │   └── a.py
+    ├── 2_mat
+    │   └── a.py
+    ├── 45_mat
+    │   └── a.py
+    └── 9_mat
+        └── a.py
+
+6 directories, 6 files
+```
 ## 12. swap分区操作
 ### 12.1 增加分区大小
 系统默认已经有了swap分区，但是运行某些程序很耗内存，想临时添加swap分区大小：  
