@@ -1,7 +1,7 @@
 source "https://rubygems.org"
 
-gem 'jekyll-paginate'
-gem "jekyll-rss"
-gem "jekyll-seo-tag"
-gem "jekyll-feed"
-gem "jekyll-sitemap"
+gem 'jekyll-paginate', group: :jekyll_plugins
+gem "jekyll-rss", group: :jekyll_plugins
+gem "jekyll-seo-tag", group: :jekyll_plugins
+gem "jekyll-feed", group: :jekyll_plugins
+gem "jekyll-sitemap", group: :jekyll_plugins
