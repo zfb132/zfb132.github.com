@@ -2,33 +2,27 @@ title: ZFB
 SEOTitle: ZFB 博客
 author: 晨曦
 timezone: Asia/Shanghai
-paginate: 10 # pagination based on number of posts
+paginate: 10
 paginate_path: "page:num"
 highlighter: rouge
 url: "https://blog.whuzfb.cn"
 baseurl: ""
 markdown: kramdown
 kramdown:
-  input: GFM                       # use Github Flavored Markdown !important
+  input: GFM
 
-gems:
-  - jekyll-paginate
-  - jekyll-sitemap
-  - jekyll-feed
+gems: [jekyll-paginate, jekyll-sitemap, jekyll-feed]
 
-# 国内用多
 disqus: zfb132
 disqus_base: http://blog.whuzfb.cn/
 
-#Google Analytics https://developers.google.com/analytics/devguides/collection/analyticsjs/
-#去_layout/default.html的头文件中去设置.
+# https://developers.google.com/analytics/devguides/collection/analyticsjs/
+# _layout/default.html
 google_analytics_id: UA-97824262-2
 google_analytics_domain: auto
 
-# 自定义永久链接
 permalink: /blog/:year/:month/:day/:title/
 
-#默认底图
 header-img: /img/default-bg.jpg
 WeChatPublic: /img/qrcode_WeChatPublic.jpg
 
@@ -40,8 +34,6 @@ about_path: about
 
 BASE_PATH:
 
-
-# SNS settings
 zhihu_username: zfb-chenxi
 weibo_username:     zfb132
 facebook_username:
@@ -51,14 +43,12 @@ RSS: feed.xml
 email: admin@whuzfb.cn
 linkedin:
 
-anchorjs: true                          # 修改在default.html->footer
-
+#  default.html footer
+anchorjs: true
 
 # page Sidebar settings
 sidebar-about-description: "在代码的道路上渐行渐远"
-sidebar-avatar: /img/me2.jpg     # img前面加`/`绝对引用。
-
-
+sidebar-avatar: /img/me2.jpg
 
 # Friends
 friends: [
