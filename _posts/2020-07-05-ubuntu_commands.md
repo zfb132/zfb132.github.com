@@ -630,3 +630,66 @@ drwxrwxr-x    4 ftp      ftp             9 Jul 14  2008 Aeromag
 可以分为以下两种：  
 * 使用`logrotate`命令：[见教程](https://blog.whuzfb.cn/blog/2020/07/07/web_https/#4-%E4%BD%BF%E7%94%A8logrotate%E8%87%AA%E5%8A%A8%E5%88%87%E5%89%B2%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6)
 * 切割`nginx`日志文件：[见教程](https://blog.whuzfb.cn/blog/2020/07/07/web_https/#5-%E9%85%8D%E7%BD%AEnginx%E5%88%87%E5%89%B2%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6)
+
+## 16 设置静态IP
+有以下两种方法：  
+1.**方法一：系统安装有GUI**。打开`设置-->网络`，查看哪一个是当前正在使用的网络连接，点击该条右侧的设置（齿轮图标），弹出对话框。`详细信息`页面会显示当前的ip（例如：`192.168.10.55`）、网关路由地址（例如：`192.168.10.254`）、所有的DNS地址（例如：`114.114.114.114,8.8.8.8`），需要记录下来，方便后期修改。然后点击`IPv4`选项  
+  * `IPv4方式`：手动
+  * `地址`：共有三格。第一格填写自己需要设置的静态ip地址，例如写为`192.168.10.56`（也可设置为与之前DHCP方式分配的IP一致，即`192.168.10.55`）；第二格填写子网掩码，一般是`255.255.255.0`（可以通过方法二的步骤核实）；第三格填写网关地址`192.168.10.254`
+  * `DNS`：填写之前看到的即可，如`114.114.114.114,8.8.8.8`
+  * 然后点击右上角`应用`，如果弹出输入密码则按要求输入即可。最后，关闭再打开网络即可应用成功
+  
+2.**方法二：在终端窗口修改**。Ubuntu 17.10 网络管理引入了一个新的工具，用来配置ip地址，本教程只适合此版本及更新版本（旧版本如ubuntu 16.04不支持）。具体步骤如下：  
+  * 查看并记录相关信息（也可使用方法一来查看）：
+```bash
+# 安装网络工具库
+sudo apt-get install net-tools
+# 查看当前正在使用的网卡信息
+ifconfig -a
+# 该命令会返回所有网卡信息，可通过查看每一条信息是否包含inet 条目，且inet 后面跟着的地址不是127.0.0.1
+# 排除法即可找到当前使用的网卡，最前面是网卡名称，例如
+# enp0s31f6: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+#         inet 192.168.10.55  netmask 255.255.255.0  broadcast 192.168.10.255
+#         inet6 fe80::cdea:a610:64f0:bed2  prefixlen 64  scopeid 0x20<link>
+#         ether e3:aa:5e:6e:53:01  txqueuelen 1000  (以太网)
+#         RX packets 44518  bytes 7552410 (7.5 MB)
+#         RX errors 0  dropped 0  overruns 0  frame 0
+#         TX packets 40667  bytes 51864207 (51.8 MB)
+#         TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+#         device interrupt 16  memory 0xef300000-ef320000 
+# 记录： 网卡名称为enp0s31f6  当前ip地址为192.168.10.55  子网掩码为255.255.255.0
+# 查看DNS记录
+systemd-resolve --status
+# 从该命令输出中找到自己用的网卡
+# Link 2 (enp0s31f6)
+#       Current Scopes: DNS
+#        LLMNR setting: yes
+# MulticastDNS setting: no
+#       DNSSEC setting: no
+#     DNSSEC supported: no
+#          DNS Servers: 114.114.114.114
+#                       8.8.8.8
+#           DNS Domain: ~.
+# 记录DNS 114.114.114.114, 8.8.8.8
+```
+  * 创建配置文件：`sudo vim /etc/netplan/01-network-manager-all.yaml`  
+  文件内容如下：  
+```yaml
+network:
+  ethernets:
+    # set network card name
+    enp0s31f6:
+      dhcp4: no
+      dhcp6: no
+      # set your static ip
+      # default network mask length is 24
+      # 255.255.255.0 --> 24
+      addresses: [192.168.10.56/24]
+      # set ipv4 gateway address
+      gateway4: 192.168.10.254
+      nameservers:
+        # set dns servers
+        addresses: [114.114.114.114,8.8.8.8]
+  version: 2
+```
+  * 输入`sudo netplan apply`即可生效
