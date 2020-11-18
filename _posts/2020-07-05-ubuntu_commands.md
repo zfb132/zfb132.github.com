@@ -708,4 +708,14 @@ network:
         addresses: [114.114.114.114,8.8.8.8]
   version: 2
 ```
-  * 输入`sudo netplan apply`即可生效
+  * 应用修改  
+```bash
+# 生成配置文件
+sudo netplan --debug generate
+# 测试配置文件
+sudo netplan try
+# 应用修改
+sudo netplan apply
+# 重启网络服务
+sudo systemctl restart network-manager
+```
