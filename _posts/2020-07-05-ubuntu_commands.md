@@ -644,11 +644,12 @@ drwxrwxr-x    4 ftp      ftp             9 Jul 14  2008 Aeromag
 ```bash
 # 安装网络工具库
 sudo apt-get install net-tools
-# 查看当前正在使用的网卡信息
+# (1)查看当前正在使用的网卡信息
 ifconfig -a
-# 该命令会返回所有网卡信息，可通过查看每一条信息是否包含inet 条目，且inet 后面跟着的地址不是127.0.0.1
+# 该命令会返回所有网卡信息，可通过查看每一条信息是否包含inet条目
+# 且inet后面跟着的地址不是127.0.0.1
 # 排除法即可找到当前使用的网卡，最前面是网卡名称，例如
-# enp0s31f6: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+# enp0s37f2: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
 #         inet 192.168.10.55  netmask 255.255.255.0  broadcast 192.168.10.255
 #         inet6 fe80::cdea:a610:64f0:bed2  prefixlen 64  scopeid 0x20<link>
 #         ether e3:aa:5e:6e:53:01  txqueuelen 1000  (以太网)
@@ -657,11 +658,26 @@ ifconfig -a
 #         TX packets 40667  bytes 51864207 (51.8 MB)
 #         TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
 #         device interrupt 16  memory 0xef300000-ef320000 
-# 记录： 网卡名称为enp0s31f6  当前ip地址为192.168.10.55  子网掩码为255.255.255.0
-# 查看DNS记录
+# 记录： 网卡名称为enp0s37f2  当前ip地址为192.168.10.55  子网掩码为255.255.255.0
+# (2)查看网关路由地址
+route -n
+# 该命令输出的第一条（目标为0.0.0.0）的网关即为所需的地址，记录网关为192.168.10.254
+# 内核 IP 路由表
+# 目标            网关            子网掩码        标志  跃点   引用  使用 接口
+# 0.0.0.0         192.168.10.254  0.0.0.0         UG    20100  0        0 enp0s37f2
+# 169.254.0.0     0.0.0.0         255.255.0.0     U     1000   0        0 enp0s37f2
+# 172.17.0.0      0.0.0.0         255.255.0.0     U     0      0        0 docker0
+# 192.168.10.0    0.0.0.0         255.255.255.0   U     100    0        0 enp0s37f2
+# 也可使用traceroute命令来查找网关
+traceroute www.baidu.com
+# 只看该命令的前两条输出即可，记录网关地址为192.168.10.254
+# traceroute to www.baidu.com (14.215.177.38), 30 hops max, 60 byte packets
+#  1  _gateway (192.168.10.254)  0.392 ms  0.379 ms  0.372 ms
+#  2  * * *
+# (3)查看DNS记录
 systemd-resolve --status
 # 从该命令输出中找到自己用的网卡
-# Link 2 (enp0s31f6)
+# Link 2 (enp0s37f2)
 #       Current Scopes: DNS
 #        LLMNR setting: yes
 # MulticastDNS setting: no
@@ -678,7 +694,7 @@ systemd-resolve --status
 network:
   ethernets:
     # set network card name
-    enp0s31f6:
+    enp0s37f2:
       dhcp4: no
       dhcp6: no
       # set your static ip
