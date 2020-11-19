@@ -127,7 +127,7 @@ sudo make -j48 install
 安装以后，使用时首先`export PATH=`，把`/usr/bin`放在第一位，保证`python3`调用的是`/usr/bin/python3`  
 ## 5. 配置文件
 每次运行opensfm生成点云，不仅需要原始图片数据，还需要一个配置文件`config.yaml`，文件结构如下：  
-```txt  
+```txt
 lab
 ├── config.yaml
 └── images
@@ -138,6 +138,7 @@ lab
 
 1 directory, 5 files
 ```
+
 配置文件的默认选项如下，见链接[opensfm.org](https://www.opensfm.org/docs/_modules/opensfm/config.html)  
 ```yaml
 # Metadata
