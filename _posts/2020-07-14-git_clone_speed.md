@@ -16,6 +16,8 @@ description:  "经常遇到github下载代码速度在每秒几十KB，这里介
 * 目录
 {:toc}
 
+## 0. 使用网站加速
+打开[github加速下载](https://ghapi.zfb132.workers.dev/)网址，根据页面提示即可使用
 ## 1. 使用镜像加速源
 目前测试结果来看，以下两个加速网站[cnpmjs](https://cnpmjs.org/)、[fastgit](https://github.com.cnpmjs.org/)的效果非常好，具体使用方法是：假如需要下载的仓库地址是[zfb132/WhuHelper](https://github.com/zfb132/WhuHelper)，那么可以采用如下命令进行下载源码   
 ```
