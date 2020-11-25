@@ -46,7 +46,7 @@ PS C:\Users> wsl --set-version Ubuntu-20.04 2
 ```bash
 # win10 主机 IP 保存在 /etc/resolv.conf 中
 # 保证win10的代理软件，开启Allow LAN，开启Mixed Port在7890端口
-# 测试不要用ping（ICMP报文），用curl -v
+# 测试不要用ping（ICMP报文），因为会被主机禁止，改用curl -v
 export hostip=$(cat /etc/resolv.conf | grep -oP '(?<=nameserver\ ).*')
 # 创建命令用于启动代理
 alias setproxy='export https_proxy="http://${hostip}:7890";export http_proxy="http://${hostip}:7890";export all_proxy="socks5://${hostip}:7890";'
