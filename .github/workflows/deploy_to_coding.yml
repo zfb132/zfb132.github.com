@@ -1,4 +1,4 @@
-name: Auto deploy to coding pages
+name: Auto deploy
 
 # 在push主分支时触发构建
 on:
@@ -7,8 +7,84 @@ on:
       - 'master'
 
 jobs:
-  # job的名字：推送到coding
+  # job的名字：推送到repo
   deploy:
+    name: Deploy to other git websites
+    # job的运行平台
+    runs-on: ubuntu-18.04
+    inputs:
+      personal_token:
+        description: 'Your personal token in other git websites'
+        required: true
+      usename:
+        description: 'Your username in other git websites'
+        required: true
+      repo_ref:
+        description: 'Your ref of repo in other git websites'
+        required: true
+      time_zone:
+        description: 'Your time zone'
+        required: false
+        default: 'UTC'
+      commitor_name:
+        description: 'Setup the name of commitor'
+        required: false
+        default: ''
+      commitor_email:
+        description: 'Setup the email of commitor'
+        required: false
+        default: ''
+    steps:
+      env:
+        # setup the timezone
+        TZ: $time_zone
+        # setup the token of repo in other git websites
+        repo_token: $personal_token
+        # setup the username of repo in other git websites
+        repo_username: $username
+        # setup the ref of repo in other git websites
+        repo_ref: $repo_ref
+      # download this github repo
+      - uses: actions/checkout@v2
+      - name: Set commitor message
+        run: |
+          echo "::add-mask::$personal_token"
+          export message=$(git log --pretty=format:"%s" -1)
+      - name: Set commitor name 
+        if: ${{inputs.commitor_name == ''}}
+        run: |
+          export username=$(git config user.name)
+          echo "::set-env name=commitor_name::$username"
+      - name: Set up commitor email
+        if: ${{inputs.commitor_email == ''}}
+        run: |
+          export email=$(git config user.email)
+          echo "::set-env name=commitor_email::$email"
+      - name: Set up config and deploy to other git websits
+        run: |
+          [ -f CNAME ] && rm CNAME || echo "CNAME doesn't exist"
+          rm -rf .github
+          rm -rf .git
+          git clone https://${repo_username}:${repo_token}@${repo_ref} repo_dir
+          cd repo_dir && mv .git ../ && cd ../ && rm -rf repo_dir
+          git config --local user.email "${commitor_email}"
+          git config --local user.name "${commitor_name}"
+          git config core.filemode false
+          git remote set-url origin https://${repo_ref}
+          git add .
+          git commit -m "$message"
+          git push --force --quiet "https://${repo_username}:${repo_token}@${repo_ref}" master:master
+      - name: Report the failure
+        if: ${{ failure() }}
+        run: echo "Failed!!!"
+
+
+  deploy_test:
+
+
+
+  # job的名字：推送到coding
+  deploy_bk:
     name: Deploy to Coding
     # job的运行平台
     runs-on: ubuntu-18.04
