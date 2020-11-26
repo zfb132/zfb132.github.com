@@ -24,13 +24,13 @@ description:  "WSL实在是太好用了"
 ## 3. 升级WSL 2
 如果在Powershell输入命令：`wsl --list --verbose`发现自己安装的Linux子系统是1.0版本  
 ```txt
-PS C:\Users> wsl --set-default-version 2
-错误: 0x1bc
-有关与 WSL 2 的主要区别的信息，请访问 https://aka.ms/wsl2
 PS C:\Users> wsl --list --verbose
   NAME            STATE           VERSION
 * Ubuntu-20.04    Stopped         1
   Ubuntu-18.04    Stopped         1
+PS C:\Users> wsl --set-default-version 2
+错误: 0x1bc
+有关与 WSL 2 的主要区别的信息，请访问 https://aka.ms/wsl2
 ```
 升级按照[教程](https://docs.microsoft.com/zh-cn/windows/wsl/install-win10#set-your-distribution-version-to-wsl-1-or-wsl-2)，即下载安装linux内核[升级包](https://docs.microsoft.com/zh-cn/windows/wsl/wsl2-kernel)，安装完毕后输入命令：`wsl --set-version Ubuntu-20.04 2`  
 ```txt
