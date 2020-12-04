@@ -55,7 +55,7 @@ Oracle由至少一个**表空间**和**数据库模式对象**组成。模式是
 
 范围（Extent）是数据库存储空间分配的逻辑单位，一个范围由许多连续的数据块组成，范围是由段依次分配的，分配的第一个范围称为初始范围，以后分配的范围称为增量范围
 #### MySQL
-MySQL[maɪˌɛskjuːˈɛl]（My Structure Quest Language）原本是一个开放源代码的关系数据库管理系统，使用C和C++编写，后被甲骨文公司（Oracle）收购，成为Oracle旗下产品。MySQL在过去由于性能高、成本低、可靠性好，已经成为最流行的开源数据库，因此被广泛地应用在Internet上的中小型网站中。<img src="http://blog.whuzfb.cn/img/post/lamp.svg" width="768" alt="LAMP架构">随着MySQL的不断成熟，它也逐渐用于更大规模的网站和应用，比如维基百科（维基百科已于2013年正式宣布将从MySQL迁移到MariaDB数据库）、Google和Facebook等网站，非常流行的开源软件组合**LAMP**（Linux-Apache-MySQL-PHP）中的“M”指的就是MySQL  
+MySQL[maɪˌɛskjuːˈɛl]（My Structure Quest Language）原本是一个开放源代码的关系数据库管理系统，使用C和C++编写，后被甲骨文公司（Oracle）收购，成为Oracle旗下产品。MySQL在过去由于性能高、成本低、可靠性好，已经成为最流行的开源数据库，因此被广泛地应用在Internet上的中小型网站中。<img src="https://blog.whuzfb.cn/img/post/lamp.svg" width="768" alt="LAMP架构">随着MySQL的不断成熟，它也逐渐用于更大规模的网站和应用，比如维基百科（维基百科已于2013年正式宣布将从MySQL迁移到MariaDB数据库）、Google和Facebook等网站，非常流行的开源软件组合**LAMP**（Linux-Apache-MySQL-PHP）中的“M”指的就是MySQL  
 **索引**是一种特殊的文件，它们包含着对数据表里所有记录的引用指针。索引不是万能的，它可以加快数据检索操作，但会使数据修改操作变慢。每修改数据记录，索引就必须刷新一次。为了在某种程度上弥补这一缺陷，许多SQL命令都有一个DELAY_KEY_WRITE项。这个选项的作用是暂时制止 MySQL在该命令每插入一条新记录和每修改一条现有之后立刻对索引进行刷新，对索引的刷新将等到全部记录插入/修改完毕之后再进行。在需要把许多新记录插入某个数据表的场合DELAY_KEY_WRITE选项的作用将非常明显。另外，索引还会在硬盘上占用相当大的空间。因此应该只为最经常查询和最经常排序的数据列建立索引。注意，如果某个数据列包含许多重复的内容，为它建立索引就没有太大的实际效果。从理论上讲，完全可以为数据表里的每个字段分别建一个索引，但MySQL把同一个数据表里的索引总数限制为16个  
 #### MariaDB  
 MariaDB（名称来自Michael Widenius的女儿Maria的名字）数据库管理系统是MySQL的一个分支，主要由开源社区在维护，采用GPL授权许可。<img src="/img/post/mariadb-logo.png" width="768" alt="MariaDB Logo">开发这个分支的原因之一是：甲骨文公司收购了MySQL后，有将MySQL闭源的潜在风险，因此社区采用分支的方式来避开这个风险  
