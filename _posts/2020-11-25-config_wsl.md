@@ -70,3 +70,37 @@ Host github
     # ProxyCommand nc -X 5 -x 127.0.0.1:10800 %h %p
     ProxyCommand /home/zfb/git-proxy-wrapper '%h %p'
 ```
+## 5. GUI界面
+在Win10安装[VcXsrv软件](https://sourceforge.net/projects/vcxsrv/files/vcxsrv/)，创建配置文件`VcXsrv-WSL2.xlaunch`并双击打开，内容如下：  
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<XLaunch 
+    WindowMode="MultiWindow" 
+    ClientMode="NoClient" 
+    LocalClient="False" 
+    Display="-1" 
+    LocalProgram="xcalc" 
+    RemoteProgram="xterm" 
+    RemotePassword="" 
+    PrivateKey="" 
+    RemoteHost="" 
+    RemoteUser="" 
+    XDMCPHost="" 
+    XDMCPBroadcast="False" 
+    XDMCPIndirect="False" 
+    Clipboard="True" 
+    ClipboardPrimary="True" 
+    ExtraParams="" 
+    Wgl="False" 
+    DisableAC="True" 
+    XDMCPTerminate="False"/>
+```
+然后在WSL的终端输入以下命令：  
+`export DISPLAY="$(awk '/nameserver/ { print $2 }' < /etc/resolv.conf)":0`  
+此时，可以在WSL2终端运行需要GUI支持的软件，例如：  
+```bash
+# 安装软件mousepad，该软件需要GUI
+sudo apt install mousepad -y
+# 打开软件
+mousepad hello.txt
+```
