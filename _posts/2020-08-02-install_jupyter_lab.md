@@ -197,7 +197,7 @@ sudo chmod +x /etc/rc.local
 ```
 运行`service rc-local start`即可启动服务，`service rc-local status`查看运行状态
 **日志分割**：然后创建文件`/etc/logrotate.d/jupyter-zfb`：
-```ini
+```conf
 su zfb zfb
 /home/zfb/jupyter/log/jupyterlab.log{
     weekly
@@ -359,7 +359,7 @@ matlab_kernel
 vhost_http_port = 8888
 ```
 运行jupyterlab的服务器的`frpc.ini`添加一个部分：  
-```ini
+```conf
 [web]
 type = http
 local_port = 8888
