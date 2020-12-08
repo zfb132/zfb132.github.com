@@ -197,7 +197,7 @@ sudo chmod +x /etc/rc.local
 ```
 运行`service rc-local start`即可启动服务，`service rc-local status`查看运行状态
 **日志分割**：然后创建文件`/etc/logrotate.d/jupyter-zfb`：
-```conf
+{% raw %}
 su zfb zfb
 /home/zfb/jupyter/log/jupyterlab.log{
     weekly
@@ -214,7 +214,8 @@ su zfb zfb
         /usr/bin/nohup /home/zfb/jupyter/bin/jupyter lab >> /home/zfb/jupyter/log/jupyterlab.log 2>&1 & echo $! > /home/zfb/jupyter/run_jupyter.pid
     endscript
 }
-```
+{% endraw %}
+
 执行命令`logrotate -dvf /etc/logrotate.d/jupyter-zfb`可以查看每次轮询的输出  
 * `d`表示只是显示，并不实际执行
 * `v`表示显示详细信息
@@ -366,7 +367,7 @@ local_port = 8888
 custom_domains = lab.example.cn
 ```
 如果要使用frp内网穿透的同时又给它设置域名，则域名解析记录添加一条名称为lab的A记录到腾讯云主机的IP（frps），在腾讯云主机再添加一个nginx项：  
-```ini
+{% raw %}
     server{
         listen 80;
         # 如果需要ssl，参考https://blog.whuzfb.cn/blog/2020/07/07/web_https/
@@ -419,7 +420,8 @@ custom_domains = lab.example.cn
         #     proxy_read_timeout    86400;
         # }
     }
-```
+{% endraw %}
+
 ## 10. VSCode连接jupyter
 由于jupyterlab可以运行在本地指定端口，所以可以通过IP和端口在客户自己浏览器进行远程开发（保证远程服务器的`jupyter lab`开机自启服务），这在局域网内很方便，但是对于没有公网IP的话，就无法使用此功能  
 好在VSCode可以直接打开远程jupyter，具体操作如下  
