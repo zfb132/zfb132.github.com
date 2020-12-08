@@ -719,3 +719,23 @@ sudo netplan apply
 # 重启网络服务
 sudo systemctl restart network-manager
 ```
+## 17 创建随机文件
+在Linux系统中有`/dev/random`和`/dev/urandom`可以产生随机数，前者是更加贴近数学意义的随机数，后者是比较适合生成文件的随机数，用法如下：  
+```bash
+# 执行命令：创建65536*1024Bytes（64MB）的文件
+dd if=/dev/urandom of=test.txt count=65536 bs=1024
+# 命令输出
+# 65536+0 records in
+# 65536+0 records out
+# 67108864 bytes (67 MB, 64 MiB) copied, 10.4984 s, 6.4 MB/s
+```
+还可以创建全是0的文件：  
+```bash
+# 执行命令：创建65536*1024Bytes（64MB）的文件
+dd if=/dev/zero of=test-0.txt count=65536 bs=1024
+# 命令输出
+# 65536+0 records in
+# 65536+0 records out
+# 67108864 bytes (67 MB, 64 MiB) copied, 9.42672 s, 7.1 MB/s
+```
+另外，可以尝试使用zip或rar算法单独压缩这两个文件，会发现后者可以被压缩到1MB以下，而前者基本不会减小体积（信息熵的体现）
