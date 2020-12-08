@@ -72,8 +72,7 @@ Host github
 ```
 ## 5. GUI界面
 在Win10安装[VcXsrv软件](https://sourceforge.net/projects/vcxsrv/files/vcxsrv/)，创建配置文件`VcXsrv-WSL2.xlaunch`并双击打开，内容如下：  
-
-{% highlight xml linenos %}
+{% highlight xml %}
 <?xml version="1.0" encoding="UTF-8"?>
 <XLaunch 
     WindowMode="MultiWindow" 
