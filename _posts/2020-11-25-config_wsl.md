@@ -72,7 +72,8 @@ Host github
 ```
 ## 5. GUI界面
 在Win10安装[VcXsrv软件](https://sourceforge.net/projects/vcxsrv/files/vcxsrv/)，创建配置文件`VcXsrv-WSL2.xlaunch`并双击打开，内容如下：  
-```xml
+
+{% highlight xml linenos %}
 <?xml version="1.0" encoding="UTF-8"?>
 <XLaunch 
     WindowMode="MultiWindow" 
@@ -94,7 +95,8 @@ Host github
     Wgl="False" 
     DisableAC="True" 
     XDMCPTerminate="False"/>
-```
+{% endhighlight %}
+
 然后在WSL的终端输入以下命令：  
 `export DISPLAY="$(awk '/nameserver/ { print $2 }' < /etc/resolv.conf)":0`  
 此时，可以在WSL2终端运行需要GUI支持的软件，例如：  
