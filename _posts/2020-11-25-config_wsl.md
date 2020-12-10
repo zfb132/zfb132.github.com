@@ -105,3 +105,10 @@ sudo apt install mousepad -y
 # 打开软件
 mousepad hello.txt
 ```
+综上所述，也可直接修改`~/.zshrc`文件，添加以下内容  
+```bash
+# 开启VcXsrv的命令
+alias sx='"/mnt/c/Program Files/VcXsrv/xlaunch.exe" -run "C:\Users\zfb\Desktop\VcXsrv-WSL2.xlaunch"'
+export DISPLAY="$(awk '/nameserver/ { print $2 }' < /etc/resolv.conf)":0
+```
+然后用户只需在终端输入`sx`即可激活后台窗口界面管理器
