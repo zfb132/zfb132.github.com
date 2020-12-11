@@ -32,6 +32,9 @@ description:  "主要介绍如何编译安装opengv、ceres以及opensfm"
 注意，递归方式才会下载`OpenSfM/opensfm/src/third_party/pybind11`文件夹下的内容，否则要自己下载pybind11的zip文件解压在对应位置：  
 `rmdir pybind11/ && git clone https://github.com/pybind/pybind11.git`  
 * 也可以opensfm下载release版本0.5.1，然后解压进入pybind11文件夹下载pybind11的zip文件
+
+**注意**  
+最好选择：[OpenSfM v0.5.1](https://github.com/mapillary/OpenSfM/releases/tag/v0.5.1)、[pybind/pybind11 v2.2.4](https://github.com/pybind/pybind11/tree/v2.2.4)
 ### 2.2 安装依赖
 使用如下命令安装依赖：  
 ```bash
@@ -54,7 +57,7 @@ cmake .. -DCMAKE_C_FLAGS=-fPIC -DCMAKE_CXX_FLAGS=-fPIC -DBUILD_EXAMPLES=OFF -DBU
 sudo make -j4 install
 ```
 安装pip库，然后build这个opensfm的库，安装在pip里面  
-```
+```bash
 cd ../../../ && pip3 install -i https://pypi.tuna.tsinghua.edu.cn/simple -r requirements.txt
 python3 setup.py build
 ```
