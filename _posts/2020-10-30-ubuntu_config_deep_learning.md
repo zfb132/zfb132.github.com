@@ -16,6 +16,8 @@ description:  "这个教程是很久以前写的了，现在可能软件版本�
 * 目录
 {:toc}
 
+## 0. 查看最新教程
+点击[此链接](https://blog.whuzfb.cn/blog/2020/12/13/ubuntu_config_deep_learning_new/)跳转到`Nvidia Driver 450`、`CUDA 11.0`、`cuDNN 8.0.4`版本配置教程
 ## 1. 深度学习硬件环境参数
 服务器的硬件配置如下：
 * CPU型号：Intel Core i7-8700
