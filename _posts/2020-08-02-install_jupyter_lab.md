@@ -491,4 +491,44 @@ contour(X,Y,Z,20);
 getplotlyoffline('https://cdn.plot.ly/plotly-latest.min.js')
 fig2plotly(gcf, 'offline', true)
 ```
-该命令会在当前目录生成一个html文件，双击打开即可
+该命令会在当前目录生成一个html文件，双击打开即可  
+**注意：** 如果发现在其他目录无法使用`fig2plotly`函数，则可能是上一步骤，将plotly添加到Matlab工具箱出现了问题。可以自己手动将其复制到指定工具箱路径，或者直接把`plotly-graphing-library-for-matlab-master`文件夹的绝对路径添加到`Matlab PATH`  
+## 15. 使用plotly绘制matlab的包含ColorBar的图片
+如果正在使用新版Matlab（R2019a以后），在`.m`文件中如果使用`colorbar`函数，则在调用plotly时候可能会遇到报错  
+```txt
+Insufficient number of outputs from right hand side of equal sign to satisfy assignment.
+
+Error in findColorbarAxis (line 8)
+colorbarAxis = obj.State.Axis(colorbarAxisIndex).Handle;
+
+Error in plotlyfig/update (line 557)
+                colorbarAxis = findColorbarAxis(obj, handle(cols(c)));
+
+Error in plotlyfig (line 208)
+                obj.update;
+
+Error in fig2plotly (line 44)
+p = plotlyfig(varargin{:});
+```
+参考[链接](https://github.com/plotly/plotly-graphing-library-for-matlab/pull/146)，于是打开文件`findColorBarAxis.m`：  
+```bash
+# 若Matlab的Plotly工具箱安装位置为/home/Polyspace/R2020a/toolbox/plotly
+sudo vi /home/Polyspace/R2020a/toolbox/plotly/plotlyfig_auz/helpers/findColorBarAxis.m
+```
+整个文件内容替换为如下：  
+```matlab
+function colorbarAxis = findColorbarAxis(obj,colorbarHandle)
+if isHG2    
+    colorbarAxisIndex = find(arrayfun(@(x)(isequal(getappdata(x.Handle,'ColorbarPeerHandle'),colorbarHandle)),obj.State.Axis));
+    % If the above returns empty then we are on a more recent Matlab
+    % release where the appdata entry is called LayoutPeers
+    if isempty(colorbarAxisIndex)
+        colorbarAxisIndex = find(arrayfun(@(x)(isequal(getappdata(x.Handle,'LayoutPeers'),colorbarHandle)),obj.State.Axis));
+    end
+else
+    colorbarAxisIndex = find(arrayfun(@(x)(isequal(getappdata(x.Handle,'LegendColorbarInnerList'),colorbarHandle) + ...
+        isequal(getappdata(x.Handle,'LegendColorbarOuterList'),colorbarHandle)),obj.State.Axis));
+end
+colorbarAxis = obj.State.Axis(colorbarAxisIndex).Handle;
+end
+```
