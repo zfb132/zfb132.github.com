@@ -259,9 +259,10 @@ public String parseBLEData(byte[] scanRecord, int startIndex) {
 ## 5. 附录
 ### 5.1 第一个数据包的内容以及解析
 数据包内容：  
-
+```text
     04 3e 38 0d 01 1b 00 01 8b 03 00 b0 01 c2 01 00 ff 7f af 00 00 00 00 00 00 00 00 00 1e
     02 0a 00 08 16 f0 ff 64 27 11 4c b9 11 09 4d 69 6e 69 42 65 61 63 6f 6e 5f 30 30 39 30 37  
+```
 下面是每个字节对应的含义（WireShark软件的解析）：  
 ```text
 Bluetooth HCI H4
@@ -308,9 +309,10 @@ Bluetooth HCI Event - LE Meta
 ```
 ### 5.2 第二个数据包的内容以及解析
 数据包内容：  
-
+```text
     04 3e 38 0d 01 13 00 01 8b 03 00 b0 01 c2 01 00 ff 7f af 00 00 00 00 00 00 00 00 00 1e
     02 01 06 1a ff 4c 00 02 15 fd a5 06 93 a4 e2 4f b1 af cf c6 eb 07 64 78 25 27 11 4c b9 c5  
+```
 下面是每个字节对应的含义（WireShark软件的解析）：  
 ```text
 Bluetooth HCI H4
