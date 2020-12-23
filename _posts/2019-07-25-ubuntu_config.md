@@ -42,11 +42,11 @@ deb-src https://mirrors.ustc.edu.cn/ubuntu/ bionic-proposed main restricted univ
 ```
 最后保存文件并执行：`sudo apt-get update`  
 ## 修改安装python库的pip源
-首先在用户主目录（`~/`）下新建文件夹`mkdir .pip`，然后进入该文件夹`cd ~/.pip`，在此文件夹下新建文件`vi pip.conf`，然后在文件中输入以下内容并保存文件（以中科大的源为例）：  
+首先在用户主目录（`~/`）下新建文件夹`mkdir .pip`，然后进入该文件夹`cd ~/.pip`，在此文件夹下新建文件`vi pip.conf`，然后在文件中输入以下内容并保存文件，以清华的源为例（中科大的源已经重定向至清华的源）：  
 ```
 [global]
-index-url = https://mirrors.ustc.edu.cn/pypi/web/simple
-trusted-host = mirrors.ustc.edu.cn
+index-url = https://pypi.tuna.tsinghua.edu.cn/simple
+trusted-host = pypi.tuna.tsinghua.edu.cn
 timeout = 60
 ```
 另外，如果只是希望指定某一次安装python库的源地址，则可以使用以下代码（以清华的源为例）：  
