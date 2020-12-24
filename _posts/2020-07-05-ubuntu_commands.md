@@ -739,3 +739,158 @@ dd if=/dev/zero of=test-0.txt count=65536 bs=1024
 # 67108864 bytes (67 MB, 64 MiB) copied, 9.42672 s, 7.1 MB/s
 ```
 另外，可以尝试使用zip或rar算法单独压缩这两个文件，会发现后者可以被压缩到1MB以下，而前者基本不会减小体积（信息熵的体现）
+## 18 重定向输出与2>&1介绍
+在linux终端下，可以在shell命令的后面，使用符号`>`和`>>`来进行标准输出的重定向（不包括执行出错的信息，即标准错误）  
+* `> a.txt`表示将终端要显示的信息全部写入文件（若文件已存在，则覆盖）
+* `>> a.txt`表示将终端要显示的信息全部写入文件（若文件已存在，则追加）
+
+例如：
+```txt
+zfb@myServer:~$ echo "hello, world"
+hello, world
+zfb@myServer:~$ echo "hello, world" > a.txt
+zfb@myServer:~$ cat a.txt
+hello, world
+zfb@myServer:~$ echo "this is second command" > a.txt
+zfb@myServer:~$ cat a.txt
+this is second command
+zfb@myServer:~$ echo "The 3rd command" >> a.txt
+zfb@myServer:~$ cat a.txt
+this is second command
+The 3rd command
+zfb@myServer:~$ 
+```
+关于`2>&1`的解释，每个程序或命令在运行后，都会至少打开三个文件描述符以存放命令的各种输入输出信息：  
+* 标准输入：对应文件`/dev/stdin`，也可以使用文件描述符`0`表示
+* 标准输出：对应文件`/dev/stdout`，也可以使用文件描述符`1`表示
+* 标准错误：对应文件`/dev/stderr`，也可以使用文件描述符`2`表示
+
+于是，很容易理解：  
+**`2>&1`表示将文件描述符`2`（标准错误）的内容重定向到文件描述符`1`（标准输出）**  
+当没有`&`时，`1`会被认为是一个普通的文件，`&`表示重定向的目标不是一个文件，而是一个文件描述符  
+通过命令`./test.sh 2>&1 >a.txt`即可实现脚本执行过程的标准输出和标准错误都写入文件`a.txt`  
+参考如下信息  
+```txt
+zfb@myServer:~$ ls -al /dev/std*
+lrwxrwxrwx 1 root root 15 Dec 23 13:36 /dev/stderr -> /proc/self/fd/2
+lrwxrwxrwx 1 root root 15 Dec 23 13:36 /dev/stdin  -> /proc/self/fd/0
+lrwxrwxrwx 1 root root 15 Dec 23 13:36 /dev/stdout -> /proc/self/fd/1
+zfb@myServer:~$ 
+```
+
+## 19 记录终端信息
+使用`script`命令**开启记录**：`script -t 2>time.file -a -f command.log`  
+* `-t`表示输出时间信息到`标准错误`（文件描述符`2`）
+* `2>time.file`表示将`标准错误`信息输出到文件（`time.file`是自己设置的文件名称）
+* `-a`表示追加模式
+* `-f`表示每次写入后都刷新缓存
+* `-q`表示安静运行模式（不会提示`Script started`以及`Script done`）
+* `command.log`是自己设置的用来保存输入命令和终端回显信息的文件名称
+
+最简单的用法为`script`，该命令会自动将输入命令和终端回显信息写入当前目录的`typescript`文件  
+其次还可以使用`script command.log`，该命令会自动将输入命令和终端回显信息写入当前目录的`command.log`文件  
+
+**退出记录**：在终端使用命令`exit`或者快捷键`Ctrl + D`  
+使用示例：  
+```txt
+zfb@myServer:~$ script -t 2>time.file -a -f command.log
+Script started, file is command.log
+zfb@myServer:~$ echo "hello, world"
+hello, world
+zfb@myServer:~$ echo $(date "+%Y-%m-%d %H:%M:%S")
+2020-12-23 20:48:46
+zfb@myServer:~$ echo "Bye"
+Bye
+zfb@myServer:~$ ls -al
+total 20
+drwxr-xr-x  2 zfb zfb 4096 Dec 23 20:48 .
+drwxr-xr-x 37 zfb zfb 4096 Dec 23 20:49 ..
+-rw-r--r--  1 zfb zfb    0 Dec 23 19:03 a.txt
+-rw-r--r--  1 zfb zfb   12 Dec 23 19:04 b.txt
+-rw-r--r--  1 zfb zfb 2744 Dec 23 20:49 command.log
+-rw-r--r--  1 zfb zfb  790 Dec 23 20:49 time.file
+zfb@myServer:~$ exit
+Script done, file is command.log
+zfb@myServer:~$
+```
+**查看保存的命令和终端回显**：`cat command.log`  
+该命令得到输出如下  
+```txt
+zfb@myServer:~$ cat command.log
+Script started on 2020-12-23 20:48:25+08:00 [TERM="xterm-256color" TTY="/dev/pts/0" COLUMNS="75" LINES="30"]
+zfb@myServer:~$ echo "hello, world"
+hello, world
+zfb@myServer:~$ echo $(date "+%Y-%m-%d %H:%M:%S")
+2020-12-23 20:48:46
+zfb@myServer:~$ echo "Bye"
+Bye
+zfb@myServer:~$ ls -al
+total 20
+drwxr-xr-x  2 zfb zfb 4096 Dec 23 20:48 .
+drwxr-xr-x 37 zfb zfb 4096 Dec 23 20:49 ..
+-rw-r--r--  1 zfb zfb    0 Dec 23 19:03 a.txt
+-rw-r--r--  1 zfb zfb   12 Dec 23 19:04 b.txt
+-rw-r--r--  1 zfb zfb 2744 Dec 23 20:49 command.log
+-rw-r--r--  1 zfb zfb  790 Dec 23 20:49 time.file
+zfb@myServer:~$ exit
+
+Script done on 2020-12-23 20:49:04+08:00 [COMMAND_EXIT_CODE="0"]
+zfb@myServer:~$
+```
+注意：  
+* 在上面显示的内容中，只有命令`cat command.log`是手动输入的，其他都是**自动显示**的
+* 根据上面显示的时间`2020-12-23 20:48:46`，可以看出并**不是重新执行**了一遍，而是重新显示了一遍
+
+另外，还可以使用命令`scriptreplay`来重新**播放**命令与回显（只是把当时记录的信息，播放一遍，不是重新执行）  
+命令为：`scriptreplay -d 1 -m 2 -t time.file -s command.log`  
+* `-d`表示倍速播放：`-d 2`表示播放速度是原始输入单条命令的速度的两倍；`-d 0.1`表示播放单条命令的速度减慢10倍
+* `-m`表示命令之间的最大延迟时间（单位是秒）：`-m 2`表示`command.log`中存放的两条命令之间的间隔时间如果大于两秒，则按两秒执行播放
+* `-t`表示后面指定存放时间信息的文件
+* `-s`表示后面指定存放输入和回显信息的文件
+
+示例如下:  
+```bash
+zfb@myServer:~$ scriptreplay -d 1 -m 2 -t time.file -s command.log
+zfb@myServer:~$ echo "hello, world"
+hello, world
+zfb@myServer:~$ echo $(date "+%Y-%m-%d %H:%M:%S")
+2020-12-23 20:48:46
+zfb@myServer:~$ echo "Bye"
+Bye
+zfb@myServer:~$ ls -al
+total 20
+drwxr-xr-x  2 zfb zfb 4096 Dec 23 20:48 .
+drwxr-xr-x 37 zfb zfb 4096 Dec 23 20:49 ..
+-rw-r--r--  1 zfb zfb    0 Dec 23 19:03 a.txt
+-rw-r--r--  1 zfb zfb   12 Dec 23 19:04 b.txt
+-rw-r--r--  1 zfb zfb 2744 Dec 23 20:49 command.log
+-rw-r--r--  1 zfb zfb  790 Dec 23 20:49 time.file
+zfb@myServer:~$ exit
+
+zfb@myServer:~$
+```
+注意：  
+* 在上面显示的内容中，只有命令`scriptreplay -d 1 -m 2 -t time.file -s command.log`是手动输入的，其他都是**自动显示**的
+* 根据上面显示的时间`2020-12-23 20:48:46`，可以看出并**不是重新执行**了一遍，而是重新播放了一遍
+* 与`cat command.log`的不同之处在于，显示效果与手动输入一致，适合作为教程演示
+* 可以把`time.file`和`command.log`文件移动到任意一台支持`scriptreplay`命令的机器上，都可以重现命令输入与终端回显
+
+## 20 记录服务器用户会话操作
+使用root用户登录服务器，创建文件夹：  
+```bash
+sudo mkdir -p /var/log/script-records/
+sudo chmod 733 /var/log/script-records/
+```
+然后编辑文件`/etc/profile`： `sudo vim /etc/profile`  
+在文件末尾追加以下内容：  
+```bash
+if [ $UID -ge 0 ]
+then
+    exec /usr/bin/script -t 2>/var/log/script-records/$USER-$UID-`date +%Y%m%d`.time -a -f -q /var/log/script-records/$USER-$UID-`date +%Y%m%d`.log
+fi
+```
+然后执行命令`source /etc/profile`即可  
+注意：
+* 733权限表示：对于某登录用户`user1`，可保证该用户记录日志到`/var/log/script-records/`目录内，又无法删除日志文件
+* 这里`$UID -ge 0`记录`id>=0`的用户，其中包括`root`用户
+* 如果只是想记录普通用户，则这里改成`$UID -ge 500`，因为linux创建普通用户id从500开始
