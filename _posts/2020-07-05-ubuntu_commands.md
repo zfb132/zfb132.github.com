@@ -417,7 +417,7 @@ sudo vi /etc/sysctl.conf
 # 使修改立即生效
 sudo sysctl -p
 ```
-## 13 查看历史登录记录
+## 13. 查看历史登录记录
 ### 13.1 使用last命令
 使用命令`last`即可列出所有相关信息  
 ```txt
@@ -580,7 +580,7 @@ number     user       IP:Port
 ```
 **查看系统登陆失败的次数及对应的IP**：  
 `sudo grep "Failed password for" /var/log/auth.log | awk '{if(match($11, /\./)!=0) print $11}' | sort | uniq -c | sort -nr | more`
-## 14 使用FTP下载文件
+## 14. 使用FTP下载文件
 FTP（文件传输协议）是一个较老且最常用的标准网络协议，用于在两台计算机之间通过网络上传/下载文件。它通过用户凭证（用户名和密码）传输数据，没有进行加密。它是一个8位的客户端-服务器协议，能操作任何类型的文件而不需要进一步处理，就像MIME或Unicode一样。但是，FTP有着极高的延时，这意味着，从开始请求到第一次接收需求数据之间的时间，会非常长；并且不时的必须执行一些冗长的登录进程  
 一般运行在20和21两个端口。端口20用于在客户端和服务器之间传输数据流，而端口21用于传输控制流，并且是命令通向ftp服务器的进口。当数据通过数据流传输时，控制流处于空闲状态。而当控制流空闲很长时间后，客户端的防火墙会将其会话置为超时  
 FTP URL的格式在[RFC 1738](https://tools.ietf.org/html/rfc1738)指定，格式为：`ftp://[user[:password]@]host[:port]/url-path`  
@@ -626,12 +626,12 @@ drwxrwxr-x    4 ftp      ftp             9 Jul 14  2008 Aeromag
 在该交互窗口使用命令`prompt off`表示关闭下载提示  
 **批量遍历下载FTP站点指定目录下的所有数据**：  
 `wget -r -nH -P/home/zfb/hh/ ftp://ftp.ngdc.noaa.gov/ionosonde/mids11/GR13L/individual/2019/* --ftp-user=anonymous --ftp-password=`
-## 15 切割日志文件
+## 15. 切割日志文件
 可以分为以下两种：  
 * 使用`logrotate`命令：[见教程](https://blog.whuzfb.cn/blog/2020/07/07/web_https/#4-%E4%BD%BF%E7%94%A8logrotate%E8%87%AA%E5%8A%A8%E5%88%87%E5%89%B2%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6)
 * 切割`nginx`日志文件：[见教程](https://blog.whuzfb.cn/blog/2020/07/07/web_https/#5-%E9%85%8D%E7%BD%AEnginx%E5%88%87%E5%89%B2%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6)
 
-## 16 设置静态IP
+## 16. 设置静态IP
 有以下两种方法：  
 1.**方法一：系统安装有GUI**。打开`设置-->网络`，查看哪一个是当前正在使用的网络连接，点击该条右侧的设置（齿轮图标），弹出对话框。`详细信息`页面会显示当前的ip（例如：`192.168.10.55`）、网关路由地址（例如：`192.168.10.254`）、所有的DNS地址（例如：`114.114.114.114,8.8.8.8`），需要记录下来，方便后期修改。然后点击`IPv4`选项  
   * `IPv4方式`：手动
@@ -719,7 +719,7 @@ sudo netplan apply
 # 重启网络服务
 sudo systemctl restart network-manager
 ```
-## 17 创建随机文件
+## 17. 创建随机文件
 在Linux系统中有`/dev/random`和`/dev/urandom`可以产生随机数，前者是更加贴近数学意义的随机数，后者是比较适合生成文件的随机数，用法如下：  
 ```bash
 # 执行命令：创建65536*1024Bytes（64MB）的文件
@@ -739,7 +739,7 @@ dd if=/dev/zero of=test-0.txt count=65536 bs=1024
 # 67108864 bytes (67 MB, 64 MiB) copied, 9.42672 s, 7.1 MB/s
 ```
 另外，可以尝试使用zip或rar算法单独压缩这两个文件，会发现后者可以被压缩到1MB以下，而前者基本不会减小体积（信息熵的体现）
-## 18 重定向输出与2>&1介绍
+## 18. 重定向输出与2>&1介绍
 在linux终端下，可以在shell命令的后面，使用符号`>`和`>>`来进行标准输出的重定向（不包括执行出错的信息，即标准错误）  
 * `> a.txt`表示将终端要显示的信息全部写入文件（若文件已存在，则覆盖）
 * `>> a.txt`表示将终端要显示的信息全部写入文件（若文件已存在，则追加）
@@ -778,7 +778,7 @@ lrwxrwxrwx 1 root root 15 Dec 23 13:36 /dev/stdout -> /proc/self/fd/1
 zfb@myServer:~$ 
 ```
 
-## 19 记录终端信息
+## 19. 记录终端信息
 使用`script`命令**开启记录**：`script -t 2>time.file -a -f command.log`  
 * `-t`表示输出时间信息到`标准错误`（文件描述符`2`）
 * `2>time.file`表示将`标准错误`信息输出到文件（`time.file`是自己设置的文件名称）
@@ -875,7 +875,7 @@ zfb@myServer:~$
 * 与`cat command.log`的不同之处在于，显示效果与手动输入一致，适合作为教程演示
 * 可以把`time.file`和`command.log`文件移动到任意一台支持`scriptreplay`命令的机器上，都可以重现命令输入与终端回显
 
-## 20 记录服务器用户会话操作
+## 20. 记录服务器用户会话操作
 使用root用户登录服务器，创建文件夹：  
 ```bash
 sudo mkdir -p /var/log/script-records/
