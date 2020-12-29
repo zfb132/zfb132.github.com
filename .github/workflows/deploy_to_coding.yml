@@ -43,7 +43,7 @@ jobs:
           git push --force --quiet "https://${coding_username}:${coding_token}@${coding_ref}" master:master
 
   # job的名字：触发腾讯云函数，自动刷新CDN的URL
-  deploy:
+  purge_url:
     name: Manual Purge URL
     # job的运行平台
     runs-on: ubuntu-18.04
