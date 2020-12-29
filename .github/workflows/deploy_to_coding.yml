@@ -41,3 +41,20 @@ jobs:
           git add .
           git commit -m "$message"
           git push --force --quiet "https://${coding_username}:${coding_token}@${coding_ref}" master:master
+
+  # job的名字：触发腾讯云函数，自动刷新CDN的URL
+  deploy:
+    name: Manual Purge URL
+    # job的运行平台
+    runs-on: ubuntu-18.04
+    # test任务的步骤
+    steps:
+      - name: 触发CDN的URL刷新功能
+        # 这个变量的值放在 https://github.com/zfb132/zfb132.github.com/settings/secrets
+        env:
+          # 设置时区
+          TZ: Asia/Shanghai
+          # 在腾讯云函数创建的API网关的地址
+          scf_url: ${{ secrets.QCLOUD_SCF_PURGE_URLS }}
+        run: |
+          curl -X POST ${scf_url}
