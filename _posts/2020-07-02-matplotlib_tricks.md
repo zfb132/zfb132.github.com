@@ -49,3 +49,11 @@ axes.unicode_minus : False
 `C:\Users\zfb\AppData\Local\Programs\Python\Python37\Lib\site-packages\matplotlib\mpl-data\fonts\ttf\`  
 `matplotlibrc`文件所在路径是  
 `C:\Users\zfb\AppData\Local\Programs\Python\Python37\Lib\site-packages\matplotlib\mpl-data\`
+
+## 4. 找不到basemap模块
+如果遇到报错信息如下：  
+`ImportError: No module named 'mpl_toolkits.basemap'`  
+则打开[网站](https://www.lfd.uci.edu/~gohlke/pythonlibs/#basemap)，下载适合自己`Python`版本与`OS`版本的`wheel`压缩包，然后安装即可，例如：  
+`pip install -i https://pypi.tuna.tsinghua.edu.cn/simple basemap‑1.2.2‑cp38‑cp38‑win_amd64.whl`  
+或者使用`conda install -c conda-forge basemap`  
+亦或参考[此链接](https://matplotlib.org/basemap/users/installing.html)  
