@@ -260,7 +260,10 @@ docker run hello-world
 sudo groupadd docker
 # 将当前用户加入 docker 组
 sudo usermod -aG docker $USER
+# 更新用户组
+newgrp docker
 ```
+如果还是出现报错，那么登出再登入该用户。还是不可以的话，就重启机器再次尝试  
 5. 设置开机自启以及手动启动Docker  
 ```bash
 # 设置Docker开机自启
