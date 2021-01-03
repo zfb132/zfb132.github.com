@@ -55,4 +55,3 @@ end
 ### 关于博客样式主题及开源证书
 
 修改自[BruceZhaoR](https://github.com/BruceZhaoR)和[Hux](https://github.com/Huxpro/huxpro.github.io).    
-Licensed under the[Apache License, Version 2.0](/LICENSE)开源证书    
