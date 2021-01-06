@@ -214,6 +214,8 @@ ONBUILD RUN /usr/local/bin/python-build --dir /app/src
 最不容易发生变化的操作放在较低的镜像层中，这样在重新 build 镜像时就会使用前面 build 产生的缓存  
 编写完成`Dockerfile`之后，可以通过`docker build`命令来创建镜像，该命令将读取指定路径下（包括子目录）的`Dockerfile`文件，并将该路径下所有内容发送给`Docker`服务端，由服务端来创建镜像。因此一般建议放置`Dockerfile`的目录为空目录。也可以通过`.dockerignore`文件（每一行添加一条匹配模式）来让`Docker`忽略路径下的目录和文件；要指定镜像的标签信息，可以通过`-t`选项，例如：  
 `sudo docker build -t myrepo/myapp:2.0 /tmp/test1/`  
+**注意**：对于使用`Dockerfile`创建的镜像构建的容器来说，直接启动就会执行`Dockerfile`的`CMD`命令（或`ENTRYPOINT`命令），所以如果是别人制作的镜像，例如[opendronemap/odm/dockerfile](https://hub.docker.com/r/opendronemap/odm/dockerfile)，我们很可能就无法进入容器内的`/bin/bash`来执行其他操作。这时，使用如下命令启动容器就可以覆盖`Dockerfile`的`ENTRYPOINT`命令，来执行自己需要的命令：  
+`docker run -it --entrypoint /bin/bash opendronemap/odm`  
 ## 6. docker-compose
 [docker-compose](https://github.com/docker/compose)是定义和运行多个Docker容器的应用，它允许用户通过一个单独的`docker-compose.yml`模板文件来定义一组相关联的应用容器为一个项目。两个重要的概念：  
 * 服务 (service)：一个应用的容器，实际上可以包括若干运行相同镜像的容器实例
