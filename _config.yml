@@ -17,7 +17,6 @@ disqus: zfb132
 disqus_base: http://blog.whuzfb.cn/
 
 # https://developers.google.com/analytics/devguides/collection/analyticsjs/
-# _layout/default.html
 google_analytics_id: UA-97824262-2
 google_analytics_domain: auto
 
