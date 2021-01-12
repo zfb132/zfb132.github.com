@@ -187,7 +187,7 @@ CODING_USERNAME  13677888877
 CODING_REF       e.coding.net/zfbin/zfbin/zfbin.git
 ```
 ### 2.3 自动部署到`coding.net`
-github的仓库的原始文件版本为[8570167](https://github.com/zfb132/zfb132.github.com/tree/857016713b4b3a191c5c5f86d213c6512c24137a)，最终添加github actions之后的文件版本为[e56d2d5](https://github.com/zfb132/zfb132.github.com/tree/e56d2d587d171d082ddef58e542aa8c2f61b65d2)，不需要关注其他文件，只考虑`.github/workflows/deploy_to_coding.yml`文件，其内容如下：  
+github的仓库的原始文件版本为[8570167](https://github.com/zfb132/zfb132.github.com/tree/857016713b4b3a191c5c5f86d213c6512c24137a)，最终添加github actions之后的文件版本为[0462a89e](https://github.com/zfb132/zfb132.github.com/tree/0462a89e81a1f05f59b03fa989cb3d3bfd26c351)，不需要关注其他文件，只考虑`.github/workflows/deploy_to_coding.yml`文件，其内容如下：  
 ```yaml
 name: Auto deploy to coding pages
 
@@ -213,7 +213,6 @@ jobs:
           # 设置时区
           TZ: Asia/Shanghai
           # 在coding.net的某个仓库新建访问令牌出现的秘钥
-          # 调用secrets的变量必须使用${{ }}，不能使用其他方法
           coding_token: ${{ secrets.DEPLOY_CODING }}
           # 团队中的某个人的用户名，一般默认是本人手机号码
           coding_username: ${{ secrets.CODING_USERNAME }}
@@ -221,7 +220,7 @@ jobs:
           coding_ref: ${{ secrets.CODING_REF }}
         run: |
           export message=$(git log --pretty=format:"%s" -1)
-          rm CNAME
+          [ -f CNAME ] && rm CNAME || echo "CNAME doesn't exist"
           rm -rf .github
           rm -rf .git
           git clone https://${coding_username}:${coding_token}@${coding_ref} coding_dir
