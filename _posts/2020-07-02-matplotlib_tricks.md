@@ -7,7 +7,7 @@ tags : [Windows,Ubuntu,Python]
 date:       2020-07-02 21:51:12 +0800
 author:     "晨曦"
 header-img: "/img/post/matplotlib-bg.png"
-description:  "记录自己遇到安装matplotlib库时遇到的一些问题和解决方法"
+description:  "记录自己安装matplotlib库时遇到的一些问题和解决方法"
 ---
   
 # 目录
