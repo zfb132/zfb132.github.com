@@ -241,6 +241,26 @@ Change: 2020-09-28 16:32:40.728799201 +0800
 ```txt
 stat: cannot stat '/home/ubuntu/frp/log/': Permission denied
 ```
+### 3.8 文件重命名
+简单的将文件`a.txt`重命名为`b.txt`的方法为`mv a.txt b.txt`  
+但是这种方法很难批量重命名（更改扩展名），所以使用`rename`软件  
+`sudo apt install rename`  
+使用方法如下  
+```bash
+# 把当前目录下的所有 *.txt 文件改名为 *.mat.txt 文件）
+rename "s/.txt/.mat.txt/" *
+# 把当前目录下所有的文件名都加上扩展名.txt
+rename "s/$/.txt/" *
+# 把所有以.txt结尾的文件名的.txt删掉
+rename "s/.txt//" *
+# 假如需要在批量修改的时候保留部分文件名，可以使用引用 \1 或 $1
+# 例如下一行的文件名修改为下下行的内容
+# Screenshot from 2019-01-02 15-56-49.jpg
+# 2019-01-02 15-56-49.jpg
+rename -n "s/Screenshot from ([0-9\\- ]+).jpg/\1.jpg/" *
+# -n 测试会重命名的内容，将结果都打印，但是并不真正执行重命名的过程
+```
+
 ## 4. 查看当前活跃的用户
 查看所有用户列表  
 `cat /etc/passwd|grep -v nologin|grep -v halt|grep -v shutdown|awk -F":" '{ print $1"|"$3"|"$4 }'|more`  
