@@ -30,10 +30,14 @@ Jekyll 是一个简单的免费的 Blog 生成工具，类似 WordPress 。它�
 然后，再分别在以上两个文件中加入 JavaScript 代码来控制实现功能：
 ```html
 <!-- 同时兼容http与https -->
-<script src="//cdn1.lncld.net/static/js/2.5.0/av-min.js"></script>
+<script src="//unpkg.com/leancloud-storage@4.12.2/dist/av-min.js"></script>
 <script>
     // 第一个参数是appid，第二个参数是appkey，此处的只是示例
-    AV.initialize("gQJjjB93fxTAN0W6cmFdlOrW-gzGzoHsz", "IcwsNtdTDwM9gdkJfLNJKcck");
+    AV.init({
+      appId: "gQJjjB93fxATN0W6cmGdlOrW-gzGzoHsz",
+      appKey: "IcwsDtnTDwM6gdkJfLNJTcck",
+      serverURL: "https://leancloud.api.whuzfb.cn"
+    });
     // 自己创建的Class的名字
     var name='Counter';
     function createRecord(Counter){

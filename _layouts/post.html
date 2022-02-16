@@ -57,9 +57,13 @@ layout: default
 
 
 				</p>
-			        <script src="//cdn1.lncld.net/static/js/2.5.0/av-min.js"></script>
+<script src="//unpkg.com/leancloud-storage@4.12.2/dist/av-min.js"></script>
 <script>
-    AV.initialize("gQJjjB93fxATN0W6cmGdlOrW-gzGzoHsz", "IcwsDtnTDwM6gdkJfLNJTcck");
+    AV.init({
+      appId: "gQJjjB93fxATN0W6cmGdlOrW-gzGzoHsz",
+      appKey: "IcwsDtnTDwM6gdkJfLNJTcck",
+      serverURL: "https://leancloud.api.whuzfb.cn"
+    });
     var name='Counter';
 
     function createRecord(Counter){
