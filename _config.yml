@@ -51,6 +51,10 @@ sidebar-avatar: /img/me2.jpg
 # Friends
 friends: [
   {
+    title: "Monlor's Blog",
+    href: "https://www.monlor.com"
+  },
+  {
     title: "CSDN",
     href: "https://blog.csdn.net/qq_32507255/"
   },
