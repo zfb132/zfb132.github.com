@@ -1168,3 +1168,4 @@ input[type=text]:focus {
 }
 
 .goog-te-banner-frame{display:none !important;}
+.goog-te-menu-value:hover {text-decoration: none}
