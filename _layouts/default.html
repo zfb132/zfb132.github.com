@@ -95,20 +95,15 @@
 <!-- google-translate -->
 <script type="text/javascript">
   var userLang = navigator.language || navigator.userLanguage || navigator.languages;
-  if(userLang.substr(0,2) == "zh"){
-    function googleTranslateElementInit() {
-      new google.translate.TranslateElement({
-        includedLanguages: 'en,zh-CN,zh-TW,hi,es,fr,ar,bn,ru,pt,de,ja,ko,it',
-        autoDisplay: true,  
-        pageLanguage: 'zh-CN', 
-        multilanguagePage: false,
-        //layout: google.translate.TranslateElement.InlineLayout.SIMPLE
-        layout: google.translate.TranslateElement.FloatPosition.TOP_RIGHT
-      }, 'google_translate_element');
-    }
-  }
-  else{
-    document.getElementById("google_translate_element").style.display="none";
+  function googleTranslateElementInit() {
+    new google.translate.TranslateElement({
+      includedLanguages: 'en,zh-CN,zh-TW,hi,es,fr,ar,bn,ru,pt,de,ja,ko,it',
+      autoDisplay: true,
+      pageLanguage: 'zh-CN',
+      multilanguagePage: false,
+      //layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+      layout: google.translate.TranslateElement.FloatPosition.TOP_RIGHT
+    }, 'google_translate_element');
   }
 </script>
 
