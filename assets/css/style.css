@@ -60,7 +60,8 @@ body {
   line-height: 1.7;
   font-size: 16px;
   color: #000;
-  overflow-x: hidden
+  overflow-x: hidden;
+  top: 0px !important; 
 }
 
 p {
@@ -887,10 +888,20 @@ a.anchorjs-link {
   -webkit-font-smoothing: antialiased
 }
 
+#google-translate {
+  position: fixed;
+  bottom: 170px;
+  right: 4%;
+  -webkit-transition: 1s;
+  -moz-transition: 1s;
+  transition: 1s;
+  font-size: 20px;
+}
+
 #back-top {
   position: fixed;
   bottom: 110px;
-  right: 2em
+  right: 4%
 }
 
 #back-top a {
@@ -1155,3 +1166,5 @@ input[type=text]:focus {
   z-index: 99;
   background-color: red;
 }
+
+.goog-te-banner-frame{display:none !important;}
