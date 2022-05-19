@@ -20,6 +20,18 @@ disqus_base: http://blog.whuzfb.cn/
 google_analytics_id: UA-97824262-2
 google_analytics_domain: auto
 
+# use google translate
+google_translate: true
+
+# https://www.bing.com/webmasters/clarity
+microsoft_clarity_id: bymgg301ca
+
+# auto push url to baidu
+baidu_push: true
+
+# use progress indicator
+progress_indicator: true
+
 permalink: /blog/:year/:month/:day/:title/
 
 header-img: /img/default-bg.jpg

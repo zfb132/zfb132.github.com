@@ -24,14 +24,16 @@
 	<link href="{{ site.BASE_PATH }}/assets/resources/syntax/syntax.css" rel="stylesheet">
 	<link href="{{ site.BASE_PATH }}/assets/css/style.css" rel="stylesheet">
 	<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  {% if site.microsoft_clarity_id %}
   <!-- Microsoft Clarity -->
   <script>
     (function(c,l,a,r,i,t,y){
       c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
       t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i+"?ref=bwt";
       y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-    })(window, document, "clarity", "script", "bymgg301ca");
+    })(window, document, "clarity", "script", "{{ site.microsoft_clarity_id }}");
   </script>
+  {% endif %}
 	<!-- google-analytics	 -->
 	<script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -39,18 +41,21 @@
   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
   })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
-  ga('create', 'UA-97824262-2', 'auto');
+  ga('create', '{{ site.google_analytics_id }}', '{{ site.google_analytics_domain }}');
   ga('send', 'pageview');
 
   </script>
-
+  {% if site.google_translate %}
   <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+  {% endif %}
 
 </head>
 
 <body ontouchstart="">
+{% if site.progress_indicator %}
 <!-- 文章进度条 -->
 <div class="progress-indicator" style="width: 0%;"></div>
+{% endif %}
 	{% include nav.html %}
 
 	{{ content }}
@@ -100,6 +105,7 @@
 <script type="text/javascript" src="{{ site.BASE_PATH }}/assets/js/blog.js"></script>
 <script type="text/javascript" src="{{ site.BASE_PATH }}/assets/js/jquery-tagcloud.js"></script>
 
+{% if site.google_translate %}
 <!-- google-translate -->
 <script type="text/javascript">
   var userLang = navigator.language || navigator.userLanguage || navigator.languages;
@@ -114,7 +120,9 @@
     }, 'google_translate_element');
   }
 </script>
+{% endif %}
 
+{% if site.progress_indicator %}
 <!-- 文章进度条：在style.css里面更改进度条样式 -->
 <script>
     /* 顶部进度条 */
@@ -136,6 +144,7 @@
       }
     }());
 </script>
+{% endif %}
 <!-- async load function -->
 <script>
     function async(u, c) {
@@ -155,10 +164,12 @@
     })
 </script>
 
+{% if site.google_translate %}
 <!-- google-translate -->
 <div id="google-translate">
   <div id="google_translate_element"></div>
 </div>
+{% endif %}
 
 <!-- back-to-top -->
 <div id="back-top">
@@ -166,7 +177,6 @@
   <i class="fa fa-chevron-up" aria-hidden="true"></i>
   </a>
 </div>
-<!-- <script type="text/javascript" src="{{ site.BASE_PATH }}/assets/resources/jquery/jquery-1.8.3.js"></script> -->
 <script>
 	$('#back-top').hide();
 	$(document).ready(function () {
@@ -198,6 +208,7 @@
         })
     }
 </script>
+{% if site.baidu_push %}
 <!-- 百度自动推送链接 -->
 <script>
 (function(){
@@ -213,5 +224,6 @@
     s.parentNode.insertBefore(bp, s);
 })();
 </script>
+{% endif %}
 </body>
 </html>
