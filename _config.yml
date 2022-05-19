@@ -16,9 +16,10 @@ gems: [jekyll-paginate, jekyll-sitemap, jekyll-feed]
 disqus: zfb132
 disqus_base: http://blog.whuzfb.cn/
 
-# https://developers.google.com/analytics/devguides/collection/analyticsjs/
+# https://support.google.com/analytics/answer/11583528
 google_analytics_id: UA-97824262-2
-google_analytics_domain: auto
+# Google Analytics 4
+google_analytics_measurement_id: G-DYVCXMX74E
 
 # use google translate
 google_translate: true
