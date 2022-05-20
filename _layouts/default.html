@@ -10,51 +10,26 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<!-- Enable responsive viewport -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="baidu-site-verification" content="fkVXkUbHNR" />
-        <meta name="keywords" content="晨曦, 博客, Django, Python, Matlab, zfb, zfb132, Android, Web, IT">
+  <meta name="baidu-site-verification" content="fkVXkUbHNR" />
+  <meta name="keywords" content="晨曦, 博客, zfb132, GPS, time, ubuntu, frp, zfb, Django, Python, Matlab, Android, Web, IT, nginx, ssl, https">
 
-	<!-- 国产高速渲染 -->
 	<meta name="renderer" content="webkit">
 	<link rel="shortcut icon" href="/img/favicon.ico">
 	<link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.BASE_PATH }}">
 	<link rel="alternate" type="application/rss+xml" title="{{ site.SEOTitle }}" href="{{ site.BASE_PATH }}/feed.xml">
 	<!-- Le styles -->
-	<link href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-	<link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-	<link href="{{ site.BASE_PATH }}/assets/resources/syntax/syntax.css" rel="stylesheet">
-	<link href="{{ site.BASE_PATH }}/assets/css/style.css" rel="stylesheet">
-	<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-  {% if site.microsoft_clarity_id %}
-  <!-- Microsoft Clarity -->
-  <script>
-    (function(c,l,a,r,i,t,y){
-      c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-      t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i+"?ref=bwt";
-      y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-    })(window, document, "clarity", "script", "{{ site.microsoft_clarity_id }}");
-  </script>
-  {% endif %}
-
-  {% if site.google_analytics_measurement_id %}
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id={{ site.google_analytics_measurement_id }}"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    // Universal Analytics property
-    gtag('config', '{{ site.google_analytics_id }}');
-    // Google Analytics 4 property
-    gtag('config', '{{ site.google_analytics_measurement_id }}');
-  </script>
-  {% endif %}
-  
-  {% if site.google_translate %}
-  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-  {% endif %}
-
+  <link rel="preconnect" href="https://www.clarity.ms">
+  <link rel="preconnect" href="https://leancloud.api.whuzfb.cn">
+  <link rel="preconnect" href="https://zz.bdstatic.com">
+  <link href="{{ site.BASE_PATH }}/assets/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="preload" href="{{ site.BASE_PATH }}/assets/css/font-awesome.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link href="{{ site.BASE_PATH }}/assets/css/font-awesome.min.css" rel="stylesheet"></noscript>
+  <link rel="preload" href="{{ site.BASE_PATH }}/assets/css/syntax.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="{{ site.BASE_PATH }}/assets/css/syntax.css"></noscript>
+  <link rel="preload" href="{{ site.BASE_PATH }}/assets/css/style.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link href="{{ site.BASE_PATH }}/assets/css/style.css" rel="stylesheet"></noscript>
+  <script defer type="text/javascript" src="{{ site.BASE_PATH }}/assets/js/jquery.min.js"></script>
 </head>
-
 <body ontouchstart="">
 {% if site.progress_indicator %}
 <!-- 文章进度条 -->
@@ -104,31 +79,12 @@
         </div>
     </div>
 </footer>
-
-<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="{{ site.BASE_PATH }}/assets/js/blog.js"></script>
-<script type="text/javascript" src="{{ site.BASE_PATH }}/assets/js/jquery-tagcloud.js"></script>
-
-{% if site.google_translate %}
-<!-- google-translate -->
-<script type="text/javascript">
-  var userLang = navigator.language || navigator.userLanguage || navigator.languages;
-  function googleTranslateElementInit() {
-    new google.translate.TranslateElement({
-      includedLanguages: 'en,zh-CN,zh-TW,hi,es,fr,ar,bn,ru,pt,de,ja,ko,it',
-      autoDisplay: true,
-      pageLanguage: 'zh-CN',
-      multilanguagePage: false,
-      //layout: google.translate.TranslateElement.InlineLayout.SIMPLE
-      layout: google.translate.TranslateElement.FloatPosition.TOP_RIGHT
-    }, 'google_translate_element');
-  }
-</script>
-{% endif %}
+<script defer type="text/javascript" src="{{ site.BASE_PATH }}/assets/js/bootstrap.min.js"></script>
+<script defer type="text/javascript" src="{{ site.BASE_PATH }}/assets/js/blog.js"></script>
 
 {% if site.progress_indicator %}
 <!-- 文章进度条：在style.css里面更改进度条样式 -->
-<script>
+<script type="module">
     /* 顶部进度条 */
     (function() {
       var $w = $(window);
@@ -161,27 +117,13 @@
     }
 </script>
 
-<!--fastClick.js -->
-<script>
-    async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
-    FastClick.attach(document.body);
-    })
-</script>
-
-{% if site.google_translate %}
-<!-- google-translate -->
-<div id="google-translate">
-  <div id="google_translate_element"></div>
-</div>
-{% endif %}
-
 <!-- back-to-top -->
 <div id="back-top">
   <a href="#section" data-toggle="tooltip" data-placement="top" title="top">
   <i class="fa fa-chevron-up" aria-hidden="true"></i>
   </a>
 </div>
-<script>
+<script type="module">
 	$('#back-top').hide();
 	$(document).ready(function () {
 	$(window).scroll(function () {
@@ -200,18 +142,51 @@
 });
 </script>
 <!-- jquery.tagcloud.js -->
-<script>
-    // only load tagcloud.js in tag.html
-    if($('#tag_cloud').length !== 0){
-        async('/assets/js/jquery-tagcloud.js',function(){
-            $.fn.tagcloud.defaults = {
-                //size: {start: 1, end: 1, unit: 'em'},
-                color: {start: '#bbbbee', end: '#0085a1'},
-            };
-            $('#tag_cloud a').tagcloud();
-        })
-    }
+<script type="module">
+  // only load tagcloud.js in tag.html
+  if($('#tag_cloud').length !== 0){
+      async('{{ site.BASE_PATH }}/assets/js/jquery-tagcloud.js',function(){
+          $.fn.tagcloud.defaults = {
+              //size: {start: 1, end: 1, unit: 'em'},
+              color: {start: '#bbbbee', end: '#0085a1'},
+          };
+          $('#tag_cloud a').tagcloud();
+      })
+  }
 </script>
+{% if site.google_translate %}
+<!-- google-translate -->
+<script async="async" type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+<script type="text/javascript">
+  var userLang = navigator.language || navigator.userLanguage || navigator.languages;
+  function googleTranslateElementInit() {
+    new google.translate.TranslateElement({
+      includedLanguages: 'en,zh-CN,zh-TW,hi,es,fr,ar,bn,ru,pt,de,ja,ko,it',
+      autoDisplay: true,
+      pageLanguage: 'zh-CN',
+      multilanguagePage: false,
+      //layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+      layout: google.translate.TranslateElement.FloatPosition.TOP_RIGHT
+    }, 'google_translate_element');
+  }
+</script>
+<div id="google-translate">
+  <div id="google_translate_element"></div>
+</div>
+{% endif %}
+{% if site.google_analytics_measurement_id %}
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async="async" src="https://www.googletagmanager.com/gtag/js?id={{ site.google_analytics_measurement_id }}"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  // Universal Analytics property
+  gtag('config', '{{ site.google_analytics_id }}');
+  // Google Analytics 4 property
+  gtag('config', '{{ site.google_analytics_measurement_id }}');
+</script>
+{% endif %}
 {% if site.baidu_push %}
 <!-- 百度自动推送链接 -->
 <script>
@@ -227,6 +202,16 @@
     var s = document.getElementsByTagName("script")[0];
     s.parentNode.insertBefore(bp, s);
 })();
+</script>
+{% endif %}
+{% if site.microsoft_clarity_id %}
+<!-- Microsoft Clarity -->
+<script>
+  (function(c,l,a,r,i,t,y){
+    c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+    t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i+"?ref=bwt";
+    y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+  })(window, document, "clarity", "script", "{{ site.microsoft_clarity_id }}");
 </script>
 {% endif %}
 </body>

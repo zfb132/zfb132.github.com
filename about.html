@@ -101,7 +101,7 @@ description: "FB Zhang"
 {% if site.disqus %}
 <script type="text/javascript">
     /* * * CONFIGURATION VARIABLES * * */
-    var disqus_shortname = 'zfb132';
+    var disqus_shortname = '{{ site.disqus }}';
     /* * * DON'T EDIT BELOW THIS LINE * * */
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
@@ -124,7 +124,7 @@ description: "FB Zhang"
 </script>
 <!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
 <script>
-    async("https://cdn.jsdelivr.net/npm/anchor-js@4.3.1/anchor.min.js",function(){
+    async("{{ site.BASE_PATH }}/assets/js/anchor.min.js",function(){
         anchors.options.placement = 'left';
         anchors.add('h2,h3');
 		anchors.remove('.subheading');
