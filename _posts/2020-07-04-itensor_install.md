@@ -108,17 +108,20 @@ ITENSOR_USE_OMP=1
 #### 1.3.2 安装OpenBLAS
 在1.1的基础上，安装`OpenBLAS`  
 ```bash
-sudo apt-get install libopenblas-dev
+# 安装OpenBLAS OpenMP
+sudo apt-get install liblapacke-dev libopenblas-dev
 ```
-然后设置`BLAS/LAPACK`相关选项，取消注释其他平台，只保留`openblas`平台；另外还要启用`OMP`  
+然后设置`BLAS/LAPACK`相关选项，**取消注释其他平台**，只保留`openblas`平台；另外还要启用`OMP`  
 ```makefile
 ## [2]
 ##
 ## BLAS/LAPACK Related Options
 ##
 PLATFORM=openblas
-BLAS_LAPACK_LIBFLAGS=-lpthread -L/usr/local/opt/openblas/lib -lopenblas
-BLAS_LAPACK_INCLUDEFLAGS=-I/usr/local/opt/openblas/include -fpermissive -DHAVE_LAPACK_CONFIG_H -DLAPACK_COMPLEX_STRUCTURE
+# 根据实际openblas安装位置修改路径
+# 也可能是 /usr/local/opt/openblas/lib 和 /usr/local/opt/openblas/include
+BLAS_LAPACK_LIBFLAGS=-lpthread -L/usr/lib/x86_64-linux-gnu/openblas-pthread -lopenblas
+BLAS_LAPACK_INCLUDEFLAGS=-I/usr/include/x86_64-linux-gnu/openblas-pthread -fpermissive -DHAVE_LAPACK_CONFIG_H -DLAPACK_COMPLEX_STRUCTURE
 
 # ...
 #########
@@ -132,7 +135,7 @@ ITENSOR_USE_OMP=1
 #### 1.3.3 安装配置Intel MKL
 该步骤较麻烦，在1.1的基础上：  
 安装[Intel-oneAPI-Toolkits](https://www.intel.com/content/www/us/en/develop/documentation/installation-guide-for-intel-oneapi-toolkits-linux/top/installation/install-using-package-managers/apt.html)并启用`intel-mkl`  
-然后设置`BLAS/LAPACK`相关选项，取消注释其他平台，只保留`mkl`平台；另外还要启用`OMP`  
+然后设置`BLAS/LAPACK`相关选项，**取消注释其他平台**，只保留`mkl`平台；另外还要启用`OMP`  
 ```makefile
 ## [2]
 ##
@@ -176,7 +179,7 @@ include $(LIBRARY_DIR)/options.mk
 ```
 最后执行`make -j$(nproc)`  
 
-#### 2.1.1 测试tutorial的project_template示例  
+#### 2.1.2 测试tutorial的project_template示例  
 ```bash
 cd ~
 # 创建临时目录
@@ -191,8 +194,8 @@ make -j$(nproc)
 ```
 
 ### 2.2 第一种方法（推荐）
-整个项目可以在仓库[itensor-install/first-method](https://github.com/zfb132/itensor/tree/master/itensor-install/first-method)下载  
-1. 编写代码文件[myappname.cpp](https://github.com/zfb132/itensor/blob/master/itensor-install/first-method/myappname.cpp)和头文件[myclass.h](https://github.com/zfb132/itensor/blob/master/itensor-install/first-method/myclass.h)以及头文件[myappname.h](https://github.com/zfb132/itensor/blob/master/itensor-install/first-method/myappname.h)
+整个项目可以在仓库[itensor-install/first-method](https://github.com/zfb132/itensor_demo/tree/master/itensor-install/first-method)下载  
+1. 编写代码文件[myappname.cpp](https://github.com/zfb132/itensor_demo/blob/master/itensor-install/first-method/myappname.cpp)和头文件[myclass.h](https://github.com/zfb132/itensor_demo/blob/master/itensor-install/first-method/myclass.h)以及头文件[myappname.h](https://github.com/zfb132/itensor_demo/blob/master/itensor-install/first-method/myappname.h)
 2. 创建文件命名为`Makefile`，内容在下面
 3. 编译项目
 `make -j$(nproc)`
@@ -251,8 +254,8 @@ mkdebugdir:
 ```
 **注意**：这里换行之后必须用TAB键缩进，不能用空格
 ### 2.3 第二种方法
-整个项目可以在仓库[itensor-install/second-method](https://github.com/zfb132/itensor/tree/master/itensor-install/second-method)下载  
-1. 编写代码文件[test.cpp](https://github.com/zfb132/itensor/blob/master/itensor-install/second-method/test.cpp)和头文件[myclass.h](https://github.com/zfb132/itensor/blob/master/itensor-install/second-method/myclass.h)
+整个项目可以在仓库[itensor-install/second-method](https://github.com/zfb132/itensor_demo/tree/master/itensor-install/second-method)下载  
+1. 编写代码文件[test.cpp](https://github.com/zfb132/itensor_demo/blob/master/itensor-install/second-method/test.cpp)和头文件[myclass.h](https://github.com/zfb132/itensor_demo/blob/master/itensor-install/second-method/myclass.h)
 2. 编译项目
 ```bash
 g++ -m64 -std=c++17 -fPIC -c -I. -I/home/zfb/itensor -o test.o test.cpp
@@ -260,3 +263,52 @@ g++ -m64 -std=c++17 -fPIC -I. -I/home/zfb/itensor test.o -o test -L/home/zfb/ite
 ```
 3. 此时项目文件夹下会生成`test`文件，运行代码
 `./test`
+
+## 3. 常见问题
+截止[ITensor v3.1.11](https://github.com/ITensor/ITensor/releases/tag/v3.1.11)，该库不支持搭配使用`lapack >= 3.9.1`（即`Ubuntu 22.04`），报错类似：  
+```txt
+tensor/lapack_wrap.cc: In function ‘void itensor::dsyev_wrapper(char, char, itensor::LAPACK_INT, itensor::LAPACK_REAL*, itensor::LAPACK_REAL*, itensor::LAPACK_INT&)’:
+tensor/lapack_wrap.cc:342:19: error: too few arguments to function ‘void dsyev_(const char*, const char*, const int*, double*, const int*, double*, double*, const int*, int*, size_t, size_t)’
+  342 |     F77NAME(dsyev)(&jobz,&uplo,&n,A,&lda,eigs,&wkopt,&lwork,&info);
+      |                   ^
+In file included from /usr/include/lapack.h:11,
+                 from /usr/include/lapacke.h:36,
+                 from /home/zfb/itensor/itensor/tensor/lapack_wrap.h:50,
+                 from tensor/lapack_wrap.cc:16:
+/usr/include/lapack.h:17008:6: note: declared here
+17008 | void LAPACK_dsyev_base(
+      |      ^~~~~~~~~~~~~~~~~
+tensor/lapack_wrap.cc:345:19: error: too few arguments to function ‘void dsyev_(const char*, const char*, const int*, double*, const int*, double*, double*, const int*, int*, size_t, size_t)’
+  345 |     F77NAME(dsyev)(&jobz,&uplo,&n,A,&lda,eigs,work.data(),&lwork,&info);
+      |                   ^
+In file included from /usr/include/lapack.h:11,
+                 from /usr/include/lapacke.h:36,
+                 from /home/zfb/itensor/itensor/tensor/lapack_wrap.h:50,
+                 from tensor/lapack_wrap.cc:16:
+/usr/include/lapack.h:17008:6: note: declared here
+17008 | void LAPACK_dsyev_base(
+      |      ^~~~~~~~~~~~~~~~~
+```
+原因是`lapack 3.9.1`修改了部分函数的定义，解决办法  
+修改文件`itensor/tensor/lapack_wrap.h`  
+原始内容
+```cpp
+#ifdef FORTRAN_NO_TRAILING_UNDERSCORE
+#define F77NAME(x) x
+#else
+#define F77NAME(x) x##_
+#endif
+```
+修改后内容
+```cpp
+#ifdef FORTRAN_NO_TRAILING_UNDERSCORE
+#define F77NAME(x) x
+#else
+#if defined(LAPACK_GLOBAL) || defined(LAPACK_NAME)
+#define F77NAME(x) LAPACK_##x
+#else
+#define F77NAME(x) x##_
+#endif
+#endif
+```
+目前已经提交[PR](https://github.com/ITensor/ITensor/pull/413)，正在等待合并

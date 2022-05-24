@@ -26,7 +26,7 @@ description:  "适用于Windows的Linux子系统搭配VSCode编写和调试代�
 * 在开始菜单找到刚才安装好的Ubuntu应用，点击进入会自动配置，等待配置完成即可输入用户名和密码来使用Ubuntu系统
 * 在wsl系统下使用`sudo apt-get update && sudo apt-get install make`来安装make工具
 ## 2. 安装itensor
-具体方法见[itensor-install/README.md](https://github.com/zfb132/itensor/blob/master/itensor-install/README.md)
+具体方法见[itensor-install/README.md](https://github.com/zfb132/itensor_demo/blob/master/itensor-install/README.md)
 ## 3. 使用vscode编写代码
 ### 3.1 配置vscode
 打开vscode，点击左下角的`><`标志  <img src="/img/post/itensor-vscode-02.png" width="768" alt="><标志"/>  
