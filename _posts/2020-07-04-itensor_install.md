@@ -311,4 +311,4 @@ In file included from /usr/include/lapack.h:11,
 #endif
 #endif
 ```
-目前已经提交[PR](https://github.com/ITensor/ITensor/pull/413)，正在等待合并
+目前已经提交[PR](https://github.com/ITensor/ITensor/pull/413)且合并进入主仓库，预计下个版本将会修复
