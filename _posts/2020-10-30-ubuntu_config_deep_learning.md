@@ -10,7 +10,7 @@ header-img: "/img/post/ubuntu-canonical-bg.png"
 description:  "这个教程是很久以前写的了，现在可能软件版本号已经不是最新了"
 ---
   
-# 目录
+## 目录
 {: .no_toc}
 
 * 目录

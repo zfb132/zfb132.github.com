@@ -10,7 +10,7 @@ header-img: "/img/post/ubuntu-canonical-bg.png"
 description:  "公开仓库可以免费使用此功能，私有仓库也有一定的使用额度"
 ---
   
-# 目录
+## 目录
 {: .no_toc}
 
 * 目录

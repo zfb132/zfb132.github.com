@@ -10,7 +10,7 @@ header-img: "/img/post/ubuntu-canonical-bg.png"
 description:  "本文主要介绍如何使用YAML语言的基础数据类型"
 ---
   
-# 目录
+## 目录
 {: .no_toc}
 
 * 目录

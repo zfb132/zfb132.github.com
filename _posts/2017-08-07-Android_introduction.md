@@ -10,7 +10,7 @@ header-img: "/img/post/android-bg.jpg"
 description:  "目前安卓的主流开发语言是Java，在正式开始Android系列的教程之前，需要知道一些基本内容"
 ---
   
-# 目录
+## 目录
 {: .no_toc}
 
 * 目录

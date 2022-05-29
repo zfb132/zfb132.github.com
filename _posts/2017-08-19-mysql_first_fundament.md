@@ -10,7 +10,7 @@ header-img: "/img/post/mysql-bg.png"
 description:  "本文主要介绍使用MySQL对数据记录进行一些基本的操作，所有内容仅限单表操作"
 ---
 
-# 目录
+## 目录
 {: .no_toc}
 
 * 目录

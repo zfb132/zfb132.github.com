@@ -10,7 +10,7 @@ header-img: "/img/post/ubuntu-canonical-bg.png"
 description:  "平时工作需要，可能会经常重装Ubuntu系统，所以写下这篇博客来帮助自己快速进行配置"
 ---
   
-# 目录
+## 目录
 {: .no_toc}
 
 * 目录

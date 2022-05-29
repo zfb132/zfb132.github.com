@@ -10,7 +10,7 @@ header-img: "/img/post/matplotlib-bg.png"
 description:  "记录自己安装matplotlib库时遇到的一些问题和解决方法"
 ---
   
-# 目录
+## 目录
 {: .no_toc}
 
 * 目录

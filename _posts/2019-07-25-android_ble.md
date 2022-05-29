@@ -10,7 +10,7 @@ header-img: "/img/post/bluetooth4.0-bg.jpg"
 description:  "在设计基于蓝牙定位的App过程中需要解析蓝牙广播数据，然后才能继续后面的定位操作，这里主要介绍了广播帧格式以及如何用Java代码解析得到具体参数"
 ---
   
-# 目录
+## 目录
 {: .no_toc}
 
 * 目录

@@ -10,7 +10,7 @@ header-img: "/img/post/javascript-bg.png"
 description:  "JavaScript通常是作为开发Web页面的脚本语言，本文介绍的JavaScript代码均运行在指定网站的控制台窗口"
 ---
   
-# 目录
+## 目录
 {: .no_toc}
 
 * 目录

@@ -10,7 +10,7 @@ header-img: "/img/post/ubuntu-canonical-bg.png"
 description:  "可以搭配frp内网穿透实现在公网环境访问桌面，作为TeamViewer、向日葵等远程控制软件的替代"
 ---
   
-# 目录
+## 目录
 {: .no_toc}
 
 * 目录

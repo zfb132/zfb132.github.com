@@ -10,7 +10,7 @@ header-img: "/img/post/ubuntu-canonical-bg.png"
 description:  "写的时候已经很早了，现在可能已经无法正常使用了，而且不推荐用Windows炼丹"
 ---
   
-# 目录
+## 目录
 {: .no_toc}
 
 * 目录

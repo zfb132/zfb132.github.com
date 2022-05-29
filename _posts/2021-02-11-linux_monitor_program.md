@@ -10,7 +10,7 @@ header-img: "/img/post/ubuntu-canonical-bg.png"
 description:  "如果某个程序停止执行，则自动发送邮件和短信通知用户"
 ---
   
-# 目录
+## 目录
 {: .no_toc}
 
 * 目录

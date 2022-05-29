@@ -10,7 +10,7 @@ header-img: "/img/post/mysql-bg.png"
 description:  "MySQL是一种开放源代码的关系型数据库管理系统，使用最常用的结构化数据库查询语言（SQL）进行数据库管理"
 ---
 
-# 目录
+## 目录
 {: .no_toc}
 
 * 目录

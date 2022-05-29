@@ -10,7 +10,7 @@ header-img: "/img/post/ubuntu-canonical-bg.png"
 description:  "记录一下在Ubuntu系统跨平台编译LWPC代码，得到Windows 64/32 位可执行程序的过程"
 ---
   
-# 目录
+## 目录
 {: .no_toc}
 
 * 目录
