@@ -1,27 +1,26 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-	<meta charset="utf-8">
-	<title>{{ page.title }} | {{ site.SEOTitle }}</title>
-	{% if page.description %}
-  {% if page.subtitle %}
+  <meta charset="utf-8">
+  <title>{{ page.title }} | {{ site.SEOTitle }}</title>
+  {%- if page.description -%}
+  {%- if page.subtitle -%}
   <meta name="description" content="{{ page.subtitle | append: ' - ' |append: page.description }}">
-  {% else %}
-	<meta name="description" content="{{ page.description }}">
-  {% endif %}
-	{% endif %}
-	<meta name="author" content="{{ site.author }}">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<!-- Enable responsive viewport -->
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  {%- else -%}
+  <meta name="description" content="{{ page.description }}">
+  {%- endif -%}
+  {%- endif -%}
+  <meta name="author" content="{{ site.author }}">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <!-- Enable responsive viewport -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="baidu-site-verification" content="fkVXkUbHNR" />
   <meta name="keywords" content="晨曦, 博客, zfb132, GPS, time, ubuntu, frp, zfb, Django, Python, Matlab, Android, Web, IT, nginx, ssl, https">
-
-	<meta name="renderer" content="webkit">
-	<link rel="shortcut icon" href="/img/favicon.ico">
-	<link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.BASE_PATH }}">
-	<link rel="alternate" type="application/rss+xml" title="{{ site.SEOTitle }}" href="{{ site.BASE_PATH }}/feed.xml">
-	<!-- Le styles -->
+  <meta name="renderer" content="webkit">
+  <link rel="shortcut icon" href="/img/favicon.ico">
+  <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.BASE_PATH }}">
+  <link rel="alternate" type="application/rss+xml" title="{{ site.SEOTitle }}" href="{{ site.BASE_PATH }}/feed.xml">
+  <!-- Le styles -->
   <link rel="preconnect" href="https://www.clarity.ms">
   <link rel="preconnect" href="https://leancloud.api.whuzfb.cn">
   <link rel="preconnect" href="https://zz.bdstatic.com">
@@ -35,92 +34,85 @@
   <script defer type="text/javascript" src="{{ site.BASE_PATH }}/assets/js/jquery.min.js"></script>
 </head>
 <body ontouchstart="">
-{% if site.progress_indicator %}
+{%- if site.progress_indicator -%}
 <!-- 文章进度条 -->
 <div class="progress-indicator" style="width: 0%;"></div>
-{% endif %}
-	{% include nav.html %}
-
-	{{ content }}
-
+{%- endif -%}
+{% include nav.html %}
+{{ content }}
 <!-- Footer -->
 <footer>
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <ul class="list-inline text-center">
-                    {% if site.RSS %}
-                    <li>
-                        <a href="{{site.base_PATH}}/{{site.RSS}}" >
-                            <i class="fa fa-rss fa-2x" aria-hidden="true"></i>
-                        </a>
-                    </li>
-                    {% endif %}
-					{% if site.email %}
-                    <li>
-                        <a target="_blank" href="mailto:{{ site.email }}">
-							<i class="fa fa-envelope fa-2x" aria-hidden="true"></i>
-						</a>
-					</li>
-					{% endif %}
-					{% if site.linkedin %}
-					<li>
-						<a target="_blank" href="https://linkedin.com/in/{{ site.linkedin }}">
-							<i class="fa fa-linkedin fa-2x" aria-hidden="true"></i>
-						</a>
-					</li>
-					{% endif %}
-                </ul>
-				<style>p.copyright.text-muted {color: #bfbfbf;} </style>
-				<p class="copyright text-muted">
-                   CopyRight &copy; 2016-2022 <a target="_blank" href="https://github.com/zfb132">FB Zhang</a><br>Modified by <a target="_blank" href="https://github.com/BruceZhaoR">BruceZhaoR</a>.<br> Theme by <a target="_blank" href="https://github.com/Huxpro">Hux</a>.<br>
-		<span class="label label-primary label-md"><strong>转载请标明作者和出处</strong></span> | <iframe style="margin-left: 2px; margin-bottom:-5px;"
-              frameborder="0" scrolling="0" width="100px" height="20px"
-              src="https://ghbtns.com/github-btn.html?user=zfb132&repo=zfb132.github.com&type=star&count=true" >
-          </iframe>
-                </p>
-            </div>
-        </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center">
+          {%- if site.RSS -%}
+          <li>
+          <a href="{{site.base_PATH}}/{{site.RSS}}" >
+            <i class="fa fa-rss fa-2x" aria-hidden="true"></i>
+              </a>
+            </li>
+            {%- endif -%}
+            {%- if site.email -%}
+            <li>
+              <a target="_blank" href="mailto:{{ site.email }}">
+                <i class="fa fa-envelope fa-2x" aria-hidden="true"></i>
+              </a>
+            </li>
+            {%- endif -%}
+            {%- if site.linkedin -%}
+            <li>
+              <a target="_blank" href="https://linkedin.com/in/{{ site.linkedin }}">
+              <i class="fa fa-linkedin fa-2x" aria-hidden="true"></i>
+              </a>
+            </li>
+            {%- endif -%}
+        </ul>
+        <style>p.copyright.text-muted {color: #bfbfbf;} </style>
+        <p class="copyright text-muted">
+          CopyRight &copy; 2016-2022 <a target="_blank" href="https://github.com/zfb132">FB Zhang</a><br>Modified by <a target="_blank" href="https://github.com/BruceZhaoR">BruceZhaoR</a>.<br> Theme by <a target="_blank" href="https://github.com/Huxpro">Hux</a>.<br>
+          <span class="label label-primary label-md"><strong>转载请标明作者和出处</strong></span> | <iframe style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0" width="100px" height="20px" src="https://ghbtns.com/github-btn.html?user=zfb132&repo=zfb132.github.com&type=star&count=true" ></iframe>
+        </p>
+      </div>
     </div>
+  </div>
 </footer>
 <script defer type="text/javascript" src="{{ site.BASE_PATH }}/assets/js/bootstrap.min.js"></script>
 <script defer type="text/javascript" src="{{ site.BASE_PATH }}/assets/js/blog.js"></script>
-
-{% if site.progress_indicator %}
+{%- if site.progress_indicator -%}
 <!-- 文章进度条：在style.css里面更改进度条样式 -->
 <script type="module">
-    /* 顶部进度条 */
-    (function() {
-      var $w = $(window);
-      var $prog2 = $('.progress-indicator');
-      var wh = $w.height();
-      var h = $('body').height();
-      var sHeight = h - wh;
-      $w.on('scroll', function() {
-        window.requestAnimationFrame(function(){
-          var perc = Math.max(0, Math.min(1, $w.scrollTop() / sHeight));
-          updateProgress(perc);
-        });
-      });
+  /* 顶部进度条 */
+  (function() {
+    var $w = $(window);
+    var $prog2 = $('.progress-indicator');
+    var wh = $w.height();
+    var h = $('body').height();
+    var sHeight = h - wh;
+    $w.on('scroll', function() {
+    window.requestAnimationFrame(function(){
+      var perc = Math.max(0, Math.min(1, $w.scrollTop() / sHeight));
+      updateProgress(perc);
+    });
+    });
 
-      function updateProgress(perc) {
-        $prog2.css({width: perc * 100 + '%'});
-      }
-    }());
+    function updateProgress(perc) {
+    $prog2.css({width: perc * 100 + '%'});
+    }
+  }());
 </script>
-{% endif %}
+{%- endif -%}
 <!-- async load function -->
 <script>
-    function async(u, c) {
-      var d = document, t = 'script',
-          o = d.createElement(t),
-          s = d.getElementsByTagName(t)[0];
-      o.src = u;
-      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
-      s.parentNode.insertBefore(o, s);
-    }
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
 </script>
-
 <!-- back-to-top -->
 <div id="back-top">
   <a href="#section" data-toggle="tooltip" data-placement="top" title="top">
@@ -128,20 +120,20 @@
   </a>
 </div>
 <script type="module">
-	$('#back-top').hide();
-	$(document).ready(function () {
-	$(window).scroll(function () {
-    if ($(this).scrollTop() > 250) {
-      $('#back-top').fadeIn();
-    } else {
-      $('#back-top').fadeOut();
-    }
+  $('#back-top').hide();
+  $(document).ready(function () {
+  $(window).scroll(function () {
+  if ($(this).scrollTop() > 250) {
+    $('#back-top').fadeIn();
+  } else {
+    $('#back-top').fadeOut();
+  }
   });
   $('#back-top a').click(function () {
-    $('body,html').animate({
-      scrollTop: 0
-    }, 800);
-    return false;
+  $('body,html').animate({
+    scrollTop: 0
+  }, 800);
+  return false;
   });
 });
 </script>
@@ -149,36 +141,36 @@
 <script type="module">
   // only load tagcloud.js in tag.html
   if($('#tag_cloud').length !== 0){
-      async('{{ site.BASE_PATH }}/assets/js/jquery-tagcloud.js',function(){
-          $.fn.tagcloud.defaults = {
-              //size: {start: 1, end: 1, unit: 'em'},
-              color: {start: '#bbbbee', end: '#0085a1'},
-          };
-          $('#tag_cloud a').tagcloud();
-      })
+    async('{{ site.BASE_PATH }}/assets/js/jquery-tagcloud.js',function(){
+      $.fn.tagcloud.defaults = {
+        //size: {start: 1, end: 1, unit: 'em'},
+        color: {start: '#bbbbee', end: '#0085a1'},
+      };
+      $('#tag_cloud a').tagcloud();
+    })
   }
 </script>
-{% if site.google_translate %}
+{%- if site.google_translate -%}
 <!-- google-translate -->
 <script async="async" type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 <script type="text/javascript">
   var userLang = navigator.language || navigator.userLanguage || navigator.languages;
   function googleTranslateElementInit() {
-    new google.translate.TranslateElement({
-      includedLanguages: 'en,zh-CN,zh-TW,hi,es,fr,ar,bn,ru,pt,de,ja,ko,it',
-      autoDisplay: true,
-      pageLanguage: 'zh-CN',
-      multilanguagePage: false,
-      //layout: google.translate.TranslateElement.InlineLayout.SIMPLE
-      layout: google.translate.TranslateElement.FloatPosition.TOP_RIGHT
-    }, 'google_translate_element');
+  new google.translate.TranslateElement({
+    includedLanguages: 'en,zh-CN,zh-TW,hi,es,fr,ar,bn,ru,pt,de,ja,ko,it',
+    autoDisplay: true,
+    pageLanguage: 'zh-CN',
+    multilanguagePage: false,
+    //layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+    layout: google.translate.TranslateElement.FloatPosition.TOP_RIGHT
+  }, 'google_translate_element');
   }
 </script>
 <div id="google-translate">
   <div id="google_translate_element"></div>
 </div>
-{% endif %}
-{% if site.google_analytics_measurement_id %}
+{%- endif -%}
+{%- if site.google_analytics_measurement_id -%}
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async="async" src="https://www.googletagmanager.com/gtag/js?id={{ site.google_analytics_measurement_id }}"></script>
 <script>
@@ -190,33 +182,33 @@
   // Google Analytics 4 property
   gtag('config', '{{ site.google_analytics_measurement_id }}');
 </script>
-{% endif %}
-{% if site.baidu_push %}
+{%- endif -%}
+{%- if site.baidu_push -%}
 <!-- 百度自动推送链接 -->
 <script>
 (function(){
-    var bp = document.createElement('script');
-    var curProtocol = window.location.protocol.split(':')[0];
-    if (curProtocol === 'https') {
-        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
-    }
-    else {
-        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-    }
-    var s = document.getElementsByTagName("script")[0];
-    s.parentNode.insertBefore(bp, s);
+  var bp = document.createElement('script');
+  var curProtocol = window.location.protocol.split(':')[0];
+  if (curProtocol === 'https') {
+    bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+  }
+  else {
+    bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+  }
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(bp, s);
 })();
 </script>
-{% endif %}
-{% if site.microsoft_clarity_id %}
+{%- endif -%}
+{%- if site.microsoft_clarity_id -%}
 <!-- Microsoft Clarity -->
 <script>
   (function(c,l,a,r,i,t,y){
-    c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-    t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i+"?ref=bwt";
-    y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+  c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+  t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i+"?ref=bwt";
+  y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
   })(window, document, "clarity", "script", "{{ site.microsoft_clarity_id }}");
 </script>
-{% endif %}
+{%- endif -%}
 </body>
 </html>

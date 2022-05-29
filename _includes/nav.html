@@ -17,10 +17,10 @@
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="{{ site.BASE_PATH }}/">主页</a></li>
                     <li><a href="/search/">搜索</a></li>
-					<li><a href="{{ site.BASE_PATH}}/{{ site.archive_path }}/">归档</a></li>
-					<li><a href="{{ site.BASE_PATH}}/{{ site.categories_path }}/">目录</a></li>
-					<li><a href="{{ site.BASE_PATH}}/{{ site.tags_path }}/">标签</a></li>
-					<li><a href="{{ site.BASE_PATH}}/{{ site.about_path }}">关于我</a></li>
+                    <li><a href="{{ site.BASE_PATH}}/{{ site.archive_path }}/">归档</a></li>
+                    <li><a href="{{ site.BASE_PATH}}/{{ site.categories_path }}/">目录</a></li>
+                    <li><a href="{{ site.BASE_PATH}}/{{ site.tags_path }}/">标签</a></li>
+                    <li><a href="{{ site.BASE_PATH}}/{{ site.about_path }}">关于我</a></li>
                 </ul>
             </div>
         </div>
@@ -37,7 +37,7 @@
     var $navbar = document.querySelector('#huxblog_navbar');
     var $collapse = document.querySelector('.navbar-collapse');
 
-	var __HuxNav__ = {
+    var __HuxNav__ = {
         close: function(){
             $navbar.className = " ";
             // wait until animation end.
@@ -70,8 +70,8 @@
      *
      * Instead, we use a 'e.target' filter to prevent handler
      * added to document close HuxNav.
-	 *
-	 * Also, we use 'click' instead of 'touchstart' as compromise
+     *
+     * Also, we use 'click' instead of 'touchstart' as compromise
      */
     document.addEventListener('click', function(e){
         if(e.target == $toggle) return;

@@ -4,320 +4,288 @@ layout: default
 
 <!-- Post Header -->
 <style type="text/css">
-    header.intro-header{
-        background-image: {% if page.header-img %} url('{{ site.BASE_PATH }}{{ page.header-img }}'){% endif %}{% if page.bg-color %} {{ page.bg-color }}{% endif %}
-    }
+  header.intro-header{
+    background-image: {% if page.header-img %} url('{{ site.BASE_PATH }}{{ page.header-img }}'){% endif -%}{% if page.bg-color %} {{ page.bg-color }}{% endif -%}
+  }
 </style>
-
 <header class="intro-header" >
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <div class="post-heading">
-                    <h1>{{ page.title }}</h1>
-                    {% comment %}
-                        always create a h2 for keeping the margin , Zfb
-                    {% endcomment %}
-                    {% comment %} if page.subtitle {% endcomment %}
-                    <h2 class="subheading">{{ page.subtitle }}</h2>
-                    {% comment %} endif {% endcomment %}
-                    <span class="meta">Posted by {% if page.author %}{{ page.author }}{% else %}{{ site.title }}{% endif %} on {{ page.date | date: "%B %-d, %Y" }}</span>
-                </div>
-            </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-heading">
+          <h1>{{ page.title }}</h1>
+          {%- comment -%}
+          {%- endcomment -%}
+          {%- comment -%} if page.subtitle {%- endcomment -%}
+          <h2 class="subheading">{{ page.subtitle }}</h2>
+          {%- comment %} endif {% endcomment -%}
+          <span class="meta">Posted by {% if page.author %}{{ page.author }}{% else %}{{ site.title }}{% endif -%} on {{ page.date | date: "%B %-d, %Y" }}</span>
         </div>
+      </div>
     </div>
+  </div>
 </header>
-
 <article >
-<!-- Main Content -->
-	<div class="container">
-		<div class="row">
-
-		<!-- Post Container -->
-    		<div class="
-                col-lg-8 col-lg-offset-2
-                col-md-10 col-md-offset-1
-                post-container">
-
-    			{{ content }}
-
-				<p class="text-right">
-				<a href="/">{{ page.author }}</a>
-				<span class="time">
-				/
-				<time>{{ page.date | date:"%Y-%m-%d" }}</time>
-				<style>span.test {color: #0085A5;font-weight: bold;}</style>
-				</span>/&nbsp;<span id="{{ page.url }}" class="leancloud_visitors" data-flag-title="{{ page.title }}"> - </span>&nbsp;views
-				<br>
-				<span>
-					<strong><em>Published under<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">(CC) BY-NC-SA 4.0</a>.
-					</em></strong>
-				</span>
-
-
-
-				</p>
+  <!-- Main Content -->
+  <div class="container">
+    <div class="row">
+      <!-- Post Container -->
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 post-container">
+        {{ content }}
+        <p class="text-right">
+          <a href="/">{{ page.author }}</a>
+          <span class="time">/<time>{{ page.date | date:"%Y-%m-%d" }}</time><style>span.test {color: #0085A5;font-weight: bold;}</style>
+          </span>/&nbsp;<span id="{{ page.url }}" class="leancloud_visitors" data-flag-title="{{ page.title }}"> - </span>&nbsp;views
+          <br>
+          <span>
+            <strong><em>Published under<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">(CC) BY-NC-SA 4.0</a>.</em></strong>
+          </span>
+        </p>
 <script defer src="{{ site.BASE_PATH }}/assets/js/av-min-4.12.2.js"></script>
 <script type="module">
-    AV.init({
-      appId: "gQJjjB93fxATN0W6cmGdlOrW-gzGzoHsz",
-      appKey: "IcwsDtnTDwM6gdkJfLNJTcck",
-      serverURL: "https://leancloud.api.whuzfb.cn"
-    });
-    var name='Counter';
+  AV.init({
+    appId: "gQJjjB93fxATN0W6cmGdlOrW-gzGzoHsz",
+    appKey: "IcwsDtnTDwM6gdkJfLNJTcck",
+    serverURL: "https://leancloud.api.whuzfb.cn"
+  });
+  var name='Counter';
 
-    function createRecord(Counter){
-      // 设置 ACL
-      var acl = new AV.ACL();
-      acl.setPublicReadAccess(true);
-      acl.setPublicWriteAccess(true);
-      // 获得span的所有元素
-      var elements=document.getElementsByClassName('leancloud_visitors');
-      // 一次创建多条记录
-      var allcounter=[];
-      for (var i = 0; i < elements.length ; i++) {
-        // 若某span的内容不包括 '-' ，则不必创建记录
-        if(elements[i].textContent.indexOf('-') == -1){
-          continue;
-        }
-        var title = elements[i].getAttribute('data-flag-title');
-        var url = elements[i].id;
-
-        var newcounter = new Counter();
-        newcounter.setACL(acl);
-        newcounter.set("title", title);
-        newcounter.set("url", url);
-        newcounter.set("time", 0);
-
-        allcounter.push(newcounter);
-        // 顺便更新显示span为默认值0
-        elements[i].textContent=0;
+  function createRecord(Counter){
+    // 设置 ACL
+    var acl = new AV.ACL();
+    acl.setPublicReadAccess(true);
+    acl.setPublicWriteAccess(true);
+    // 获得span的所有元素
+    var elements=document.getElementsByClassName('leancloud_visitors');
+    // 一次创建多条记录
+    var allcounter=[];
+    for (var i = 0; i < elements.length ; i++) {
+      // 若某span的内容不包括 '-' ，则不必创建记录
+      if(elements[i].textContent.indexOf('-') == -1){
+        continue;
       }
+      var title = elements[i].getAttribute('data-flag-title');
+      var url = elements[i].id;
 
-      AV.Object.saveAll(allcounter).then(function (todo) {
-        // 成功保存记录之后
-        console.log('创建记录成功！');
-      }, function (error) {
-        // 异常错误 
-        console.error('创建记录失败: ' + error.message);
-      });
+      var newcounter = new Counter();
+      newcounter.setACL(acl);
+      newcounter.set("title", title);
+      newcounter.set("url", url);
+      newcounter.set("time", 0);
+
+      allcounter.push(newcounter);
+      // 顺便更新显示span为默认值0
+      elements[i].textContent=0;
     }
 
-    function showCount(Counter){
-      // 是否需要创建新纪录的标志（添加一篇新文章）
-      var flag=false;
-      var query = new AV.Query(name);
-      query.greaterThanOrEqualTo('time', 0);
-      query.find().then(function (results) {
+    AV.Object.saveAll(allcounter).then(function (todo) {
+      // 成功保存记录之后
+      console.log('创建记录成功！');
+    }, function (error) {
+      // 异常错误 
+      console.error('创建记录失败: ' + error.message);
+    });
+  }
+
+  function showCount(Counter){
+    // 是否需要创建新纪录的标志（添加一篇新文章）
+    var flag=false;
+    var query = new AV.Query(name);
+    query.greaterThanOrEqualTo('time', 0);
+    query.find().then(function (results) {
+      // 当获取到的记录为0时置默认值
+      if(results.length==0){
+        $('.leancloud_visitors').text('-');
+        flag=true;
+        console.log('返回查询记录为空');
+        // 如果获取到空记录就创建新记录
+        createRecord(Counter);
+        return;
+      }
+      // 将获取到的数据设置为text
+      for (var i = 0; i < results.length; i++) {
+        var item = results[i];
+        var url = item.get('url');
+        var time = item.get('time');
+        var element = document.getElementById(url);
+        element.textContent = time;
+      }
+      // 当某个span含有默认值时说明需要创建记录
+      if($('.leancloud_visitors').text().indexOf("-") != -1){
+        flag=true;
+      }
+      // 当获取的记录数与span个数不吻合时
+      if(results.length != $('.leancloud_visitors').length){
+        flag=true;
+      }
+      if(flag){
+        createRecord(Counter);
+      }
+    }, function (error) {
+      console.log('query error:'+error.message);
+    });
+  }
+
+  // 适用于单网页需要多次显示浏览量
+  function updateCount(Counter){
+    // 获得span
+    var elements=document.getElementsByClassName('leancloud_visitors');
+    var url = elements[0].id;
+    var query = new AV.Query(name);
+    query.equalTo('url', url);
+    query.find().then(function(results) {
         // 当获取到的记录为0时置默认值
         if(results.length==0){
           $('.leancloud_visitors').text('-');
           flag=true;
-          console.log('返回查询记录为空');
+          console.log('返回查询内容为空!');
           // 如果获取到空记录就创建新记录
           createRecord(Counter);
           return;
         }
-        // 将获取到的数据设置为text
-        for (var i = 0; i < results.length; i++) {
-          var item = results[i];
-          var url = item.get('url');
-          var time = item.get('time');
-          var element = document.getElementById(url);
-          element.textContent = time;
-        }
-        // 当某个span含有默认值时说明需要创建记录
-        if($('.leancloud_visitors').text().indexOf("-") != -1){
-          flag=true;
-        }
-        // 当获取的记录数与span个数不吻合时
-        if(results.length != $('.leancloud_visitors').length){
-          flag=true;
-        }
-        if(flag){
-          createRecord(Counter);
-        }
-      }, function (error) {
-        console.log('query error:'+error.message);
+        var counter = results[0];
+        counter.increment("time");
+        counter.save(null, {fetchWhenSave: true}).then(function(counter) {
+            // 将获取到的数据设置为text
+            for (var i = 0; i < elements.length; i++) {
+              elements[i].textContent = counter.get('time');
+            }
+          },function(error) {
+            console.log('保存更新后数字失败: ' + error.message);
+          });
+      },function(error) {
+        console.log('查询失败: ' + error.code + " " + error.message);
       });
-    }
+  }
 
-    // 适用于单网页需要多次显示浏览量
-    function updateCount(Counter){
-      // 获得span
-      var elements=document.getElementsByClassName('leancloud_visitors');
-      var url = elements[0].id;
-      var query = new AV.Query(name);
-      query.equalTo('url', url);
-      query.find().then(function(results) {
-          // 当获取到的记录为0时置默认值
-          if(results.length==0){
-            $('.leancloud_visitors').text('-');
-            flag=true;
-            console.log('返回查询内容为空!');
-            // 如果获取到空记录就创建新记录
-            createRecord(Counter);
-            return;
-          }
-          var counter = results[0];
-          counter.increment("time");
-          counter.save(null, {fetchWhenSave: true}).then(function(counter) {
-              // 将获取到的数据设置为text
-              for (var i = 0; i < elements.length; i++) {
-                elements[i].textContent = counter.get('time');
-              }
-            },function(error) {
-              console.log('保存更新后数字失败: ' + error.message);
-            });
-        },function(error) {
-          console.log('查询失败: ' + error.code + " " + error.message);
-        });
-    }
-
-    $(function() {
-      var Counter = AV.Object.extend(name);
-      updateCount(Counter);
-    });
+  $(function() {
+    var Counter = AV.Object.extend(name);
+    updateCount(Counter);
+  });
 </script>
-
-					<hr>
-					{% unless page.categories == empty %}
-					<ul class="tag_box list-unstyled list-inline">
-					<li><i class="fa fa-folder-open"></i></li>
-					{% assign categories_list = page.categories %}
-					{% if categories_list.first[0] == null %}
-						{% for category in categories_list %}
-							<li><a href="{{ site.BASE_PATH }}/{{ site.categories_path }}#{{ category }}-ref">
-								{{ category | join: "/" }} <span>({{ site.categories[category].size }})</span>
-								{% unless forloop.last %},{% endunless %}
-							</a></li>
-						{% endfor %}
-					{% else %}
-						{% for category in categories_list %}
-							<li><a href="{{ site.BASE_PATH }}/{{ site.categories_path }}#{{ category[0] }}-ref">
-								{{ category[0] | join: "/" }} <span>/{{ category[1].size }})</span>
-							</a></li>
-						{% endfor %}
-					{% endif %}
-					</ul>
-					{% endunless %}
-
-					{% unless page.tags == empty %}
-					<ul class="list-inline">
-					<li><i class="fa fa-tags"></i></li>
-					{% assign tags_list = page.tags %}
-					{% if tags_list.first[0] == null %}
-						{% for tag in tags_list %}
-							<li>
-								<a href="{{ site.BASE_PATH }}/{{ site.tags_path }}#{{ tag }}-ref">
-								{{ tag }} <span>({{ site.tags[tag].size }})</span>
-								{% unless forloop.last %},{% endunless %}
-								</a>
-							</li>
-						{% endfor %}
-					{% else %}
-						{% for tag in tags_list %}
-							<li>
-								<a href="{{ site.BASE_PATH }}/{{ site.tags_path }}#{{ tag[0] }}-ref">
-									{{ tag[0] }} <span>({{ tag[1].size }})</span>
-									{% unless forloop.last %},{% endunless %}
-								</a>
-							</li>
-
-						{% endfor %}
-					{% endif %}
-					{% assign tags_list = nil %}
-					</ul>
-					{% endunless %}
-
-					<hr>
-
-                <ul class="pager">
-                    {% if page.previous %}
-                    <li class="previous">
-                      <a href="{{ site.BASE_PATH }}{{ page.previous.url }}" data-toggle="tooltip" data-placement="top" title="{{ page.previous.title }}">&larr; 上一篇<br>
-                      <span>{{page.previous.title}}</span></a></li>
-                    {% else %}
-                    <li class="previous disabled"><a>&larr; 上一篇</a></li>
-                   {% endif %}
-                   {% if page.next %}
-                    <li class="next"><a href="{{ site.BASE_PATH }}{{ page.next.url }}" data-toggle="tooltip" data-placement="top" title="{{ page.next.title }}">下一篇 &rarr;<br>
-                    <span>{{page.next.title}}</span></a></li>
-                    {% else %}
-                    <li class="next disabled"><a>下一篇 &rarr;</a>
-                    {% endif %}
-                </ul>
-
-                {% if site.disqus %}
-                <!-- disqus 评论框 start -->
-                <div class="comment">
-                    <div id="disqus_thread" class="disqus-thread"></div>
-                </div>
-                <!-- disqus 评论框 end -->
-                {% endif %}
-
-            </div>
-		<!-- Sidebar Container -->
-            <div class="
-                col-lg-8 col-lg-offset-2
-                col-md-10 col-md-offset-1
-                sidebar-container">
-
-
-                <!-- Friends Blog -->
-                {% if site.friends %}
-                <hr>
-                <h5>友情链接</h5>
-                <ul class="list-inline">
-                    {% for friend in site.friends %}
-                        <li><a href="{{friend.href}}" target="_blank">{{friend.title}}</a></li>
-                    {% endfor %}
-                </ul>
-                {% endif %}
-            </div>
+        <hr>
+        {%- unless page.categories == empty -%}
+          <ul class="tag_box list-unstyled list-inline">
+            <li><i class="fa fa-folder-open"></i></li>
+            {%- assign categories_list = page.categories -%}
+            {%- if categories_list.first[0] == null -%}
+              {%- for category in categories_list -%}
+                <li><a href="{{ site.BASE_PATH }}/{{ site.categories_path }}#{{ category }}-ref">
+                  {{ category | join: "/" }} <span>({{ site.categories[category].size }})</span>
+                  {% unless forloop.last %},{% endunless -%}
+                </a></li>
+              {%- endfor -%}
+            {%- else -%}
+              {%- for category in categories_list -%}
+                <li><a href="{{ site.BASE_PATH }}/{{ site.categories_path }}#{{ category[0] }}-ref">
+                  {{ category[0] | join: "/" }} <span>/{{ category[1].size }})</span>
+                </a></li>
+              {%- endfor -%}
+            {%- endif -%}
+          </ul>
+        {%- endunless -%}
+        {%- unless page.tags == empty -%}
+          <ul class="list-inline">
+            <li><i class="fa fa-tags"></i></li>
+            {%- assign tags_list = page.tags -%}
+            {%- if tags_list.first[0] == null -%}
+              {%- for tag in tags_list -%}
+                <li>
+                  <a href="{{ site.BASE_PATH }}/{{ site.tags_path }}#{{ tag }}-ref">
+                  {{ tag }} <span>({{ site.tags[tag].size }})</span>
+                  {% unless forloop.last %},{% endunless -%}
+                  </a>
+                </li>
+              {%- endfor -%}
+            {%- else -%}
+              {%- for tag in tags_list -%}
+                <li>
+                  <a href="{{ site.BASE_PATH }}/{{ site.tags_path }}#{{ tag[0] }}-ref">
+                    {{ tag[0] }} <span>({{ tag[1].size }})</span>
+                    {% unless forloop.last %},{% endunless -%}
+                  </a>
+                </li>
+              {%- endfor -%}
+            {%- endif -%}
+            {%- assign tags_list = nil -%}
+          </ul>
+        {%- endunless -%}
+        <hr>
+        <ul class="pager">
+          {%- if page.previous -%}
+            <li class="previous">
+            <a href="{{ site.BASE_PATH }}{{ page.previous.url }}" data-toggle="tooltip" data-placement="top" title="{{ page.previous.title }}">&larr; 上一篇<br>
+            <span>{{page.previous.title}}</span></a></li>
+          {%- else -%}
+            <li class="previous disabled"><a>&larr; 上一篇</a></li>
+          {%- endif -%}
+          {%- if page.next -%}
+            <li class="next"><a href="{{ site.BASE_PATH }}{{ page.next.url }}" data-toggle="tooltip" data-placement="top" title="{{ page.next.title }}">下一篇 &rarr;<br>
+            <span>{{page.next.title}}</span></a></li>
+          {%- else -%}
+            <li class="next disabled"><a>下一篇 &rarr;</a>
+          {%- endif -%}
+        </ul>
+        {%- if site.disqus -%}
+        <!-- disqus 评论框 start -->
+        <div class="comment">
+          <div id="disqus_thread" class="disqus-thread"></div>
         </div>
+        <!-- disqus 评论框 end -->
+        {%- endif -%}
+      </div>
+      <!-- Sidebar Container -->
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 sidebar-container">
+        <!-- Friends Blog -->
+        {%- if site.friends -%}
+        <hr>
+        <h5>友情链接</h5>
+        <ul class="list-inline">
+          {%- for friend in site.friends -%}
+              <li><a href="{{friend.href}}" target="_blank">{{friend.title}}</a></li>
+          {%- endfor -%}
+        </ul>
+        {%- endif -%}
+      </div>
     </div>
+  </div>
 </article>
-
-{% if site.disqus %}
+{%- if site.disqus -%}
 <!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
 <script type="text/javascript">
-    /* * * CONFIGURATION VARIABLES * * */
-    var disqus_shortname = "{{site.disqus}}";
-    var disqus_identifier = "{{page.id}}";
-    var disqus_url = "{{site.disqus_base}}{page.url}}";
-    (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
+  var disqus_shortname = "{{site.disqus}}";
+  var disqus_identifier = "{{page.id}}";
+  var disqus_url = "{{site.disqus_base}}{page.url}}";
+  (function() {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
 </script>
 <!-- disqus 公共JS代码 end -->
-{% endif %}
-
-{% if site.anchorjs %}
+{%- endif -%}
+{%- if site.anchorjs -%}
 <!-- async load function -->
 <script>
-    function async(u, c) {
-      var d = document, t = 'script',
-          o = d.createElement(t),
-          s = d.getElementsByTagName(t)[0];
-      o.src = u;
-      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
-      s.parentNode.insertBefore(o, s);
-    }
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
 </script>
 <!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
 <script>
-    async("{{ site.BASE_PATH }}/assets/js/anchor.min.js",function(){
-        anchors.options.placement = 'left';
-        anchors.add('h2,h3');
-		anchors.remove('.subheading');
-    })
+  async("{{ site.BASE_PATH }}/assets/js/anchor.min.js",function(){
+    anchors.options.placement = 'left';
+    anchors.add('h2,h3');
+  anchors.remove('.subheading');
+  })
 </script>
-{% endif %}
-
-{% if page.mathjax %}
+{%- endif -%}
+{%- if page.mathjax -%}
 <!-- mathjax -->
 <script>
   (function () {
@@ -327,4 +295,4 @@ layout: default
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
 </script>
-{% endif %}
+{%- endif -%}

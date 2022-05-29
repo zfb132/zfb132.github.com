@@ -1,36 +1,33 @@
 ---
 layout: default
-title: Search Results
+title: 搜索结果
 ---
 
 <!-- Post Header -->
 <style type="text/css">
-    header.intro-header{background-color: #4285f4;}
+  header.intro-header{background-color: #4285f4;}
 </style>
-
 <header class="intro-header" >
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <div class="site-heading">
-                    <h1>{{ page.title }}</h1>
-                    <span class="subheading">{{ page.description }}</span>
-                </div>
-            </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="site-heading">
+          <h1>{{ page.title }}</h1>
+          <span class="subheading">{{ page.description }}</span>
         </div>
+      </div>
     </div>
+  </div>
 </header>
 <div style="margin:0 auto;width:300px;height:80px;padding-top:10px;padding-bottom:10px"></div>
 <div class="container">
   <div class="row">
     <!-- Post Container -->
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 post-container">
-    
-<form action="/search" method="get">
-  <label for="search-box"></label>
-  <input type="text" id="bdcsMain" name="query" placeholder="输入关键词">
-</form>
-
+      <form action="/search" method="get">
+        <label for="search-box"></label>
+        <input type="text" id="bdcsMain" name="query" placeholder="输入关键词">
+      </form>
     </div>
   </div>
 </div>
@@ -44,4 +41,3 @@ title: Search Results
     var s = document.getElementsByTagName('script')[0];
     s.parentNode.insertBefore(bdcs, s);})();
 </script>
-
