@@ -44,10 +44,16 @@ layout: default
                     <hr><h5><a href="/about">关 于 我</a></h5>
                     <div class="short-about">
                         {% if site.sidebar-avatar %}
-                            <img src="{{site.sidebar-avatar}}" />
-                        {% endif %}
-                        {% if site.sidebar-about-description %}
-                            <p>{{site.sidebar-about-description}}</p>
+                            {% if site.sidebar-about-description %}
+                                <img alt="{{site.sidebar-about-description}}" src="{{site.sidebar-avatar}}" />
+                                <p>{{site.sidebar-about-description}}</p>
+                            {% else %}
+                                <img alt="sidebar-avatar" src="{{site.sidebar-avatar}}" />
+                            {% endif %}
+                        {% else %}
+                            {% if site.sidebar-about-description %}
+                                <p>{{site.sidebar-about-description}}</p>
+                            {% endif %}
                         {% endif %}
                         <!-- SNS Link -->
                         <ul class="list-inline">

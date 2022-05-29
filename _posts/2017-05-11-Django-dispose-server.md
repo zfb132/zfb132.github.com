@@ -10,10 +10,16 @@ header-img: "/img/post/django-bg.png"
 description:  "这是花费了一个月的时间摸索整理出来的一份总结。分享出来一方面是给新人一个借鉴，另一方面对自己也算是个备份。"
 ---
 
+## 目录
+{: .no_toc}
+
+* 目录
+{:toc}
+
 ***
-# Django[ˈdʒæŋɡoʊ]部分  
+## Django[ˈdʒæŋɡoʊ]部分  
 ***
-## 整个Django项目：   
+### 1. 整个Django项目
 
 ```
 ├── examples.desktop  
@@ -52,15 +58,15 @@ description:  "这是花费了一个月的时间摸索整理出来的一份总�
 ```
 这是整个项目的样子：  
 
-## Django项目如何创建呢？  
+### 2. Django项目如何创建  
 
-### 首先需要在ubuntu上面安装python-pip    
+#### 2.1 首先需要在ubuntu上面安装python-pip    
         `sudo apt-get install python3-pip`
-### 升级pip      
+#### 2.2 升级pip      
         `(sudo) pip3 install –upgrade pip`   
-### 安装django    
+#### 2.3 安装django    
         `sudo pip3 install Django==1.8.0`  
-### 创建工程项目microblog  
+#### 2.4 创建工程项目microblog  
         `django-admin.py startproject microblog`      
 此时的情况：         
 ```
@@ -76,9 +82,9 @@ description:  "这是花费了一个月的时间摸索整理出来的一份总�
    	│       └── wsgi.py      
 ``` 
     
-### 创建app项目blog（此命令在manage.py同级的目录处执行）      
+#### 2.5 创建app项目blog（此命令在manage.py同级的目录处执行）      
         `python3 manage.py startapp blog`  
-### 首先在settings.py中添加自己的app名称：      
+#### 2.6 首先在settings.py中添加自己的app名称：      
 ```python
 	INSTALLED_APPS = (
 	'django.contrib.admin',
@@ -93,7 +99,7 @@ description:  "这是花费了一个月的时间摸索整理出来的一份总�
 ```
 新建的 app 如果不加到 INSTALL\_APPS 中的话, Django 就不能自动找到app中的模板文件(app-name/templates/下的文件)和静态文件(app-name/static/中的文件)    
 
-### 在views.py中定义视图函数：    
+#### 2.7 在views.py中定义视图函数：    
 ```python
 # coding:utf-8
 # !usr/bin/env python3
@@ -124,7 +130,7 @@ def user(request):
     else:
         return HttpResponse("这是get请求")
 ```
-### 在urls.py中定义视图函数相关的url：   
+#### 2.8 在urls.py中定义视图函数相关的url：   
 ```python
 # coding:utf-8
 # !usr/bin/env python3
@@ -184,28 +190,28 @@ STATICFILES_DIRS = (
 
 ）
 
-### 更改一下models.py文件并： 
+#### 2.9 更改一下models.py文件并： 
   `python3 manage.py makemigrations`  
   `python3 manage.py migrate`  
 
-### 此时运行： 
+#### 2.10 此时运行： 
    `python3 manage.py runserver 8000`    
    
 (默认在8000端口运行)    
 
 ***
-# 服务器部分  
+## 服务器部分  
 ***
 
-## 安装pip3：  
+### 1.1 安装pip3：  
     `sudo apt install python3-pip`  
-## 在服务器上下载uwsgi：  
+### 1.2 在服务器上下载uwsgi：  
     `sudo python3 -m pip install uwsgi`  
 
-## 安装nginx：  
+### 1.3 安装nginx：  
     `sudo apt-get install nginx`  
 
-## 在工程目录下建立myweb_uwsgi.ini文件：  
+### 1.4 在工程目录下建立myweb_uwsgi.ini文件：  
 ```
 |-- blog  
 |   |-- __init__.py  
@@ -261,7 +267,7 @@ daemonize = /home/log/blogserver.log
 log-maxsize = 1000000
 
 ```
-## 然后进入/etc/nginx目录下：    
+### 1.5 然后进入/etc/nginx目录下：    
 ```
 mylinux@VM-11-11-mylinux:/home/microblog$ cd /etc/nginx
 mylinux@VM-11-11-mylinux:/etc/nginx$ ls
@@ -389,20 +395,20 @@ http {
 #}
 
 ```
-## 然后运行Django项目：  
+### 1.6 然后运行Django项目：  
     `uwsgi –ini /home/microblog/myweb_uwsgi.ini`  
 
-## 然后运行或重启nginx：  
+### 1.7 然后运行或重启nginx：  
     `service nginx restart`  
 
-## 成功  
+### 1.8 成功  
 
 
 ***
-# 附录：各文件内容  
+## 附录：各文件内容  
 ***
   
-## manage.py   
+### manage.py   
 ```python
 # manage.py
 #!/usr/bin/env python
@@ -418,7 +424,7 @@ if __name__ == "__main__":
     execute_from_command_line(sys.argv)
 ```
 ***
-## settings.py  
+### settings.py  
 ```python
 # coding:utf-8
 # !usr/bin/env python3
@@ -566,7 +572,7 @@ STATICFILES_FINDERS = (
 '''
 ```
 ***
-## urls.py  
+### urls.py  
 ```python
 # coding:utf-8
 # !usr/bin/env python3
@@ -591,7 +597,7 @@ urlpatterns = [
 ]
 ```
 ***
-## wsgi.py  
+### wsgi.py  
 ```python
 # wsgi.py
 """
@@ -612,7 +618,7 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE", "microblog.settings")
 application = get_wsgi_application()
 ```
 ***
-## admin.py  
+### admin.py  
 ```python
 # coding:utf-8
 # !usr/bin/env python3
@@ -627,7 +633,7 @@ class ArticleAdmin(admin.ModelAdmin):
     list_display = ('title', 'pub_date', 'update_time',)
 ```
 ***
-## views.py
+### views.py
 ```python
 # coding:utf-8
 # !usr/bin/env python3
@@ -667,7 +673,7 @@ admin.site.register(Article, ArticleAdmin)
 admin.site.register(Person, PersonAdmin)
 ```
 ***
-## models.py  
+### models.py  
 ```python
 # coding:utf-8
 # !usr/bin/env python3
@@ -708,7 +714,7 @@ class Person(models.Model):
 
 ```
 ***
-## tests.py  
+### tests.py  
 ```python
 # tests.py
 from django.test import TestCase

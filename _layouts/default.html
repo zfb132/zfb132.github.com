@@ -4,7 +4,11 @@
 	<meta charset="utf-8">
 	<title>{{ page.title }} | {{ site.SEOTitle }}</title>
 	{% if page.description %}
+  {% if page.subtitle %}
+  <meta name="description" content="{{ page.subtitle | append: ' - ' |append: page.description }}">
+  {% else %}
 	<meta name="description" content="{{ page.description }}">
+  {% endif %}
 	{% endif %}
 	<meta name="author" content="{{ site.author }}">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
