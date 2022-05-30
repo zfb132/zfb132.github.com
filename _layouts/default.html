@@ -15,7 +15,11 @@
   <!-- Enable responsive viewport -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="baidu-site-verification" content="fkVXkUbHNR" />
-  <meta name="keywords" content="晨曦, 博客, zfb132, GPS, time, ubuntu, frp, zfb, Django, Python, Matlab, Android, Web, IT, nginx, ssl, https">
+  {%- if page.tags -%}
+  <meta name="keywords" content="{{ page.tags | join: ', ' | append: ', 晨曦, whuzfb, 博客, zfb132' }}">
+  {%- else -%}
+  <meta name="keywords" content="晨曦, whuzfb, 博客, zfb132, GPS, time, ubuntu, frp, zfb, Django, Python, Matlab, Android, Web, IT, nginx, ssl, https">
+  {%- endif -%}
   <meta name="renderer" content="webkit">
   <link rel="shortcut icon" href="/img/favicon.ico">
   <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.BASE_PATH }}">
@@ -70,7 +74,7 @@
         </ul>
         <style>p.copyright.text-muted {color: #bfbfbf;} </style>
         <p class="copyright text-muted">
-          CopyRight &copy; 2016-2022 <a target="_blank" href="https://github.com/zfb132">FB Zhang</a><br>Modified by <a target="_blank" href="https://github.com/BruceZhaoR">BruceZhaoR</a>.<br> Theme by <a target="_blank" href="https://github.com/Huxpro">Hux</a>.<br>
+          CopyRight &copy; 2016-2022 <a target="_blank" href="https://github.com/zfb132">FB Zhang</a><br>Modified by <a target="_blank" href="https://github.com/BruceZhaoR">BruceZhaoR</a><br> Theme by <a target="_blank" href="https://github.com/Huxpro">Hux</a><br>
           <span class="label label-primary label-md"><strong>转载请标明作者和出处</strong></span> | <iframe style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0" width="100px" height="20px" src="https://ghbtns.com/github-btn.html?user=zfb132&repo=zfb132.github.com&type=star&count=true" ></iframe>
         </p>
       </div>
