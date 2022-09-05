@@ -5,7 +5,8 @@ timezone: Asia/Shanghai
 paginate: 10
 paginate_path: "page:num"
 highlighter: rouge
-url: "https://blog.whuzfb.cn"
+domain: blog.whuzfb.cn
+url: "https://${domain}"
 baseurl: ""
 markdown: kramdown
 kramdown:
@@ -14,7 +15,7 @@ kramdown:
 gems: [jekyll-paginate, jekyll-sitemap, jekyll-feed]
 
 disqus: zfb132
-disqus_base: http://blog.whuzfb.cn/
+disqus_base: http://${domain}/
 
 # https://support.google.com/analytics/answer/11583528
 google_analytics_id: UA-97824262-2
