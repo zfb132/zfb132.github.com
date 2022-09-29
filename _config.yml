@@ -6,7 +6,7 @@ paginate: 10
 paginate_path: "page:num"
 highlighter: rouge
 domain: blog.whuzfb.cn
-url: "https://${domain}"
+url: "https://blog.whuzfb.cn"
 baseurl: ""
 markdown: kramdown
 kramdown:
@@ -15,7 +15,7 @@ kramdown:
 gems: [jekyll-paginate, jekyll-sitemap, jekyll-feed]
 
 disqus: zfb132
-disqus_base: http://${domain}/
+disqus_base: http://blog.whuzfb.cn/
 
 # https://support.google.com/analytics/answer/11583528
 google_analytics_id: UA-97824262-2
