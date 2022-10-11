@@ -142,7 +142,7 @@ screen -wipe
 screen -D -r test_scr
 ```
 一些进阶操作：  
-1. 使用`-L`选项保存`screen`命令的日志（`screen`不支持日志文件的按大小或日期等分割，会一直写入同一个文件）
+1. 使用`-L`选项保存`screen`命令的日志（`screen`不支持日志文件的按大小或日期等分割，会一直写入同一个文件）  
 ```bash
 # 不同的screen日志会混合在同一个日志文件，非常麻烦，该方法不推荐
 
@@ -153,7 +153,7 @@ screen -L -S test_scr
 # 若该日志文件已存在，则追加
 screen -L -S zfb_abc
 ```
-2. 修改`/etc/screenrc`使`screen`命令支持指定日志文件名
+2. 修改`/etc/screenrc`使`screen`命令支持指定日志文件名  
 ```bash
 # 在文件末尾添加一行 logfile ./screenlog_%t.log
 echo "logfile ./screenlog_%t.log" | sudo tee -a /etc/screenrc
@@ -162,13 +162,13 @@ echo "logfile ./screenlog_%t.log" | sudo tee -a /etc/screenrc
 # 若该日志文件已存在，则追加
 screen -L -t test_name -S test_scr
 ```
-3. 创建一个`detached`的会话
+3. 创建一个`detached`的会话  
 ```bash
 # 创建新会话，但不立即进入（attach）该会话
 # 相当于 screen -S test_scr 然后 Ctrl+A D
 screen -dm -S test_scr
 ```
-4. 创建会话的同时运行命令
+4. 创建会话的同时运行命令  
 ```bash
 # 创建会话test_scr，并执行命令python3 test.py，同时进入（attach）该会话
 screen -S test_scr python3 test.py
