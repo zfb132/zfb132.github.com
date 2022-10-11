@@ -141,6 +141,41 @@ screen -wipe
 # 强制退出其他用户正在使用的screen窗口（防止某用户断线且占用终端导致其他用户无法使用）
 screen -D -r test_scr
 ```
+一些进阶操作：  
+1. 使用`-L`选项保存`screen`命令的日志（`screen`不支持日志文件的按大小或日期等分割，会一直写入同一个文件）
+```bash
+# 不同的screen日志会混合在同一个日志文件，非常麻烦，该方法不推荐
+
+# 运行命令会在当前目录下生成screenlog_bash.log文件，记录日志
+# 若该日志文件已存在，则追加
+screen -L -S test_scr
+# 运行命令会在当前目录下生成screenlog_bash.log文件，记录日志
+# 若该日志文件已存在，则追加
+screen -L -S zfb_abc
+```
+2. 修改`/etc/screenrc`使`screen`命令支持指定日志文件名
+```bash
+# 在文件末尾添加一行 logfile ./screenlog_%t.log
+echo "logfile ./screenlog_%t.log" | sudo tee -a /etc/screenrc
+
+# 运行命令会在当前目录下生成screenlog_test_name.log文件，记录日志
+# 若该日志文件已存在，则追加
+screen -L -t test_name -S test_scr
+```
+3. 创建一个`detached`的会话
+```bash
+# 创建新会话，但不立即进入（attach）该会话
+# 相当于 screen -S test_scr 然后 Ctrl+A D
+screen -dm -S test_scr
+```
+4. 创建会话的同时运行命令
+```bash
+# 创建会话test_scr，并执行命令python3 test.py，同时进入（attach）该会话
+screen -S test_scr python3 test.py
+# 创建会话test_scr，并执行命令python3 test.py，但是不进入该会话，相当于后台运行
+screen -dmS test_scr python3 test.py
+```
+
 ## 3. Ubuntu用户管理
 ### 3.1 创建用户
 创建用户，同时创建该用户主目录、创建用户同名的组（用户名为`username`）  
