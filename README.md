@@ -1,5 +1,6 @@
 ## 晨曦的技术博客
- 
+
+[![Netlify Status](https://api.netlify.com/api/v1/badges/8bba0efb-2e94-42c6-860c-4f5af391f8e4/deploy-status)](https://app.netlify.com/sites/deluxe-crumble-e3fc27/deploys) 
 搭建这个博客的目的是将自己在学习代码过程中的一些心得、经验分享到这里，主要为了方便自己以后查阅，也欢迎大家提出宝贵意见。  
 
 欢迎大家RSS订阅我的博客,只需要复制 `https://blog.whuzfb.cn/feed.xml`到邮箱或者订阅器之类的地方就可以了.  
