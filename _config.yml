@@ -9,7 +9,7 @@ domain: blog.whuzfb.cn
 url: "https://blog.whuzfb.cn"
 baseurl: ""
 # make all the pages gray
-global_gray: true
+global_gray: false
 markdown: kramdown
 kramdown:
   input: GFM
