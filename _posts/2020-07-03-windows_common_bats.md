@@ -16,6 +16,11 @@ description:  "批处理功能在解决批量解压、复制、重命名以及�
 * 目录
 {:toc}
 
+## 0. bat命令的一些说明
+* 延迟变量一般用于需要循环赋值调用它的时候，例如求和的sum变量；或者用于接收用户输入。不用延迟变量会导致获取的值是变量上一次的值，而不是最新的值。延迟变量调用时候用`!!`，还需要`setlocal enabledelayedexpansion`  
+* 字符串替换使用`%FINAL_FILE:.mat=_normal.mat%`，这句话的意思是把变量`FINAL_FILE`的`.mat`全部换成`_normal.mat`，同理可用于把`"`替换成空，即删除（需要注意的是最外层的`"`也会被删除）  
+* `if`判断语句无法使用多个条件的`或`  
+* Windows命令行操作支持的命令集合： [Windows 命令](https://docs.microsoft.com/zh-cn/windows-server/administration/windows-commands/windows-commands)  
 
 ## 1. 批量复制文件  
 创建文件`copy_file.bat`，内容如下，保存为`ANSI`编码，否则中文会乱码：  
@@ -190,7 +195,69 @@ for /r . %%a in (*.rar *.zip *.Z *.gz) do (
 ren *.7z *.zip
 ```
 双击此文件，即可将当前目录下的所有`.7z`文件的扩展名修改为`.zip`  
-## 4. 解决Win10局域网共享问题（未测试）
+## 4. 批量处理某种类型的文件
+```bat
+@echo off
+color 0A
+setlocal enabledelayedexpansion
+set exe_name="C:\Program Files\Matlab\Matlab.exe"
+set WORK_DIR="%cd%"
+set var="%cd%""\process_matrix.mat"
+REM replace all " to null
+set FINAL_FILE=%var:"=%
+REM replace .mat to _normal.mat
+set FINAL_NORMAL_FILE=%FINAL_FILE:.mat=_normal.mat%
+set var="%cd%""\log.txt"
+set LOGTXT=%var:"=%
+set option_load_name=
+
+REM check if replace anyway
+set isfirst=y
+for %%i in (%FINAL_FILE% %FINAL_NORMAL_FILE%) do (
+    if exist %%i (
+        set isFirst=n
+        echo %%i exists.
+    )
+)
+REM echo "!isFirst!"
+if "!isFirst!"=="n" (
+    :input
+        echo Press y to continue and replace it, n to exit
+        set /p op=
+        if "!op!"=="n" (
+            echo Leave and do nothing!
+            REM pause
+            exit
+        ) else (
+            if not "!op!"=="y" (
+                echo You typed incorrect key!
+                goto input
+            ) else (
+                echo Ready to process
+            )
+        )
+)
+
+REM /R : recursion all subfolder, otherwise you'd better use the following format
+REM don't just delete /R
+REM for %%i in (c:\softwares\VisualBat\*.url) do ( echo %%i )
+for /R %WORK_DIR% %%f in (*.mat) do (
+    if "%%f"=="%FINAL_FILE%" (
+        echo Skip add %FINAL_FILE% to Matlab
+    ) else (
+        if "%%f"=="%FINAL_NORMAL_FILE%" (
+            echo Skip add %FINAL_NORMAL_FILE% to Matlab
+        ) else (
+            REM use delay var to ensure op will become long and long
+            set option_load_name=!option_load_name! -O "%%f"
+            echo Add %%f to Matlab
+        )
+    )
+)
+echo !option_load_name!
+pause
+```
+## 5. 解决Win10局域网共享问题（未测试）
 创建文件`fix_lan_share.bat`，内容如下：  
 ```bat
 @echo off

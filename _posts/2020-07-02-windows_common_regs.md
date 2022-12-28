@@ -17,6 +17,18 @@ description:  "有些软件会不经同意修改右键菜单，有些时候又�
 {:toc}
 
 
+## 0. 注册表介绍
+Windows注册表的分支  
+
+名称|作用|  
+:--:|:--:|  
+HKEY_CLASSES_ROOT|存储Windows可识别的文档类型的详细列表，以及相关联的程序|  
+HKEY_CURRENT_USER|存储当前用户设置的信息|  
+HKEY_LOCAL_MACHINE|包括安装在计算机上的硬件和软件的信息|  
+HKEY_USERS|包含使用计算机的用户的信息|  
+HKEY_CURRENT_CONFIG|这个分支包含计算机当前的硬件配置信息|  
+
+
 ## 1. 删除Visual Studio的右键菜单  
 创建文件`del-vs-context.reg`，内容如下：  
 ```reg
@@ -60,7 +72,21 @@ Windows Registry Editor Version 5.00
 @="powershell.exe -noexit -command \"(ipconfig) -match 'IPv4';python -m http.server 8080\""
 ```
 或者直接下载[蓝奏云文件](https://zfb132.lanzous.com/iqboWe8v5eh "open-httpserver-here.reg")，将下载得到的文件名删除`.txt`后缀，双击即可实现功能  
-## 4. USB3.0连接安卓手机刷机出现问题  
+## 4. 删除文件资源管理器左侧多余的OneDrive条目
+OneDrive的个人版和组织版会在资源管理器左侧创建各自的条目，但很多时候常用的只有一个，所以想要隐藏另一个无用的条目。直接删除注册表中的条目即可，参考链接  
+* [文件资源管理器左侧有两个onedrive图标，其中一个是无效的，如何删除？](https://answers.microsoft.com/zh-hans/windows/forum/all/%E6%96%87%E4%BB%B6%E8%B5%84%E6%BA%90%E7%AE%A1/31674379-ba5d-48bb-bf56-f30078f5a8a9)
+* [从 win10 资源管理器左侧移除坚果云/OneDrive](https://loesspie.com/2021/01/19/win10-remove-jianguoyun/)
+
+如果要删除`OneDrive - Personal`，则新建文件`remove-onedrive.reg`，内容如下：  
+```reg
+Windows Registry Editor Version 5.00
+
+[HKEY_CLASSES_ROOT\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}]
+"System.IsPinnedToNameSpaceTree"=dword:00000000
+```
+如果要删除`OneDrive - Organization`，则需要在注册表中搜索`OneDrive - Organization`，找到对应的`CLSID`，同样将`System.IsPinnedToNameSpaceTree`的值改为`0`即可
+
+## 5. USB3.0连接安卓手机刷机出现问题  
 如果在使用小米刷机助手对手机刷机的时候，将手机通过USB3.0接口连接电脑，出现刷机失败的情况，考虑修改注册表。新建文件`usb-hack.reg`，内容如下：  
 ```reg
 Windows Registry Editor Version 5.00
