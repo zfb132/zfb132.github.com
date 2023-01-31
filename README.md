@@ -1,7 +1,8 @@
 ## 晨曦的技术博客
 [![Vercel Status](https://vercelbadge.vercel.app/api/zfb132/zfb132.github.com)](https://vercel.com/zfb132/zfb132-github-com)  
 [![Netlify Status](https://api.netlify.com/api/v1/badges/8bba0efb-2e94-42c6-860c-4f5af391f8e4/deploy-status)](https://app.netlify.com/sites/zfb/deploys)  
-[![Cloudflare Pages Status](https://img.shields.io/endpoint?url=https://cloudflare-pages-badges.zfb132.workers.dev/?projectName=zfb132-github-com)](https://dash.cloudflare.com/)  
+[![Cloudflare Pages Status](https://img.shields.io/endpoint?url=https://cloudflare-pages-badges.whuzfb.workers.dev/?projectName=whuzfb)](https://dash.cloudflare.com/)  
+[![Auto deploy to qcloud cos](https://github.com/zfb132/zfb132.github.com/actions/workflows/deploy_to_coding.yml/badge.svg)](https://github.com/zfb132/zfb132.github.com/actions/workflows/deploy_to_coding.yml)  
 搭建这个博客的目的是将自己在学习代码过程中的一些心得、经验分享到这里，主要为了方便自己以后查阅，也欢迎大家提出宝贵意见。  
 
 欢迎大家RSS订阅我的博客,只需要复制 `https://blog.whuzfb.cn/feed.xml`到邮箱或者订阅器之类的地方就可以了.  

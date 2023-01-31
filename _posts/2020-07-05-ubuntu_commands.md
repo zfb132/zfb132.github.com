@@ -949,3 +949,36 @@ fi
 * 733权限表示：对于某登录用户`user1`，可保证该用户记录日志到`/var/log/script-records/`目录内，又无法删除日志文件
 * 这里`$UID -ge 0`记录`id>=0`的用户，其中包括`root`用户
 * 如果只需要记录普通用户，则可以改成`$UID -ge 500`，因为linux创建普通用户id从500开始
+
+## 21. 隐藏进程信息
+适用于多用户共享服务器的情况，可以隐藏或过滤其他用户的进程信息，方便自己查看自己的进程信息  
+这里的隐藏或过滤是指：进程信息不会出现在`ps`、`top`等命令的输出中，但是进程仍然在运行  
+### 21.1 只对root用户可见
+临时方案，比较麻烦，且不够灵活，[参考](https://unix.stackexchange.com/questions/280860/how-to-hide-a-specific-process)  
+```bash
+# 阻止所有的普通用户查看进程42的信息
+mount -o bind /empty/dir /proc/42
+
+# 恢复
+umount /proc/42
+```
+### 21.2 仅对当前用户可见
+介绍`hidepid`参数，[参考1](https://www.cyberciti.biz/faq/linux-hide-processes-from-other-users/)和[参考2](https://www.cnblogs.com/pyvm/p/11517974.html)  
+`hidepid`参数的值有3种（都是无法阻止`root`用户的）：
+* 0：默认值，所有用户都可以查看所有进程信息
+* 1：表示用户不能进入`/proc/`下的目录，而只能进入属于自己的目录，不过还是能够看到`/proc`下的其他`process IDs`，但是看不到进程的详细信息
+* 2：表示任何用户不能进入`/proc/`下的目录，而只能进入属于自己的目录，且看不到`/proc`下的其他`process IDs`，也看不到其他进程的详细信息
+
+```bash
+# 使用hidepid=2重新挂载/proc
+sudo mount -o remount,rw,hidepid=2 /proc
+```
+
+查看当前机器的`/proc`挂载信息  
+`cat /proc//mounts | grep /proc`
+
+永久方案，修改`/etc/fstab`文件，添加或修改以下内容  
+```bash
+## append the following line ##
+proc    /proc    proc    defaults,nosuid,nodev,noexec,relatime,hidepid=2     0     0
+```
