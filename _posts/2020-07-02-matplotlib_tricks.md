@@ -27,6 +27,57 @@ description:  "记录自己安装matplotlib库时遇到的一些问题和解决�
 在绘制图形语句之前添加以下内容，然后再绘制图像即可：  
 `%matplotlib inline`  
 ## 2. linux系统下画图中文乱码  
+### 2.1 方法1
+在Ubuntu系统下安装matplotlib后，在画图时发现图中的标题、图例等使用中文的地方全部显示为方块，即乱码。按照以下步骤即可解决此问题（假设`matplotlib`安装在`py36`的虚拟环境下，则目录为`~/py36/lib/python3.6/site-packages/matplotlib/mpl-data/fonts/ttf/`；若是系统默认的python，则目录一般为`~/.local/lib/python3.10/site-packages/matplotlib/mpl-data/fonts/ttf/`）  
+1. 在[github下载](https://github.com/zfb132/program_font "msyh")，也可以在[蓝奏云下载](https://zfb132.lanzous.com/iYMA7e8z0gd "msyh")，共有`msyh.ttf、msyhbd.ttf、msyhl.ttf`三个文件。也可以根据需要把其他字体复制到
+2. 把这三个文件复制到刚才找到的`ttf`（根据当前所用环境的不同，路径的前缀会有区别，以自己机器为准）目录下面。另外，也可以把其他自己需要的字体复制过来
+3. 删除matplotlib的字体缓存配置：删除文件`~/.cache/matplotlib/fontlist*.json`、`~/.matplotlib/fontList.cache`、`~/.cache/matplotlib/fontList.cache`（如果存在的话就删除，不存在则跳过）。下次画图时matplotlib会根据`ttf`文件夹下的字体自动重新创建
+
+测试的python代码如下  
+```python
+import matplotlib.pyplot as plt
+import numpy as np
+# 解决中文显示问题
+# 使用仿宋 GB2312
+plt.rcParams['font.sans-serif'] = ['FangSong_GB2312']
+# 解决负号显示问题
+plt.rcParams['axes.unicode_minus'] = False
+# 生成一些数据
+x = np.linspace(0, 10, 100)
+y = np.sin(x)
+# 创建图形
+plt.figure(figsize=(8, 6))
+# 绘制数据
+plt.plot(x, y, label="正弦波")
+# 添加标题和坐标轴标签（包含中文）
+plt.title("正弦函数的图像", fontsize=20)
+plt.xlabel("时间 (秒)", fontsize=15)
+plt.ylabel("振幅", fontsize=15)
+# 显示图例
+plt.legend()
+# 显示网格
+plt.grid(True)
+# 显示图形
+plt.show()
+```
+
+下面介绍如何根据获取字体的英文名称，用于在matplotlib设置字体  
+```bash
+# 在linux命令行输入以下命令（路径前缀需要根据自己实际情况修改），获取ttf文件夹下的字体信息
+# 只关注 family 这个字段的第一个名字（英文名字）
+# 例如仿宋 GB2312字体的名字就是 FangSong_GB2312
+# 例如楷体 GB2312字体的名字就是 KaiTi_GB2312
+fc-query /home/ubuntu/.local/lib/python3.10/site-packages/matplotlib/mpl-data/fonts/ttf/*.ttf | grep GB2312
+#    family: "FangSong_GB2312"(s) "仿宋_GB2312"(s)
+#    fullname: "FangSong_GB2312"(s) "仿宋_GB2312"(s)
+#    file: "/home/ubuntu/.local/lib/python3.10/site-packages/matplotlib/mpl-data/fonts/ttf/仿宋_GB2312.ttf"(s)
+#    postscriptname: "FangSong_GB2312"(s)
+#    family: "KaiTi_GB2312"(s) "楷体_GB2312"(s)
+#    fullname: "KaiTi_GB2312"(s) "楷体_GB2312"(s)
+#    file: "/home/ubuntu/.local/lib/python3.10/site-packages/matplotlib/mpl-data/fonts/ttf/楷体_GB2312.ttf"(s)
+#    postscriptname: "KaiTi_GB2312"(s)
+```
+### 2.2 方法2
 在Ubuntu系统下安装matplotlib后，在画图时发现图中的标题、图例等使用中文的地方全部显示为方块，即乱码。按照以下步骤即可解决此问题（假设用户名为`ubuntu`，`matplotlib`安装在`py36`的虚拟环境下）  
 1. 安装msyh字体（即微软雅黑字体），可以在[github下载](https://github.com/zfb132/program_font "msyh")，也可以在[蓝奏云下载](https://zfb132.lanzous.com/iYMA7e8z0gd "msyh")，共有`msyh.ttf、msyhbd.ttf、msyhl.ttf`三个文件
 2. 把这三个文件复制到`/usr/share/fonts/`目录下
